@@ -1414,7 +1414,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #0fc7ff;
+    background: #e5650b;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -1833,6 +1833,16 @@ pre code {
   50%, 70% {
     transform: scale(1.1);
   }
+}
+.reading-progress-bar {
+  --progress: 0;
+  background: #7aa2ff;
+  height: 3px;
+  position: fixed;
+  z-index: 50;
+  width: var(--progress);
+  left: 0;
+  top: 0;
 }
 .rtl.post-body p,
 .rtl.post-body a,
@@ -2891,8 +2901,8 @@ header.header {
 }
 :root {
   --body-bg-color: #141924;
-  --content-bg-color: #1a2230;
-  --card-bg-color: #1a2230;
+  --content-bg-color: rgba(26,34,48,0.92);
+  --card-bg-color: rgba(26,34,48,0.92);
   --text-color: #d7dee8;
   --secondary-text-color: #8f9bb0;
   --headings-color: #f2f5f9;

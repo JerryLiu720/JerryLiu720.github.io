@@ -17,6 +17,8 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous" defer></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jerryliu.site","root":"/blog/","images":"/blog/images","scheme":"Gemini","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/blog/js/config.js" defer></script>
 
@@ -56,6 +58,7 @@
 
 
 
+  <script src="/blog/js/third-party/pace.js" defer></script>
 
 
   
@@ -63,6 +66,24 @@
 
 
 
+<style>
+  /* 星空漂浮粒子背景层：html 承担底色，body 透明以露出星星 */
+  html {
+    background: var(--body-bg-color, #141924);
+  }
+  body {
+    background: transparent !important;
+  }
+  canvas#hermes-starfield {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+  }
+</style>
 
   <noscript>
     <link rel="stylesheet" href="/blog/css/noscript.css">
@@ -240,7 +261,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="lubuntu配置-VNC"><a href="#lubuntu配置-VNC" class="headerlink" title="lubuntu配置 VNC"></a>lubuntu配置 VNC</h2>
+          <h2 id="lubuntu配置-VNC"><a href="#lubuntu配置-VNC" class="headerlink" title="lubuntu配置 VNC"></a>lubuntu配置 VNC</h2><blockquote>
+</blockquote>
+<p>环境：mac , lubuntu</p>
+<h1 id="1-安装vnc服务"><a href="#1-安装vnc服务" class="headerlink" title="1.安装vnc服务"></a>1.安装vnc服务</h1><ul>
+<li>cyberdog开机,进入其命令行</li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">ssh 192.168.2.180 -l mi</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>安装tightvncserver</li>
+</ul>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/blog/posts/30a6384b/#more" rel="contents">
@@ -334,6 +365,8 @@
           <blockquote>
 </blockquote>
 <p>为了统一和安全考虑，将superset接入公司账号系统，使用员工现有邮箱和密码作为登录方式<br>env:superset 0.36.0</p>
+<p><img src="/blog/img/superset13.png"></p>
+<p>Superset使用FAB（Flask-Appbuilder）实现了用户权限功能，登录认证框架。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/blog/posts/83ee6eb4/#more" rel="contents">
@@ -426,6 +459,8 @@
     <div class="post-body" itemprop="articleBody">
           <p><img src="/blog/img/superset13.png"></p>
 <p>从以下几个点出发</p>
+<h3 id="1-修改缓存方式为redis"><a href="#1-修改缓存方式为redis" class="headerlink" title="1. 修改缓存方式为redis"></a>1. 修改缓存方式为redis</h3><p>安装Redis <code>pip install redis</code></p>
+<p>修改配置文件<code>incubator-superset/superset/config.py</code>中CACHE_CONFIG为以下内容,设置24小时过期</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/blog/posts/c7a184e9/#more" rel="contents">
@@ -708,6 +743,8 @@
 <blockquote>
 </blockquote>
 <p>mac 10.15 Catalina + Anaconda 3 + Python3.7 + superset 0.30</p>
+<p><img src="/blog/img/superset13.png"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"> Superset 是一款由 Airbnb 开源的“现代化的企业级 BI（商业智能） Web 应用程序”，其通过创建和分享 dashboard，为数据分析提供了轻量级的数据查询和可视化方案。</span><br><span class="line"> Superset 的前端主要用到了 React 和 NVD3/D3，而后端则基于 Python 的 Flask 框架和 Pandas、SQLAlchemy 等依赖库，主要提供了这几方面的功能：</span><br><span class="line">集成数据查询功能，支持多种数据库，包括 MySQL、PostgresSQL、Oracle、SQL Server、SQLite、SparkSQL 等，并深度支持 Druid。</span><br><span class="line">通过 NVD3/D3 预定义了多种可视化图表，满足大部分的数据展示功能。如果还有其他需求，也可以自开发更多的图表类型，或者嵌入其他的 JavaScript 图表库（如 HighCharts、ECharts）。</span><br><span class="line">提供细粒度安全模型，可以在功能层面和数据层面进行访问控制。支持多种鉴权方式（如数据库、OpenID、LDAP、OAuth、REMOTE_USER 等）。</span><br></pre></td></tr></tbody></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/blog/posts/8b1f8f2c/#more" rel="contents">
@@ -799,8 +836,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">之前的博客生成是用的hexo，但是慢慢的随着博客增多速度 越来越慢,一些功能无法实现，比如图片预览的fancybox。</span><br><span class="line">偶然看到了文章介绍hugo，一个用golang编写的静态网站生成器 ，主题很多,号称世界上最快的框架，</span><br><span class="line">实际用起来也比hexo快的多，几十个页面生成速度毫秒级别，网站的访问速度从未有的顺畅，速度起码翻倍。</span><br></pre></td></tr></tbody></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://themes.gohugo.io/">主题地址</a></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/blog/posts/5ce0efd4/#more" rel="contents">
@@ -894,6 +929,9 @@
           <blockquote>
 </blockquote>
 <p>环境：CDH6.3.1,Centos7.5</p>
+<p><img src="/blog/img/ext_sentry.png"></p>
+<p>上一篇记录的是kerberos。是用来管理用户身份*即用户身份认证</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">Sentry，用户身份和权限的映射关系管理 即授权。</span><br><span class="line">CDH的介绍是：Sentry 服务存储身份验证政策元数据并为客户端提供对该元数据的并发安全访问。</span><br></pre></td></tr></tbody></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/blog/posts/b43bd655/#more" rel="contents">
@@ -987,6 +1025,10 @@
           <blockquote>
 </blockquote>
 <p>环境： 基于centos 7.5,CDH 6.3.1</p>
+<p><img src="/blog/img/CDH.png"></p>
+<p><img src="/blog/img/ext_dog-ring.jpg"></p>
+<h2 id="一-安装kerberos"><a href="#一-安装kerberos" class="headerlink" title="一.安装kerberos"></a>一.安装kerberos</h2><p><strong>kerberso是什么</strong></p>
+<p>之前没有接触过kerberos，最近项目需要基于CDH的多租户管理，所以简单了解了下。kerberos要做的工作就是验证进行权限申请的人是他声称的那个人的问题。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/blog/posts/824879e0/#more" rel="contents">
@@ -1079,6 +1121,7 @@
     <div class="post-body" itemprop="articleBody">
           <p><img src="/blog/img/CDH.png"></p>
 <p>环境：CentOS 7.5, CDH 6.3</p>
+<p>本文记录在 CentOS 7.5 下完全离线部署 CDH 6.3 的完整过程。之前搭建过 CDH 5.x，每次都会遇到一些问题，这次把 6.x 的搭建过程记录下来。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/blog/posts/2360fe26/#more" rel="contents">
@@ -1149,10 +1192,144 @@
     <span class="toggle-line"></span>
   </div>
   <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
 
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
+<canvas id="hermes-starfield"></canvas>
+<script>
+  (function () {
+    var cv = document.getElementById('hermes-starfield');
+    if (!cv) return;
+    var ctx = cv.getContext('2d');
+    var W, H, DPR = Math.min(window.devicePixelRatio || 1, 2);
+    var stars = [], COUNT = 130;
+    var mouse = { x: -9999, y: -9999 };
+    var bursts = [];
+
+    function resize() {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      cv.width = W * DPR;
+      cv.height = H * DPR;
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    }
+    function rand(a, b) { return a + Math.random() * (b - a); }
+    function init() {
+      stars = [];
+      for (var i = 0; i < COUNT; i++) {
+        stars.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: rand(0.4, 1.9),
+          v: rand(0.02, 0.16),          // 上浮
+          vx: rand(-0.04, 0.04),        // 水平漂移
+          tw: rand(0.002, 0.02),
+          p: Math.random() * Math.PI * 2
+        });
+      }
+    }
+
+    // 交互：鼠标推开
+    window.addEventListener('mousemove', function (e) {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    }, { passive: true });
+    window.addEventListener('mouseout', function () {
+      mouse.x = -9999; mouse.y = -9999;
+    });
+    // 点击：粒子爆发
+    window.addEventListener('click', function (e) {
+      for (var i = 0; i < 14; i++) {
+        var a = (Math.PI * 2 * i) / 14 + Math.random() * 0.4;
+        var sp = rand(1.2, 3.6);
+        bursts.push({
+          x: e.clientX, y: e.clientY,
+          vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
+          life: 1, decay: rand(0.012, 0.03),
+          r: rand(0.8, 2.0)
+        });
+      }
+    });
+
+    function tick() {
+      ctx.clearRect(0, 0, W, H);
+      var i, j, s;
+
+      // 星连线（近距）
+      ctx.lineWidth = 0.6;
+      for (i = 0; i < stars.length; i++) {
+        for (j = i + 1; j < stars.length; j++) {
+          var a = stars[i], b = stars[j];
+          var dx = a.x - b.x, dy = a.y - b.y;
+          var d2 = dx * dx + dy * dy;
+          if (d2 < 110 * 110) {
+            var al = (1 - Math.sqrt(d2) / 110) * 0.28;
+            ctx.strokeStyle = 'rgba(150,180,255,' + al.toFixed(3) + ')';
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          }
+        }
+      }
+
+      // 星星 + 鼠标斥力
+      var MR = 150;
+      for (i = 0; i < stars.length; i++) {
+        s = stars[i];
+        var mdx = s.x - mouse.x, mdy = s.y - mouse.y;
+        var md = Math.sqrt(mdx * mdx + mdy * mdy);
+        if (md < MR && md > 0.01) {
+          var f = (1 - md / MR) * 1.4;       // 推开力度
+          s.x += (mdx / md) * f;
+          s.y += (mdy / md) * f;
+        }
+        s.x += s.vx; s.y -= s.v;
+        s.p += s.tw;
+        if (s.y < -4) { s.y = H + 4; s.x = Math.random() * W; }
+        if (s.x < -4) s.x = W + 4;
+        if (s.x > W + 4) s.x = -4;
+        var alpha = 0.4 + 0.55 * (0.5 + 0.5 * Math.sin(s.p));
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(210,226,255,' + alpha.toFixed(3) + ')';
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // 鼠标与近星连线
+      if (mouse.x > -1000) {
+        for (i = 0; i < stars.length; i++) {
+          s = stars[i];
+          var dxm = s.x - mouse.x, dym = s.y - mouse.y;
+          var dm = Math.sqrt(dxm * dxm + dym * dym);
+          if (dm < 170) {
+            var al2 = (1 - dm / 170) * 0.45;
+            ctx.strokeStyle = 'rgba(140,190,255,' + al2.toFixed(3) + ')';
+            ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+          }
+        }
+      }
+
+      // 点击爆发
+      for (i = bursts.length - 1; i >= 0; i--) {
+        var p = bursts[i];
+        p.x += p.vx; p.y += p.vy;
+        p.life -= p.decay;
+        if (p.life <= 0) { bursts.splice(i, 1); continue; }
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(180,210,255,' + p.life.toFixed(3) + ')';
+        ctx.arc(p.x, p.y, p.r * p.life + 0.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    resize();
+    init();
+    window.addEventListener('resize', function () { resize(); init(); });
+    tick();
+  })();
+</script>
 
 </body>
 </html>
