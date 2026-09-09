@@ -1414,7 +1414,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #aaffab;
+    background: #f47c58;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2890,32 +2890,32 @@ header.header {
   }
 }
 :root {
-  --body-bg-color: #0b0b0d;
-  --content-bg-color: #15161a;
-  --card-bg-color: #15161a;
-  --text-color: #d5d6d8;
-  --secondary-text-color: #8b9199;
-  --headings-color: #f0f1f3;
-  --link-color: #d7e3f7;
-  --link-hover-color: #fff;
-  --link-decoration-bg: rgba(215,227,247,0.3);
-  --blockquote-color: #c2c6cc;
-  --blockquote-bg-color: #101114;
-  --menu-item-bg-color: #202226;
-  --btn-default-bg: #1c1e23;
-  --btn-default-color: #d5d6d8;
-  --btn-default-border-color: #2c2f35;
-  --btn-default-hover-bg: #2a2d34;
+  --body-bg-color: #141924;
+  --content-bg-color: #1a2230;
+  --card-bg-color: #1a2230;
+  --text-color: #d7dee8;
+  --secondary-text-color: #8f9bb0;
+  --headings-color: #f2f5f9;
+  --link-color: #7aa2ff;
+  --link-hover-color: #a9c2ff;
+  --link-decoration-bg: rgba(122,162,255,0.25);
+  --blockquote-color: #b9c4d4;
+  --blockquote-bg-color: #151c28;
+  --menu-item-bg-color: #223049;
+  --btn-default-bg: #1d2534;
+  --btn-default-color: #d7dee8;
+  --btn-default-border-color: #2e3b52;
+  --btn-default-hover-bg: #2a3a55;
   --btn-default-hover-color: #fff;
-  --selection-bg: rgba(215,227,247,0.3);
+  --selection-bg: rgba(122,162,255,0.3);
   --selection-color: #fff;
-  --code-foreground: #e8eaed;
-  --code-background: #1c1e23;
-  --highlight-background: #101114;
-  --highlight-foreground: #d5d6d8;
-  --highlight-gutter-background: #15171b;
-  --highlight-gutter-foreground: #6b7178;
-  --table-row-odd-bg-color: #1a1c21;
-  --table-row-hover-bg-color: #212429;
-  --border-color: #26282d;
+  --code-foreground: #e6edf5;
+  --code-background: #121823;
+  --highlight-background: #121823;
+  --highlight-foreground: #d7dee8;
+  --highlight-gutter-background: #161f2d;
+  --highlight-gutter-foreground: #66748c;
+  --table-row-odd-bg-color: #1d2634;
+  --table-row-hover-bg-color: #243041;
+  --border-color: #283242;
 }

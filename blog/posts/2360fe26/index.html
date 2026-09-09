@@ -20,18 +20,18 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jerryliu.site","root":"/blog/","images":"/blog/images","scheme":"Gemini","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/blog/js/config.js" defer></script>
 
-    <meta name="description" content="环境: centos 7.5,CDH 6.3">
+    <meta name="description" content="环境：CentOS 7.5, CDH 6.3">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Centos7.5离线搭建CDH6.3">
 <meta property="og:url" content="https://jerryliu.site/blog/posts/2360fe26/index.html">
 <meta property="og:site_name" content="JerryLiu">
-<meta property="og:description" content="环境: centos 7.5,CDH 6.3">
+<meta property="og:description" content="环境：CentOS 7.5, CDH 6.3">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jerryliu.site/blog/img/CDH.png">
 <meta property="article:published_time" content="2019-10-15T04:00:00.000Z">
-<meta property="article:modified_time" content="2026-09-09T12:37:39.307Z">
+<meta property="article:modified_time" content="2026-09-09T15:08:09.419Z">
 <meta property="article:author" content="JerryLiu">
-<meta property="article:tag" content="cdh,hadoop,sentry,flume,kafka">
+<meta property="article:tag" content="cdh,hadoop">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jerryliu.site/blog/img/CDH.png">
 
@@ -134,7 +134,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%90%AD%E5%BB%BA%E5%89%8D%E7%9A%84%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">1.搭建前的环境准备</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%90%AD%E5%BB%BA%E5%89%8D%E7%9A%84%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">一、搭建前的环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%89%88%E6%9C%AC%E4%B8%8E%E4%BE%9D%E8%B5%96%E8%A6%81%E6%B1%82"><span class="nav-number">1.1.</span> <span class="nav-text">1. 版本与依赖要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE%EF%BC%88%E6%89%80%E6%9C%89%E8%8A%82%E7%82%B9%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">2. 网络与安全配置（所有节点）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5-NTP%EF%BC%88%E6%89%80%E6%9C%89%E8%8A%82%E7%82%B9%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">3. 时间同步 NTP（所有节点）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%89%E8%A3%85-JDK-8%EF%BC%88%E6%89%80%E6%9C%89%E8%8A%82%E7%82%B9%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">4. 安装 JDK 8（所有节点）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%B1%80%E5%9F%9F%E7%BD%91-Yum-%E6%BA%90"><span class="nav-number">1.5.</span> <span class="nav-text">5. 局域网 Yum 源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%87%86%E5%A4%87%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-number">2.</span> <span class="nav-text">二、准备离线安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%90%AD%E5%BB%BA%E6%9C%AC%E5%9C%B0-CM-Yum-%E6%BA%90%EF%BC%88CM-Server-%E8%8A%82%E7%82%B9%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">三、搭建本地 CM Yum 源（CM Server 节点）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%AE%89%E8%A3%85-Cloudera-Manager"><span class="nav-number">4.</span> <span class="nav-text">四、安装 Cloudera Manager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E9%85%8D%E7%BD%AE-Parcel-%E5%AD%98%E5%82%A8%E5%BA%93"><span class="nav-number">5.</span> <span class="nav-text">五、配置 Parcel 存储库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E9%85%8D%E7%BD%AE-MariaDB-MySQL"><span class="nav-number">6.</span> <span class="nav-text">六、配置 MariaDB &#x2F; MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85%E5%B9%B6%E5%90%AF%E5%8A%A8"><span class="nav-number">6.1.</span> <span class="nav-text">1. 安装并启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE-etc-my-cnf"><span class="nav-number">6.2.</span> <span class="nav-text">2. 修改配置 &#x2F;etc&#x2F;my.cnf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85-JDBC-%E9%A9%B1%E5%8A%A8%EF%BC%88CM-Server-%E8%8A%82%E7%82%B9%EF%BC%89"><span class="nav-number">6.3.</span> <span class="nav-text">3. 安装 JDBC 驱动（CM Server 节点）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%88%9B%E5%BB%BA-CDH-%E6%89%80%E9%9C%80%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">6.4.</span> <span class="nav-text">4. 创建 CDH 所需数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%88%9D%E5%A7%8B%E5%8C%96-CM-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">6.5.</span> <span class="nav-text">5. 初始化 CM 数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E5%90%AF%E5%8A%A8-CM-%E5%B9%B6%E5%AE%89%E8%A3%85-CDH"><span class="nav-number">7.</span> <span class="nav-text">七、启动 CM 并安装 CDH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E9%9B%86%E7%BE%A4%E4%BC%98%E5%8C%96%E5%8F%82%E8%80%83"><span class="nav-number">8.</span> <span class="nav-text">八、集群优化参考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%87%E6%B3%A8"><span class="nav-number">9.</span> <span class="nav-text">备注</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -149,7 +149,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -164,7 +164,7 @@
         <a href="https://github.com/JerryLiu0720" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;JerryLiu0720" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:me@eric7.site" title="E-Mail → mailto:me@eric7.site" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+        <a href="mailto:me@jerryliu.site" title="E-Mail → mailto:me@jerryliu.site" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
 
@@ -231,160 +231,104 @@
     
     
     <div class="post-body" itemprop="articleBody"><p><img src="/blog/img/CDH.png"></p>
-<blockquote>
-</blockquote>
-<p>环境: centos 7.5,CDH 6.3</p>
+<p>环境：CentOS 7.5, CDH 6.3</p>
 <span id="more"></span>
 
-<p>本文是在Centos7.5下完全离线部署CDH6</p>
-<p>公司的CDH为5.X版本,CDH5和CDH6的差异还是有些的。之前搭建过CDH5，但每次多多少少会遇到一些问题，所以这次搭建记录一下。</p>
-<p>官方文档地址：<a target="_blank" rel="noopener" href="https://docs.cloudera.com/documentation/enterprise/6/6.0/topics/install_cm_cdh.html#cmig_topic_6_6">cloudera</a></p>
-<p>参考资料：<a target="_blank" rel="noopener" href="https://www.staroon.dev/2018/12/01/CDH6Install/">blog</a></p>
-<h2 id="1-搭建前的环境准备"><a href="#1-搭建前的环境准备" class="headerlink" title="1.搭建前的环境准备"></a>1.搭建前的环境准备</h2><p>环境要求</p>
-<p>操作系统</p>
+<p>本文记录在 CentOS 7.5 下完全离线部署 CDH 6.3 的完整过程。之前搭建过 CDH 5.x，每次都会遇到一些问题，这次把 6.x 的搭建过程记录下来。</p>
 <ul>
-<li></li>
+<li>官方文档：<a target="_blank" rel="noopener" href="https://docs.cloudera.com/documentation/enterprise/6/6.0/topics/install_cm_cdh.html#cmig_topic_6_6">Cloudera Enterprise 6.0 安装指南</a></li>
+<li>参考：<a target="_blank" rel="noopener" href="https://www.staroon.dev/2018/12/01/CDH6Install/">staroon.dev CDH6 安装</a></li>
 </ul>
-<p>软件依赖<br>• Python 2.7+，不支持Python 3（安装HUE需要）</p>
-<p>• perl</p>
-<p>• python-psycopg2 2.5.4+（安装HUE需要）</p>
-<p>• iproute package<br>○ RHEL7：iproute-3.10<br>○ RHEL6：iproute-2.6</p>
-<p>说明：通常这部分依赖环境操作系统已经自带，不需要手动安装。</p>
-<p>系统版本</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">• RHEL系列：6.10，6.9，6.8，7.2，7.3，7.4，7.5</span><br><span class="line"></span><br><span class="line">• SELS：12 SP3,12 SP2</span><br><span class="line"></span><br><span class="line">• Ubuntu系列：16.04 LTS</span><br></pre></td></tr></tbody></table></figure>
-
-<p>文件系统</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">• ext3</span><br><span class="line"></span><br><span class="line">• ext4</span><br><span class="line"></span><br><span class="line">• XFS</span><br><span class="line"></span><br><span class="line">• S3</span><br></pre></td></tr></tbody></table></figure>
-
-<p>Kudu仅支持ext4和XFS文件系统，不支持NFS和NAS存储。</p>
-<p>文件访问记录</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">Cloudera建议禁用该项功能，可以提升磁盘性能。</span><br><span class="line">配置/etc/fstab文件：/dev/sdb1 /data1 ext4 defaults,noatime 0 0</span><br><span class="line">不重启即生效命令：mount -o remount /data1</span><br><span class="line">nproc配置：</span><br><span class="line">配置文件位置/etc/security/limits.conf，Cloudera Manager通常会自动配置该文件，但是该项配置可能会被/etc/security/limits.d/目录下的文件覆盖掉。确保nproc限制设置的足够高，比如65536或者262144。</span><br></pre></td></tr></tbody></table></figure>
-
-<p><strong>数据库要求</strong></p>
-<p>Cloudera Manager和CDH内置嵌入式PostgreSQL数据库，用于非生产环境。生产环境不支持PostgreSQL数据库，必须为集群配置专用外部数据库。</p>
-<p>注意：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">• 数据库需要使用UTF8编码。对于MySQL和MariaDB，必须使用UTF8编码，而不是utf8mb4；</span><br><span class="line">• 对于MySQL5.7，必须要额外安装MySQL-shared-compat或者MySQL-shared包</span><br></pre></td></tr></tbody></table></figure>
-
-<p>版本要求：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">• MySQL：5.7</span><br><span class="line">• MariaDB：5.5，10.0</span><br><span class="line">• PostgreSQL：8.4，9.2，9.4</span><br><span class="line">• Oracle：12C</span><br></pre></td></tr></tbody></table></figure>
-
-<p><strong>Java要求</strong></p>
-<p>仅支持Oracle 64位JDK8，不支持JDK7，JDK9。</p>
-<p>版本要求：最低要求1.8u31，推荐1.8u74，1.8u91，1.8u102，1.8u111，1.8u121，1.8u131，1.8u162</p>
-<p>网络以及安全要求</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">• CDH不支持IPv6，操作系统必须要禁用IPv6</span><br><span class="line">• 集群主机必须正确配置/etc/hosts文件</span><br><span class="line">    ○ 应该包含集群中所有主机的主机名和对应IP地址</span><br><span class="line">    ○ 不能含有大写主机名</span><br><span class="line">    ○ 不能有重复的IP地址</span><br><span class="line">• SELinux不得阻止Cloudera Manager或者CDH的操作</span><br><span class="line">• 防火墙必须被禁用或者放开CDH集群所使用的端口</span><br><span class="line">• 对于RHEL或者CENTOS，/etc/sysconfig/network文件中必须包含正确的主机名</span><br></pre></td></tr></tbody></table></figure>
-
-<p>浏览器要求</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">• Chrome：63+</span><br><span class="line">• Firefox：59+</span><br><span class="line">• Safari</span><br><span class="line">• IE：11+</span><br><span class="line">• Edge：41+</span><br></pre></td></tr></tbody></table></figure>
-
-<p>所使用的端口：</p>
-<p>官方文档介绍：<a target="_blank" rel="noopener" href="https://www.cloudera.com/documentation/enterprise/6/6.0/topics/cm_ig_ports.html">CDH集群端口占用列表</a></p>
-<p>组件版本</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">组件名称	组件版本</span><br><span class="line">Apache Avro	1.8.2</span><br><span class="line">Apache Flume	1.8.0</span><br><span class="line">Apache Hadoop	3.0.0</span><br><span class="line">Apache HBase	2.0.0</span><br><span class="line">HBase Indexer	1.5</span><br><span class="line">Apache Hive	2.1.1</span><br><span class="line">Hue	4.2.0</span><br><span class="line">Apache Impala	3.0.0</span><br><span class="line">Apache Kafka	1.0.1</span><br><span class="line">Kite SDK	1.0.0</span><br><span class="line">Apache Kudu	1.6.0</span><br><span class="line">Apache Solr	7.0.0</span><br><span class="line">Apache Oozie	5.0.0</span><br><span class="line">Apache Parquet	1.9.0</span><br><span class="line">Parquet-format	2.3.1</span><br><span class="line">Apache Pig	0.17.0</span><br><span class="line">Apache Sentry	2.0.0</span><br><span class="line">Apache Spark	2.2.0</span><br><span class="line">Apache Sqoop	1.4.7</span><br><span class="line">Apache ZooKeeper 3.4.5</span><br></pre></td></tr></tbody></table></figure>
-
-<p>安装之前</p>
-<p>网络相关配置</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">• 设置唯一主机名：hostnamectl set-hostname new-hostname</span><br><span class="line">• 配置/etc/hosts</span><br><span class="line">• 检测主机名与IP是否正确对应</span><br></pre></td></tr></tbody></table></figure>
-
-<p>禁用防火墙</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">• 停止防火墙：systemctl stop firewalld</span><br><span class="line">• 关闭防火墙开机自启动：systemctl disable firewalld</span><br></pre></td></tr></tbody></table></figure>
-
-<p>设置SELinux执行模式</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">1. 检查SELinux模式：getenforce，如果输出permissive或者disabled，你可以跳过该步骤，如果输出enforcing，则需要继续下面的操作步骤。</span><br><span class="line">2. 编辑/etc/selinux/config（在某些操作系统可能是/etc/sysconfig/selinux）文件，将SELINUX=enforcing修改为SELINUX=permissive，保存该文件。</span><br><span class="line">3. 重启操作系统生效或者执行：setenforce 0临时禁用SELinux。</span><br><span class="line">4. 当CDH安装部署完成之后，可以重新启用SELinux，修改SELinux配置文件，然后执行：setenforce 1命令。</span><br></pre></td></tr></tbody></table></figure>
-
-<p>配置局域网内yum源</p>
-<p>安装Cloudera Manager需要很多依赖包，强烈建议搭建一个局域网内yum源，在集群中某一个节点上部署即可。<br>可参考我之前的文章：CentOS7下使用FTP搭建局域网内Yum源<br>配置NTP服务</p>
-<p>集群中所有节点的时间必须要保持同步，可以选择集群中其中一个节点作为ntp服务端，其余节点作为客户端。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">• 安装ntp软件：yum -y install ntp</span><br><span class="line">• 配置ntp服务端/etc/ntp.conf</span><br><span class="line">• 配置ntp客户端/etc/ntp.conf</span><br><span class="line">• 启动ntp服务：systemctl start ntpd</span><br><span class="line">• 配置开机自启动：systemctl enable ntpd</span><br><span class="line">• 同步客户端时间与服务端时间相同：ntpdate -u &lt;ntp-server&gt;</span><br></pre></td></tr></tbody></table></figure>
-
-<p>具体配置说明可参考我之前的文章：环境准备-配置ntp时间同步<br>安装jdk8<br>集群所有节点都要安装。<br>可参考我之前的文章：环境准备-JDK1.8安装<br>安装mysql5.7<br>只需要在集群中某一个节点上安装即可。<br>可参考我之前的文章：CentOS7下使用RPM安装MySQL5.7<br>集群性能优化相关配置<br>集群所有节点都需要进行这些配置。<br>可参考我之前的文章：CDH6集群性能调优（操作系统层面）<br>环境准备部分完毕</p>
-<p>来自 <a target="_blank" rel="noopener" href="https://www.staroon.dev/2018/12/01/CDH6BeforeInstall/">https://www.staroon.dev/2018/12/01/CDH6BeforeInstall/</a></p>
-<ul>
-<li><p>CDH6需要java 1.8版本</p>
-</li>
-<li><p>需要安装Mysql</p>
-</li>
-<li></li>
+<h2 id="一、搭建前的环境准备"><a href="#一、搭建前的环境准备" class="headerlink" title="一、搭建前的环境准备"></a>一、搭建前的环境准备</h2><h3 id="1-版本与依赖要求"><a href="#1-版本与依赖要求" class="headerlink" title="1. 版本与依赖要求"></a>1. 版本与依赖要求</h3><ul>
+<li>操作系统：RHEL 7.2<del>7.5 / CentOS 7.2</del>7.5（64 位）</li>
+<li>Python：2.7+（安装 Hue 需要，不支持 Python 3）、perl、python-psycopg2 2.5.4+</li>
+<li>Java：仅支持 Oracle 64 位 JDK 8（最低 1.8u31，推荐 1.8u74+）</li>
+<li>数据库：生产环境需外部数据库，MySQL 5.7 或 MariaDB 5.5/10.0；库表必须使用 UTF8 编码（不要用 utf8mb4）</li>
+<li>MySQL 5.7 需额外安装 MySQL-shared-compat 或 MySQL-shared 包</li>
+<li>浏览器：Chrome 63+ / Firefox 59+ / IE 11+ / Edge 41+</li>
 </ul>
-<p>1.添加host /etc/hosts<br>Eric1 192.168.2.10<br>2，禁用防火墙<br>Systemctl stop firewalld<br>关闭开机自启<br>Systemctl disalbe firewalld</p>
-<p>安装NTP<br>集群中所有节点的时间必须要保持同步，可以选择集群中其中一个节点作为ntp服务端，其余节点作为客户端。<br>• 安装ntp软件：yum -y install ntp<br>• 配置ntp服务端/etc/ntp.conf<br>• 配置ntp客户端/etc/ntp.conf<br>• 启动ntp服务：systemctl start ntpd<br>• 配置开机自启动：systemctl enable ntpd<br>• 同步客户端时间与服务端时间相同：ntpdate -u</p>
-<p>来自 <a target="_blank" rel="noopener" href="https://www.staroon.dev/2018/12/01/CDH6BeforeInstall/">https://www.staroon.dev/2018/12/01/CDH6BeforeInstall/</a></p>
-<p>安装java1.8<br>1.安装java环境<br>环境存放到 cd /opt/<br>下载 wget <a target="_blank" rel="noopener" href="https://repo.huaweicloud.com/java/jdk/8u202-b08/jdk-8u202-linux-x64.tar.gz">https://repo.huaweicloud.com/java/jdk/8u202-b08/jdk-8u202-linux-x64.tar.gz</a><br>(这里是用华为的镜像地址下载，oracle需要登陆账号)<br>解压到指定目录 tar -zxvf jdk-8u202-linux-x64.tar.gz<br>vim ~/.bashrc 添加环境变量如下<br>export JAVA_HOME=/opt/jdk1.8.0_202  ## 这里要注意目录要换成自己解压的jdk 目录<br>export JRE_HOME=${JAVA_HOME}/jre<br>export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib<br>export PATH=${JAVA_HOME}/bin:$PATH<br>立即生效<br>source ~/.bashr<br>验证 java -version</p>
-<p>安装数据库<br>yum install mariadb-server -y<br>systemctl start mariadb  #启动MariaDB<br>systemctl stop mariadb  #停止MariaDB<br>systemctl restart mariadb  #重启MariaDB<br>systemctl enable mariadb  #设置开机启动</p>
-<p>这里安装maridb</p>
-<p>数据库配置<br>CDH官方给的有一份推荐的MySQL的配置内容：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">datadir=/var/lib/mysql</span><br><span class="line">socket=/var/lib/mysql/mysql.sock</span><br><span class="line">transaction-isolation = READ-COMMITTED</span><br><span class="line"># Disabling symbolic-links is recommended to prevent assorted security risks;</span><br><span class="line"># to do so, uncomment this line:</span><br><span class="line">symbolic-links = 0</span><br><span class="line"># Settings user and group are ignored when systemd is used.</span><br><span class="line"># If you need to run mysqld under a different user or group,</span><br><span class="line"># customize your systemd unit file for mariadb according to the</span><br><span class="line"># instructions in http://fedoraproject.org/wiki/Systemd</span><br><span class="line">key_buffer = 16M</span><br><span class="line">key_buffer_size = 32M</span><br><span class="line">max_allowed_packet = 32M</span><br><span class="line">thread_stack = 256K</span><br><span class="line">thread_cache_size = 64</span><br><span class="line">query_cache_limit = 8M</span><br><span class="line">query_cache_size = 64M</span><br><span class="line">query_cache_type = 1</span><br><span class="line">max_connections = 550</span><br><span class="line">#expire_logs_days = 10</span><br><span class="line">#max_binlog_size = 100M</span><br><span class="line">#log_bin should be on a disk with enough free space.</span><br><span class="line">#Replace '/var/lib/mysql/mysql_binary_log' with an appropriate path for your</span><br><span class="line">#system and chown the specified folder to the mysql user.</span><br><span class="line">log_bin=/var/lib/mysql/mysql_binary_log</span><br><span class="line">#In later versions of MariaDB, if you enable the binary log and do not set</span><br><span class="line">#a server_id, MariaDB will not start. The server_id must be unique within</span><br><span class="line">#the replicating group.</span><br><span class="line">server_id=1</span><br><span class="line">binlog_format = mixed</span><br><span class="line">read_buffer_size = 2M</span><br><span class="line">read_rnd_buffer_size = 16M</span><br><span class="line">sort_buffer_size = 8M</span><br><span class="line">join_buffer_size = 8M</span><br><span class="line"># InnoDB settings</span><br><span class="line">innodb_file_per_table = 1</span><br><span class="line">innodb_flush_log_at_trx_commit  = 2</span><br><span class="line">innodb_log_buffer_size = 64M</span><br><span class="line">innodb_buffer_pool_size = 4G</span><br><span class="line">innodb_thread_concurrency = 8</span><br><span class="line">innodb_flush_method = O_DIRECT</span><br><span class="line">innodb_log_file_size = 512M</span><br><span class="line">[mysqld_safe]</span><br><span class="line">log-error=/var/log/mariadb/mariadb.log</span><br><span class="line">pid-file=/var/run/mariadb/mariadb.pid</span><br><span class="line">#</span><br><span class="line"># include all files from the config directory</span><br><span class="line">#</span><br><span class="line">!includedir /etc/my.cnf.d</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="2-网络与安全配置（所有节点）"><a href="#2-网络与安全配置（所有节点）" class="headerlink" title="2. 网络与安全配置（所有节点）"></a>2. 网络与安全配置（所有节点）</h3><p>设置唯一主机名并配置 hosts：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">hostnamectl set-hostname &lt;主机名&gt;          <span class="comment"># 每台节点唯一</span></span><br><span class="line">vim /etc/hosts                            <span class="comment"># 写入集群所有主机名与 IP，禁止大写、禁止重复 IP</span></span><br></pre></td></tr></tbody></table></figure>
 
-<p>来自 <a target="_blank" rel="noopener" href="https://docs.cloudera.com/documentation/enterprise/6/6.0/topics/install_cm_mariadb.html#install_cm_mariadb">https://docs.cloudera.com/documentation/enterprise/6/6.0/topics/install_cm_mariadb.html#install_cm_mariadb</a></p>
-<p>下载CM6 RPM包<br><a target="_blank" rel="noopener" href="https://archive.cloudera.com/cm6/6.3.1/redhat7/yum/RPMS/x86_64/">https://archive.cloudera.com/cm6/6.3.1/redhat7/yum/RPMS/x86_64/</a><br>下载以下四个包放在 自己新建的/opt/cloudera-repos</p>
-<p>cloudera-manager-agent-6.3.1-1466458.el7.x86_64.rpm	2019-10-11 08:42	9.00MB<br>cloudera-manager-daemons-6.3.1-1466458.el7.x86_64.rpm	2019-10-11 08:42	1.00GB<br>cloudera-manager-server-6.3.1-1466458.el7.x86_64.rpm	2019-10-11 08:42	11.00KB<br>cloudera-manager-server-db-2-6.3.1-1466458.el7.x86_64.rpm	2019-10-11 08:42	10.00KB<br>oracle-j2sdk1.8-1.8.0+update181-1.x86_64.rpm	2019-10-11 08:42	176.00MB</p>
-<p>配置Cloudera Manager yum库<br>注意：不要尝试使用FTP搭建CM的YUM库！<br>首先安装httpd和createrepo：<br>yum -y install httpd createrepo<br>启动httpd服务并设置开机自启动：<br>systemctl start httpd<br>systemctl enable httpd<br>然后进入到前面准备好的存放Cloudera Manager RPM包的目录cloudera-repos下：<br>cd /upload/cloudera-repos/<br>生成RPM元数据：<br>createrepo .</p>
-<p>[root@bogon cloudera-repos]# createrepo .<br>Spawning worker 0 with 1 pkgs<br>Spawning worker 1 with 1 pkgs<br>Spawning worker 2 with 1 pkgs<br>Spawning worker 3 with 1 pkgs<br>Workers Finished<br>Saving Primary metadata<br>Saving file lists metadata<br>Saving other metadata<br>Generating sqlite DBs<br>Sqlite DBs complete</p>
-<p>然后将cloudera-repos目录移动到httpd的html目录下：<br>mv cloudera-repos /var/www/html/<br>确保可以通过浏览器查看到这些RPM包</p>
-<p><a target="_blank" rel="noopener" href="http://192.168.2.106/cloudera-repos/">http://192.168.2.106/cloudera-repos/</a></p>
-<p>接着在Cloudera Manager Server主机上创建cm6的repo文件（要把哪个节点作为Cloudera Manager Server节点，就在这个节点上创建repo文件）：<br>cd /etc/yum.repos.d<br>vim cloudera-manager.repo<br>添加如下内容：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">1. [cloudera-manager]</span><br><span class="line">2. name=Cloudera Manager 6.0.1</span><br><span class="line">3. baseurl=http://cdh601/cloudera-repos/</span><br><span class="line">4. gpgcheck=0</span><br><span class="line">5. enabled=1</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>注意：CDH 不支持 IPv6，建议在系统层面禁用。</p>
+</blockquote>
+<p>禁用防火墙：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></tbody></table></figure>
 
-<p>保存，退出,然后执行yum clean all &amp;&amp; yum makecache命令：<br>[root@bogon yum.repos.d]# yum clean all &amp;&amp; yum makecache<br>已加载插件：fastestmirror<br>正在清理软件源： base cloudera-manager extras updates<br>Cleaning up everything<br>Maybe you want: rm -rf /var/cache/yum, to also free up space taken by orphaned data from disabled or removed repos<br>Cleaning up list of fastest mirrors<br>已加载插件：fastestmirror<br>base                                                                                                                      | 3.6 kB  00:00:00</p>
-<p>cloudera-manager                                                                                                          | 2.9 kB  00:00:00</p>
-<p>extras                                                                                                                    | 2.9 kB  00:00:00</p>
-<p>updates                                                                                                                   | 2.9 kB  00:00:00</p>
-<p>(1/13): cloudera-manager/filelists_db                                                                                     | 102 kB  00:00:00</p>
-<p>(2/13): cloudera-manager/primary_db                                                                                       | 6.5 kB  00:00:00</p>
-<p>(3/13): cloudera-manager/other_db                                                                                         |  864 B  00:00:00</p>
-<p>(4/13): base/7/x86_64/group_gz                                                                                            | 165 kB  00:00:00</p>
-<p>(5/13): extras/7/x86_64/primary_db                                                                                        | 153 kB  00:00:01</p>
-<p>(6/13): extras/7/x86_64/other_db                                                                                          | 100 kB  00:00:00</p>
-<p>(7/13): base/7/x86_64/other_db                                                                                            | 2.6 MB  00:00:02</p>
-<p>(8/13): extras/7/x86_64/filelists_db                                                                                      | 207 kB  00:00:02</p>
-<p>(9/13): updates/7/x86_64/other_db                                                                                         | 368 kB  00:00:00</p>
-<p>(10/13): updates/7/x86_64/primary_db                                                                                      | 5.9 MB  00:00:07</p>
-<p>(11/13): updates/7/x86_64/filelists_db                                                                                    | 3.3 MB  00:00:07</p>
-<p>(12/13): base/7/x86_64/filelists_db                                                                                       | 7.3 MB  00:00:14</p>
-<p>(13/13): base/7/x86_64/primary_db                                                                                         | 6.0 MB  00:01:01</p>
-<p>Determining fastest mirrors</p>
-<ul>
-<li><p>base: mirror.lzu.edu.cn</p>
-</li>
-<li><p>extras: mirror.lzu.edu.cn</p>
-</li>
-<li><p>updates: mirror.bit.edu.cn<br>元数据缓存已建立</p>
-</li>
+<p>SELinux 设为 permissive：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">getenforce          <span class="comment"># enforcing 才需要改</span></span><br><span class="line">sed -i <span class="string">'s/SELINUX=enforcing/SELINUX=permissive/'</span> /etc/selinux/config</span><br><span class="line">setenforce 0</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="3-时间同步-NTP（所有节点）"><a href="#3-时间同步-NTP（所有节点）" class="headerlink" title="3. 时间同步 NTP（所有节点）"></a>3. 时间同步 NTP（所有节点）</h3><p>集群时间必须同步：选一个节点做 NTP 服务端，其余节点做客户端。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">yum -y install ntp</span><br><span class="line">systemctl start ntpd &amp;&amp; systemctl <span class="built_in">enable</span> ntpd</span><br><span class="line"><span class="comment"># 客户端向服务端同步（服务端 IP 如 192.168.2.10）</span></span><br><span class="line">ntpdate -u 192.168.2.10</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="4-安装-JDK-8（所有节点）"><a href="#4-安装-JDK-8（所有节点）" class="headerlink" title="4. 安装 JDK 8（所有节点）"></a>4. 安装 JDK 8（所有节点）</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt</span><br><span class="line">wget https://repo.huaweicloud.com/java/jdk/8u202-b08/jdk-8u202-linux-x64.tar.gz</span><br><span class="line">tar -zxvf jdk-8u202-linux-x64.tar.gz</span><br></pre></td></tr></tbody></table></figure>
+
+<p><code>~/.bashrc</code> 添加环境变量：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/opt/jdk1.8.0_202   <span class="comment"># 换成自己的解压目录</span></span><br><span class="line"><span class="built_in">export</span> JRE_HOME=<span class="variable">${JAVA_HOME}</span>/jre</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">${JAVA_HOME}</span>/lib:<span class="variable">${JRE_HOME}</span>/lib</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">${JAVA_HOME}</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line">java -version</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="5-局域网-Yum-源"><a href="#5-局域网-Yum-源" class="headerlink" title="5. 局域网 Yum 源"></a>5. 局域网 Yum 源</h3><p>安装 CM 需要大量依赖，建议先在集群内某节点搭一个局域网 Yum 源（如用 httpd + createrepo，或 FTP 方式），后续所有节点都指向它。</p>
+<h2 id="二、准备离线安装包"><a href="#二、准备离线安装包" class="headerlink" title="二、准备离线安装包"></a>二、准备离线安装包</h2><ol>
+<li><strong>CDH Parcel 包</strong>（放到 CM Server 的 parcel-repo）：<code>CDH-6.0.1-1.cdh6.0.1.p0.590678-el7.parcel</code> 及 <code>manifest.json</code></li>
+<li><strong>Cloudera Manager RPM 包</strong>（cm6/6.3.1，从 <a target="_blank" rel="noopener" href="https://archive.cloudera.com/cm6/6.3.1/redhat7/yum/RPMS/x86_64/">archive.cloudera.com</a> 下载到 <code>/opt/cloudera-repos</code>）：</li>
+</ol>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">cloudera-manager-agent-6.3.1-1466458.el7.x86_64.rpm</span><br><span class="line">cloudera-manager-daemons-6.3.1-1466458.el7.x86_64.rpm</span><br><span class="line">cloudera-manager-server-6.3.1-1466458.el7.x86_64.rpm</span><br><span class="line">cloudera-manager-server-db-2-6.3.1-1466458.el7.x86_64.rpm</span><br><span class="line">oracle-j2sdk1.8-1.8.0+update181-1.x86_64.rpm     # 约 176MB</span><br></pre></td></tr></tbody></table></figure>
+
+<ol start="3">
+<li><strong>MySQL 驱动</strong>：<code>mysql-connector-java-5.1.47.tar.gz</code></li>
+</ol>
+<h2 id="三、搭建本地-CM-Yum-源（CM-Server-节点）"><a href="#三、搭建本地-CM-Yum-源（CM-Server-节点）" class="headerlink" title="三、搭建本地 CM Yum 源（CM Server 节点）"></a>三、搭建本地 CM Yum 源（CM Server 节点）</h2><blockquote>
+<p>不要尝试用 FTP 搭建 CM 的 Yum 库。</p>
+</blockquote>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">yum -y install httpd createrepo</span><br><span class="line">systemctl start httpd &amp;&amp; systemctl <span class="built_in">enable</span> httpd</span><br><span class="line"><span class="built_in">cd</span> /opt/cloudera-repos</span><br><span class="line">createrepo .</span><br><span class="line"><span class="built_in">mv</span> cloudera-repos /var/www/html/</span><br></pre></td></tr></tbody></table></figure>
+
+<p>浏览器验证：<code>http://&lt;server-ip&gt;/cloudera-repos/</code> 能看到 RPM 列表即可。</p>
+<p>在 CM Server 节点创建 repo 文件：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim /etc/yum.repos.d/cloudera-manager.repo</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="section">[cloudera-manager]</span></span><br><span class="line"><span class="attr">name</span>=Cloudera Manager <span class="number">6.3</span>.<span class="number">1</span></span><br><span class="line"><span class="attr">baseurl</span>=http://&lt;server-ip&gt;/cloudera-repos/</span><br><span class="line"><span class="attr">gpgcheck</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">enabled</span>=<span class="number">1</span></span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">yum clean all &amp;&amp; yum makecache</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="四、安装-Cloudera-Manager"><a href="#四、安装-Cloudera-Manager" class="headerlink" title="四、安装 Cloudera Manager"></a>四、安装 Cloudera Manager</h2><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">yum install -y cloudera-manager-daemons cloudera-manager-agent cloudera-manager-server</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="五、配置-Parcel-存储库"><a href="#五、配置-Parcel-存储库" class="headerlink" title="五、配置 Parcel 存储库"></a>五、配置 Parcel 存储库</h2><p>将 CDH Parcel 与 manifest.json 上传到 CM Server 的 <code>/opt/cloudera/parcel-repo/</code>：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt/cloudera/parcel-repo</span><br><span class="line"><span class="built_in">sha1sum</span> CDH-6.0.1-1.cdh6.0.1.p0.590678-el7.parcel | awk <span class="string">'{print $1}'</span> &gt; CDH-6.0.1-1.cdh6.0.1.p0.590678-el7.parcel.sha</span><br><span class="line"><span class="built_in">chown</span> -R cloudera-scm:cloudera-scm /opt/cloudera/parcel-repo/*</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="六、配置-MariaDB-MySQL"><a href="#六、配置-MariaDB-MySQL" class="headerlink" title="六、配置 MariaDB / MySQL"></a>六、配置 MariaDB / MySQL</h2><h3 id="1-安装并启动"><a href="#1-安装并启动" class="headerlink" title="1. 安装并启动"></a>1. 安装并启动</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">yum -y install mariadb-server</span><br><span class="line">systemctl start mariadb &amp;&amp; systemctl <span class="built_in">enable</span> mariadb</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="2-修改配置-etc-my-cnf"><a href="#2-修改配置-etc-my-cnf" class="headerlink" title="2. 修改配置 /etc/my.cnf"></a>2. 修改配置 <code>/etc/my.cnf</code></h3><figure class="highlight ini"><table><tbody><tr><td class="code"><pre><span class="line"><span class="section">[mysqld]</span></span><br><span class="line"><span class="attr">datadir</span>=/var/lib/mysql</span><br><span class="line"><span class="attr">socket</span>=/var/lib/mysql/mysql.sock</span><br><span class="line"><span class="attr">transaction-isolation</span> = READ-COMMITTED</span><br><span class="line"><span class="attr">symbolic-links</span> = <span class="number">0</span></span><br><span class="line"><span class="attr">key_buffer</span> = <span class="number">16</span>M</span><br><span class="line"><span class="attr">key_buffer_size</span> = <span class="number">32</span>M</span><br><span class="line"><span class="attr">max_allowed_packet</span> = <span class="number">32</span>M</span><br><span class="line"><span class="attr">thread_stack</span> = <span class="number">256</span>K</span><br><span class="line"><span class="attr">thread_cache_size</span> = <span class="number">64</span></span><br><span class="line"><span class="attr">query_cache_limit</span> = <span class="number">8</span>M</span><br><span class="line"><span class="attr">query_cache_size</span> = <span class="number">64</span>M</span><br><span class="line"><span class="attr">query_cache_type</span> = <span class="number">1</span></span><br><span class="line"><span class="attr">max_connections</span> = <span class="number">550</span></span><br><span class="line"><span class="attr">log_bin</span>=/var/lib/mysql/mysql_binary_log</span><br><span class="line"><span class="attr">server_id</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">binlog_format</span> = mixed</span><br><span class="line"><span class="attr">read_buffer_size</span> = <span class="number">2</span>M</span><br><span class="line"><span class="attr">read_rnd_buffer_size</span> = <span class="number">16</span>M</span><br><span class="line"><span class="attr">sort_buffer_size</span> = <span class="number">8</span>M</span><br><span class="line"><span class="attr">join_buffer_size</span> = <span class="number">8</span>M</span><br><span class="line"><span class="attr">innodb_file_per_table</span> = <span class="number">1</span></span><br><span class="line"><span class="attr">innodb_flush_log_at_trx_commit</span> = <span class="number">2</span></span><br><span class="line"><span class="attr">innodb_log_buffer_size</span> = <span class="number">64</span>M</span><br><span class="line"><span class="attr">innodb_buffer_pool_size</span> = <span class="number">4</span>G</span><br><span class="line"><span class="attr">innodb_thread_concurrency</span> = <span class="number">8</span></span><br><span class="line"><span class="attr">innodb_flush_method</span> = O_DIRECT</span><br><span class="line"><span class="attr">innodb_log_file_size</span> = <span class="number">512</span>M</span><br><span class="line"></span><br><span class="line"><span class="section">[mysqld_safe]</span></span><br><span class="line"><span class="attr">log-error</span>=/var/log/mariadb/mariadb.log</span><br><span class="line"><span class="attr">pid-file</span>=/var/run/mariadb/mariadb.pid</span><br><span class="line">!includedir /etc/my.cnf.d</span><br></pre></td></tr></tbody></table></figure>
+
+<p>重启生效：<code>systemctl restart mariadb</code></p>
+<h3 id="3-安装-JDBC-驱动（CM-Server-节点）"><a href="#3-安装-JDBC-驱动（CM-Server-节点）" class="headerlink" title="3. 安装 JDBC 驱动（CM Server 节点）"></a>3. 安装 JDBC 驱动（CM Server 节点）</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">tar zxvf mysql-connector-java-5.1.47.tar.gz</span><br><span class="line"><span class="built_in">mkdir</span> -p /usr/share/java/</span><br><span class="line"><span class="built_in">cp</span> mysql-connector-java-5.1.47-bin.jar /usr/share/java/mysql-connector-java.jar</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="4-创建-CDH-所需数据库"><a href="#4-创建-CDH-所需数据库" class="headerlink" title="4. 创建 CDH 所需数据库"></a>4. 创建 CDH 所需数据库</h3><p>按需创建数据库及对应用户（UTF8 编码）：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> DATABASE scm <span class="keyword">DEFAULT</span> <span class="keyword">CHARACTER SET</span> utf8 <span class="keyword">DEFAULT</span> <span class="keyword">COLLATE</span> utf8_general_ci;</span><br><span class="line"><span class="keyword">CREATE</span> DATABASE amon <span class="keyword">DEFAULT</span> <span class="keyword">CHARACTER SET</span> utf8 <span class="keyword">DEFAULT</span> <span class="keyword">COLLATE</span> utf8_general_ci;</span><br><span class="line"><span class="keyword">CREATE</span> DATABASE rman <span class="keyword">DEFAULT</span> <span class="keyword">CHARACTER SET</span> utf8 <span class="keyword">DEFAULT</span> <span class="keyword">COLLATE</span> utf8_general_ci;</span><br><span class="line"><span class="keyword">CREATE</span> DATABASE metastore <span class="keyword">DEFAULT</span> <span class="keyword">CHARACTER SET</span> utf8 <span class="keyword">DEFAULT</span> <span class="keyword">COLLATE</span> utf8_general_ci;</span><br><span class="line"><span class="keyword">CREATE</span> DATABASE oozie <span class="keyword">DEFAULT</span> <span class="keyword">CHARACTER SET</span> utf8 <span class="keyword">DEFAULT</span> <span class="keyword">COLLATE</span> utf8_general_ci;</span><br><span class="line"><span class="keyword">CREATE</span> DATABASE hue <span class="keyword">DEFAULT</span> <span class="keyword">CHARACTER SET</span> utf8 <span class="keyword">DEFAULT</span> <span class="keyword">COLLATE</span> utf8_general_ci;</span><br><span class="line"></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">ON</span> scm.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">'scm'</span>@<span class="string">'%'</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">'scm'</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">ON</span> amon.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">'amon'</span>@<span class="string">'%'</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">'amon'</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">ON</span> rman.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">'rman'</span>@<span class="string">'%'</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">'rman'</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">ON</span> metastore.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">'hive'</span>@<span class="string">'%'</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">'hive'</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">ON</span> oozie.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">'oozie'</span>@<span class="string">'%'</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">'oozie'</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">ON</span> hue.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">'hue'</span>@<span class="string">'%'</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">'hue'</span>;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="5-初始化-CM-数据库"><a href="#5-初始化-CM-数据库" class="headerlink" title="5. 初始化 CM 数据库"></a>5. 初始化 CM 数据库</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">/opt/cloudera/cm/schema/scm_prepare_database.sh mysql scm scm</span><br><span class="line"><span class="comment"># 输入 scm 用户的密码，看到 Started Jetty server 前耐心等待</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="七、启动-CM-并安装-CDH"><a href="#七、启动-CM-并安装-CDH" class="headerlink" title="七、启动 CM 并安装 CDH"></a>七、启动 CM 并安装 CDH</h2><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">systemctl start cloudera-scm-server</span><br><span class="line"><span class="built_in">tail</span> -f /var/log/cloudera-scm-server/cloudera-scm-server.log</span><br></pre></td></tr></tbody></table></figure>
+
+<p>看到日志输出 <code>Started Jetty server</code> 后，浏览器访问：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">http://&lt;server-ip&gt;:7180     # 默认账号/密码：admin / admin</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Web 界面操作要点：</p>
+<ol>
+<li>选择要安装的集群机器；</li>
+<li>若只有一台机器，选「基础安装」，把所有角色分配到这一台上；</li>
+<li>填写之前准备好的 MySQL 库信息；</li>
+<li>等待各服务安装完成 —— 单机部署时中间可能因 GC 导致步骤失败，多试几次即可；</li>
+<li>Parcel 分发与激活在 Web 界面完成。</li>
+</ol>
+<h2 id="八、集群优化参考"><a href="#八、集群优化参考" class="headerlink" title="八、集群优化参考"></a>八、集群优化参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.staroon.dev/2018/11/30/CDH6Performance/">staroon.dev CDH6 性能调优（操作系统层面）</a></li>
 </ul>
-<p>安装CM<br>yum install cloudera-manager-daemons cloudera-manager-agent cloudera-manager-server</p>
-<p>配置本地Parcel存储库<br>Cloudera Manager Server安装完成后，进入到本地Parcel存储库目录：<br>cd /opt/cloudera/parcel-repo<br>将第一部分下载的CDH Parcel文件（CDH-6.0.1-1.cdh6.0.1.p0.590678-el7.parcel和manifest.json）上传至该目录下，然后执行命令生成sha文件：<br>sha1sum CDH-6.0.1-1.cdh6.0.1.p0.590678-el7.parcel | awk ‘{ print $1 }’ &gt; CDH-6.0.1-1.cdh6.0.1.p0.590678-el7.parcel.sha<br>然后执行下面的命令修改文件所有者：<br>chown -R cloudera-scm:cloudera-scm /opt/cloudera/parcel-repo/*<br>最终/opt/cloudera/parcel-repo目录内容如下：</p>
-<p>mysql配置<br>/etc/my.cnf</p>
-<p>启动mysql<br>配置开机自启</p>
-<p>systemctl start mariadb  #启动MariaDB<br>systemctl enable mariadb</p>
-<p>查看端口<br>安装netstat<br>yum install net-tools</p>
-<p>配置mysql jdbc驱动<br>从前面下载好的mysql-connector-java-5.1.47.tar.gz包中解压出mysql-connector-java-5.1.47-bin.jar文件，将mysql-connector-java-5.1.47-bin.jar文件上传至CM Server节点上的/usr/share/java/目录下并重命名为mysql-connector-java.jar（如果/usr/share/java/目录不存在，需要手动创建）：<br>tar zxvf mysql-connector-java-5.1.47.tar.gz<br>mkdir -p /usr/share/java/<br>cp mysql-connector-java-5.1.47-bin.jar /usr/share/java/mysql-connector-java.jar</p>
-<p>来自 <a target="_blank" rel="noopener" href="https://www.staroon.dev/2018/12/01/CDH6Install/">https://www.staroon.dev/2018/12/01/CDH6Install/</a></p>
-<p>创建CDH所需要的数据库<br>根据所需要安装的服务参照下表创建对应的数据库以及数据库用户，数据库必须使用utf8编码，创建数据库时要记录好用户名及对应密码：</p>
-<p>我这里就先创建4个数据库及对应用户：<br>CREATE DATABASE scm DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;<br>CREATE DATABASE amon DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;<br>CREATE DATABASE rman DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;<br>CREATE DATABASE oozie DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;<br>CREATE DATABASE hue DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</p>
-<p>CREATE DATABASE metastore DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;<br>GRANT ALL ON scm.* TO ‘scm’@’%’ IDENTIFIED BY ‘scm’;<br>GRANT ALL ON amon.* TO ‘amon’@’%’ IDENTIFIED BY ‘amon’;<br>GRANT ALL ON rman.* TO ‘rman’@’%’ IDENTIFIED BY ‘rman’;<br>GRANT ALL ON metastore.* TO ‘hive’@’%’ IDENTIFIED BY ‘hive’;</p>
-<p>GRANT ALL ON oozie.* TO ‘oozie’@’%’ IDENTIFIED BY ‘oozie’;<br>GRANT ALL ON hue.* TO ‘hue’@’%’ IDENTIFIED BY ‘hue’;</p>
-<p>FLUSH PRIVILEGES;</p>
-<p>SHOW GRANTS FOR ‘scm’@’%’;<br>SHOW GRANTS FOR ‘amon’@’%’;<br>SHOW GRANTS FOR ‘rman’@’%’;<br>SHOW GRANTS FOR ‘hive’@’%’;</p>
-<p>来自 <a target="_blank" rel="noopener" href="https://www.staroon.dev/2018/12/01/CDH6Install/">https://www.staroon.dev/2018/12/01/CDH6Install/</a></p>
-<p>设置Cloudera Manager 数据库<br>Cloudera Manager Server包含一个配置数据库的脚本。<br>• mysql数据库与CM Server是同一台主机<br>执行命令：/opt/cloudera/cm/schema/scm_prepare_database.sh mysql scm scm</p>
-<p>mysql数据库与CM Server不在同一台主机上<br>执行命令：/opt/cloudera/cm/schema/scm_prepare_database.sh mysql -h  –scm-host  scm scm</p>
-<p>来自 <a target="_blank" rel="noopener" href="https://www.staroon.dev/2018/12/01/CDH6Install/">https://www.staroon.dev/2018/12/01/CDH6Install/</a></p>
-<p>[root@eric1 schema]# /opt/cloudera/cm/schema/scm_prepare_database.sh mysql scm scm<br>Enter SCM password:<br>JAVA_HOME=/opt/jdk1.8.0_202<br>Verifying that we can write to /etc/cloudera-scm-server<br>Creating SCM configuration file in /etc/cloudera-scm-server<br>Executing:  /opt/jdk1.8.0_202/bin/java -cp /usr/share/java/mysql-connector-java.jar:/usr/share/java/oracle-connector-java.jar:/usr/share/java/postgresql-connector-java.jar:/opt/cloudera/cm/schema/../lib/* com.cloudera.enterprise.dbutil.DbCommandExecutor /etc/cloudera-scm-server/db.properties com.cloudera.cmf.db.<br>[                          main] DbCommandExecutor              INFO  Unable to login using supplied username/password.<br>[                          main] DbCommandExecutor              ERROR Error when connecting to database.<br>java.sql.SQLException: Access denied for user ‘scm’@‘localhost’ (using password: YES)<br>at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:965)[mysql-connector-java.jar:5.1.47]</p>
-<p>安装CDH节点<br>启动Cloudera Manager Server服务<br>systemctl start cloudera-scm-server</p>
-<p>wget <a target="_blank" rel="noopener" href="http://192.168.1.171/cloudera-repos/oracle-j2sdk1.8-1.8.0+update181-1.x86_64.rpm">http://192.168.1.171/cloudera-repos/oracle-j2sdk1.8-1.8.0+update181-1.x86_64.rpm</a><br>rpm -ivh oracle-j2sdk1.8-1.8.0+update181-1.x86_64.rpm</p>
-<p>export JAVA_HOME=/usr/java/jdk1.8.0_181-cloudera  ## 这里要注意目录要换成自己解压的jdk 目录<br>export JRE_HOME=${JAVA_HOME}/jre<br>export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib<br>export PATH=${JAVA_HOME}/bin:$PATH</p>
-<p>然后等待Cloudera Manager Server启动，可能需要稍等一会儿，可以通过命令tail -f /var/log/cloudera-scm-server/cloudera-scm-server.log去监控服务启动状态。<br>当看到INFO WebServerImpl:com.cloudera.server.cmf.WebServerImpl: Started Jetty server.日志打印出来后，说明服务启动成功，可以通过浏览器访问Cloudera Manager WEB界面了。</p>
-<p>查看本地端口 netstat</p>
-<p>访问Cloudera Manager WEB界面<br>打开浏览器，访问地址：http://<server_host>:7180，默认账号和密码都为admin：</server_host></p>
-<p>来自 <a target="_blank" rel="noopener" href="https://www.staroon.dev/2018/12/01/CDH6Install/">https://www.staroon.dev/2018/12/01/CDH6Install/</a></p>
-<p>选择安装的机器。</p>
-<p>rm /usr/bin/host</p>
-<p>因为只有一台机器这里选择基础安装</p>
-<p>自定义角色分配，因为只有一台，这里按照默认来，将必须组件分到一台上面</p>
-<p>将之前讲好的mysql数据库信息填进去。</p>
-<p>等待设置成功</p>
-<p>由于只有一台机器。中间因为GC,导致步骤失败多次，多试几遍就好</p>
-<p>集群优化参考<br><a target="_blank" rel="noopener" href="https://www.staroon.dev/2018/11/30/CDH6Performance/">https://www.staroon.dev/2018/11/30/CDH6Performance/</a></p>
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><ul>
+<li>安装完成后如需要可重新启用 SELinux（改回 enforcing 并 <code>setenforce 1</code>）。</li>
+<li>生产环境不建议使用内置 PostgreSQL，务必使用本文的外部数据库方案。</li>
+</ul>
 
     </div>
 
@@ -394,7 +338,7 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blog/tags/cdh-hadoop-sentry-flume-kafka/" rel="tag"># cdh,hadoop,sentry,flume,kafka</a>
+              <a href="/blog/tags/cdh-hadoop/" rel="tag"># cdh,hadoop</a>
           </div>
 
         
