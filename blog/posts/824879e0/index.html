@@ -42,9 +42,12 @@
 <meta property="og:image" content="https://jerryliu.site/blog/img/hue-erro.png">
 <meta property="og:image" content="https://jerryliu.site/blog/img/setting.png">
 <meta property="article:published_time" content="2019-12-30T04:00:00.000Z">
-<meta property="article:modified_time" content="2026-09-09T15:33:29.167Z">
+<meta property="article:modified_time" content="2026-09-09T15:46:09.336Z">
 <meta property="article:author" content="JerryLiu">
-<meta property="article:tag" content="cdh,hadoop,kerberos,sentry">
+<meta property="article:tag" content="cdh">
+<meta property="article:tag" content="hadoop">
+<meta property="article:tag" content="kerberos">
+<meta property="article:tag" content="sentry">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jerryliu.site/blog/img/CDH.png">
 
@@ -77,6 +80,7 @@
 
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -166,7 +170,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-%E5%AE%89%E8%A3%85kerberos"><span class="nav-number">1.</span> <span class="nav-text">一.安装kerberos</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C-%E8%BF%9B%E5%85%A5CM%E7%AE%A1%E7%90%86%E9%A1%B5%E9%9D%A2%E9%85%8D%E7%BD%AEkerberos"><span class="nav-number">2.</span> <span class="nav-text">二.进入CM管理页面配置kerberos</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89-kerberos%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">三.kerberos的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B-%E4%B8%8B%E9%9D%A2%E6%88%91%E4%BB%AC%E6%9D%A5%E8%AE%BE%E7%BD%AE%E4%B8%8Bkerberos-hive%E7%8E%AF%E5%A2%83"><span class="nav-number">4.</span> <span class="nav-text">四.下面我们来设置下kerberos  hive环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94-%E9%97%AE%E9%A2%98%E4%B8%8E%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">五.问题与总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%80%BB%E7%BB%93"><span class="nav-number">5.1.</span> <span class="nav-text">其他总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#other"><span class="nav-number">5.2.</span> <span class="nav-text">other:</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-%E5%AE%89%E8%A3%85kerberos"><span class="nav-number">1.</span> <span class="nav-text">一.安装kerberos</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C-%E8%BF%9B%E5%85%A5CM%E7%AE%A1%E7%90%86%E9%A1%B5%E9%9D%A2%E9%85%8D%E7%BD%AEkerberos"><span class="nav-number">2.</span> <span class="nav-text">二.进入CM管理页面配置kerberos</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89-kerberos%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">三.kerberos的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B-%E4%B8%8B%E9%9D%A2%E6%88%91%E4%BB%AC%E6%9D%A5%E8%AE%BE%E7%BD%AE%E4%B8%8Bkerberos-hive%E7%8E%AF%E5%A2%83"><span class="nav-number">4.</span> <span class="nav-text">四.下面我们来设置下kerberos  hive环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94-%E9%97%AE%E9%A2%98%E4%B8%8E%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">五.问题与总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AE%B0%E5%BD%95"><span class="nav-number">5.1.</span> <span class="nav-text">其他记录</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -186,7 +190,7 @@
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -277,9 +281,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><blockquote>
-</blockquote>
-<p>环境： 基于centos 7.5,CDH 6.3.1</p>
+    <div class="post-body" itemprop="articleBody"><p>环境： 基于centos 7.5,CDH 6.3.1</p>
 <p><img src="/blog/img/CDH.png"></p>
 <p><img src="/blog/img/ext_dog-ring.jpg"></p>
 <h2 id="一-安装kerberos"><a href="#一-安装kerberos" class="headerlink" title="一.安装kerberos"></a>一.安装kerberos</h2><p><strong>kerberso是什么</strong></p>
@@ -287,21 +289,23 @@
 <span id="more"></span>
 
 <p><strong>Kerberos协议：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">Kerberos协议主要用于计算机网络的身份鉴别(Authentication), 其特点是用户只需输入一次身份验证信息就可以凭借此验证获得的票据</span><br><span class="line">(ticket-granting ticket)访问多个服务，即SSO(Single Sign On)。由于在每个Client和Service之间建立了共享密钥，使得该协</span><br><span class="line">议具 有相当的安全性。</span><br></pre></td></tr></tbody></table></figure>
-
+<blockquote>
+<p>Kerberos协议主要用于计算机网络的身份鉴别(Authentication), 其特点是用户只需输入一次身份验证信息就可以凭借此验证获得的票据(ticket-granting ticket)访问多个服务，即SSO(Single Sign On)。由于在每个Client和Service之间建立了共享密钥，使得该协议具 有相当的安全性。</p>
+</blockquote>
 <p>一句话来概括kerberos是用来做什么的：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">“kerberos主要是用来做网络通信时候的身份认证（Authentication）”</span><br></pre></td></tr></tbody></table></figure>
-
+<blockquote>
+<p>“kerberos主要是用来做网络通信时候的身份认证（Authentication）”</p>
+</blockquote>
 <p>kerberos的简单原理图如下,kerberos的原理实现远远复杂的多。</p>
 <p><img src="/blog/img/ext_u_939042365_379837012_fm_26_gp_0.jpg"></p>
 <p>kerberos原理介绍参考资料：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/fc2d2dbd510b">简书</a></p>
 <p><strong>1.安装KDC服务</strong></p>
 <p>可以将KDC安装在集群内也可以安装在单独的机器。这里安装到CM（h1）上</p>
 <p>安装命令：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">(base) [root@h1 ~]#  yum&nbsp;-y&nbsp;install&nbsp;krb5-server&nbsp;krb5-libs&nbsp;krb5-auth-dialog&nbsp;krb5-workstation</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">(base) [root@h1 ~]#  yum -y install krb5-server krb5-libs krb5-auth-dialog krb5-workstation</span><br></pre></td></tr></tbody></table></figure>
 
 <p><strong>2.修改kdc的配置文件</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">(base) [root@h1 ~]#  vim /etc/kbc5.conf</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">(base) [root@h1 ~]#  vim /etc/krb5.conf</span><br></pre></td></tr></tbody></table></figure>
 
 <p>将以下内容粘贴进去</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"># Configuration snippets may be placed in this directory as well</span><br><span class="line">includedir /etc/krb5.conf.d/</span><br><span class="line">[logging]</span><br><span class="line"> default = FILE:/var/log/krb5libs.log</span><br><span class="line"> kdc = FILE:/var/log/krb5kdc.log</span><br><span class="line"> admin_server = FILE:/var/log/kadmind.log</span><br><span class="line">[libdefaults]</span><br><span class="line"> dns_lookup_realm = false</span><br><span class="line"> ticket_lifetime = 24h</span><br><span class="line"> renew_lifetime = 7d</span><br><span class="line"> forwardable = true</span><br><span class="line"> rdns = false</span><br><span class="line"> pkinit_anchors = /etc/pki/tls/certs/ca-bundle.crt</span><br><span class="line"> default_realm = CAT.COM</span><br><span class="line"> #default_ccache_name = KEYRING:persistent:%{uid}</span><br><span class="line">[realms]</span><br><span class="line"> CAT.COM = {</span><br><span class="line">  kdc = master</span><br><span class="line">  admin_server = master</span><br><span class="line"> }</span><br><span class="line">[domain_realm]</span><br><span class="line">.cat.com = CAT.COM</span><br><span class="line">cat.com = CAT.COM</span><br></pre></td></tr></tbody></table></figure>
@@ -381,8 +385,6 @@
 <p><strong>4.运行MapReduce作业</strong></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">#先用user1登陆kerberos</span><br><span class="line">[root@h1 conf]# su - user1</span><br><span class="line">[root@h1 conf]# kinit user1</span><br><span class="line">Password for user1@CAT.COM:</span><br><span class="line">[root@h1 conf]# klist</span><br><span class="line">Ticket cache: FILE:/tmp/krb5cc_0</span><br><span class="line">Default principal: user1@CAT.COM</span><br><span class="line">Valid starting       Expires              Service principal</span><br><span class="line">12/30/2019 22:27:40  12/31/2019 22:27:40  krbtgt/CAT.COM@CAT.COM</span><br><span class="line">        renew until 01/06/2020 22:27:40</span><br><span class="line">#测试mr demo</span><br><span class="line">[root@h1 conf]# hadoop jar /opt/cloudera/parcels/CDH/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar pi 10 1</span><br><span class="line">WARNING: Use "yarn jar" to launch YARN applications.</span><br><span class="line">Number of Maps  = 10</span><br><span class="line">Samples per Map = 1</span><br><span class="line">Wrote input for Map #0</span><br><span class="line">Wrote input for Map #1</span><br><span class="line">Wrote input for Map #2</span><br><span class="line">Wrote input for Map #3</span><br><span class="line">Wrote input for Map #4</span><br><span class="line">Wrote input for Map #5</span><br><span class="line">Wrote input for Map #6</span><br><span class="line">Wrote input for Map #7</span><br><span class="line">Wrote input for Map #8</span><br><span class="line">Wrote input for Map #9</span><br><span class="line">Starting Job</span><br><span class="line">19/12/30 22:32:49 INFO client.RMProxy: Connecting to ResourceManager at h1.cat.com/192.168.1.171:8032</span><br><span class="line">19/12/30 22:32:50 INFO hdfs.DFSClient: Created token for user2: HDFS_DELEGATION_TOKEN owner=user2@CAT.COM, renewer=yarn, realUser=, issueDate=1577716370019, maxDate=1578321170019, sequenceNumber=4, masterKeyId=10 on 192.168.1.171:8020</span><br><span class="line">19/12/30 22:32:50 INFO security.TokenCache: Got dt for hdfs://h1.cat.com:8020; Kind: HDFS_DELEGATION_TOKEN, Service: 192.168.1.171:8020, Ident: (token for user2: HDFS_DELEGATION_TOKEN owner=user2@CAT.COM, renewer=yarn, realUser=, issueDate=1577716370019, maxDate=1578321170019, sequenceNumber=4, masterKeyId=10)</span><br><span class="line">19/12/30 22:32:50 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /user/user2/.staging/job_1577701614246_0003</span><br><span class="line">19/12/30 22:32:50 INFO input.FileInputFormat: Total input files to process : 10</span><br><span class="line">19/12/30 22:32:50 INFO mapreduce.JobSubmitter: number of splits:10</span><br><span class="line">19/12/30 22:32:50 INFO Configuration.deprecation: yarn.resourcemanager.system-metrics-publisher.enabled is deprecated. Instead, use yarn.system-metrics-publisher.enabled</span><br><span class="line">19/12/30 22:32:50 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1577701614246_0003</span><br><span class="line">19/12/30 22:32:50 INFO mapreduce.JobSubmitter: Executing with tokens: [Kind: HDFS_DELEGATION_TOKEN, Service: 192.168.1.171:8020, Ident: (token for user2: HDFS_DELEGATION_TOKEN owner=user2@CAT.COM, renewer=yarn, realUser=, issueDate=1577716370019, maxDate=1578321170019, sequenceNumber=4, masterKeyId=10)]</span><br><span class="line">19/12/30 22:32:51 INFO conf.Configuration: resource-types.xml not found</span><br><span class="line">19/12/30 22:32:51 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.</span><br><span class="line">19/12/30 22:32:51 INFO impl.YarnClientImpl: Submitted application application_1577701614246_0003</span><br><span class="line">19/12/30 22:32:51 INFO mapreduce.Job: The url to track the job: http://h1.cat.com:8088/proxy/application_1577701614246_0003/</span><br><span class="line">19/12/30 22:32:51 INFO mapreduce.Job: Running job: job_1577701614246_0003</span><br><span class="line">19/12/30 22:33:04 INFO mapreduce.Job: Job job_1577701614246_0003 running in uber mode : false</span><br><span class="line">19/12/30 22:33:04 INFO mapreduce.Job:  map 0% reduce 0%</span><br><span class="line">19/12/30 22:33:14 INFO mapreduce.Job:  map 20% reduce 0%</span><br><span class="line">19/12/30 22:33:19 INFO mapreduce.Job:  map 30% reduce 0%</span><br><span class="line">19/12/30 22:33:20 INFO mapreduce.Job:  map 40% reduce 0%</span><br><span class="line">19/12/30 22:33:24 INFO mapreduce.Job:  map 50% reduce 0%</span><br><span class="line">19/12/30 22:33:25 INFO mapreduce.Job:  map 60% reduce 0%</span><br><span class="line">19/12/30 22:33:30 INFO mapreduce.Job:  map 80% reduce 0%</span><br><span class="line">19/12/30 22:33:35 INFO mapreduce.Job:  map 100% reduce 0%</span><br><span class="line">19/12/30 22:33:41 INFO mapreduce.Job:  map 100% reduce 100%</span><br><span class="line">19/12/30 22:33:42 INFO mapreduce.Job: Job job_1577701614246_0003 completed successfully</span><br><span class="line">19/12/30 22:33:42 INFO mapreduce.Job: Counters: 54</span><br><span class="line">        File System Counters</span><br><span class="line">                FILE: Number of bytes read=49</span><br><span class="line">                FILE: Number of bytes written=2433690</span><br><span class="line">                FILE: Number of read operations=0</span><br><span class="line">                FILE: Number of large read operations=0</span><br><span class="line">                FILE: Number of write operations=0</span><br><span class="line">......................</span><br><span class="line">Job Finished in 53.382 seconds</span><br><span class="line">Estimated value of Pi is 3.60000000000000000000</span><br></pre></td></tr></tbody></table></figure>
 
-<blockquote>
-</blockquote>
 <p><strong>测试连接 beelin</strong></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">beeline&gt; !connect jdbc:hive2://localhost:10000/;principal=hive/h1@CAT.COM</span><br><span class="line">Connecting to jdbc:hive2://localhost:10000/;principal=hive/h1@CAT.COM</span><br><span class="line">Connected to: Apache Hive (version 2.1.1-cdh6.3.1)</span><br><span class="line">Driver: Hive JDBC (version 2.1.1-cdh6.3.1)</span><br><span class="line">Transaction isolation: TRANSACTION_REPEATABLE_READ</span><br><span class="line">0: jdbc:hive2://localhost:10000/&gt;</span><br></pre></td></tr></tbody></table></figure>
 
@@ -394,10 +396,9 @@
 <li><p>两种情况下会报以下错误：</p>
 </li>
 </ul>
-<blockquote>
-</blockquote>
 <p>1.ticket过期没有续约情况下<br>2.没有生成keytab</p>
-<p>“Failed on local exception: java.io.IOException: org.apache.hadoop.security.AccessControlException: Client cannot authenticate via:[TOKEN, KERBEROS]; Host Details : local host is: “h1.cat.com/192.168.1.171”; destination host is: “h1.cat.com”:8020; “</p>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">“Failed on local exception: java.io.IOException: org.apache.hadoop.security.AccessControlException: Client cannot authenticate via:[TOKEN, KERBEROS]; Host Details : local host is: “h1.cat.com/192.168.1.171”; destination host is: “h1.cat.com”:8020; "</span><br></pre></td></tr></tbody></table></figure>
+
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">[root@h1 ~]# hive</span><br><span class="line">WARNING: Use "yarn jar" to launch YARN applications.</span><br><span class="line">SLF4J: Class path contains multiple SLF4J bindings.</span><br><span class="line">SLF4J: Found binding in [jar:file:/opt/cloudera/parcels/CDH-6.3.1-1.cdh6.3.1.p0.1470567/jars/log4j-slf4j-impl-2.8.2.jar!/org/slf4j/impl/StaticLoggerBinder.class]</span><br><span class="line">SLF4J: Found binding in [jar:file:/opt/cloudera/parcels/CDH-6.3.1-1.cdh6.3.1.p0.1470567/jars/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]</span><br><span class="line">SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.</span><br><span class="line">SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]</span><br><span class="line"></span><br><span class="line">Logging initialized using configuration in jar:file:/opt/cloudera/parcels/CDH-6.3.1-1.cdh6.3.1.p0.1470567/jars/hive-common-2.1.1-cdh6.3.1.jar!/hive-log4j2.properties Async: false</span><br><span class="line">Exception in thread "main" java.lang.RuntimeException: java.io.IOException: Failed on local exception: java.io.IOException: org.apache.hadoop.security.AccessControlException: Client cannot authenticate via:[TOKEN, KERBEROS]; Host Details : local host is: "h1.cat.com/192.168.1.171"; destination host is: "h1.cat.com":8020;</span><br><span class="line">        at org.apache.hadoop.hive.ql.session.SessionState.start(SessionState.java:604)</span><br><span class="line">        at org.apache.hadoop.hive.ql.session.SessionState.beginStart(SessionState.java:545)</span><br><span class="line">        at org.apache.hadoop.hive.cli.CliDriver.run(CliDriver.java:763)</span><br><span class="line">        at org.apache.hadoop.hive.cli.CliDriver.main(CliDriver.java:699)</span><br><span class="line">        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">        at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">        at org.apache.hadoop.util.RunJar.run(RunJar.java:313)</span><br><span class="line">        at org.apache.hadoop.util.RunJar.main(RunJar.java:227)</span><br><span class="line">Caused by: java.io.IOException: Failed on local exception: java.io.IOException: org.apache.hadoop.security.AccessControlException: Client cannot authenticate via:[TOKEN, KERBEROS]; Host Details : local host is: "h1.cat.com/192.168.1.171"; destination host is: "h1.cat.com":8020;</span><br><span class="line">        at org.apache.hadoop.net.NetUtils.wrapException(NetUtils.java:808)</span><br><span class="line">        at org.apache.hadoop.ipc.Client.getRpcResponse(Client.java:1503)</span><br><span class="line">        at org.apache.hadoop.ipc.Client.call(Client.java:1445)</span><br><span class="line">        at org.apache.hadoop.ipc.Client.call(Client.java:1355)</span><br><span class="line">        at org.apache.hadoop.ipc.ProtobufRpcEngine$Invoker.invoke(ProtobufRpcEngine.java:228)</span><br><span class="line">        at org.apache.hadoop.ipc.ProtobufRpcEngine$Invoker.invoke(ProtobufRpcEngine.java:116)</span><br><span class="line">        at com.sun.proxy.$Proxy28.getFileInfo(Unknown Source)</span><br><span class="line">        at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolTranslatorPB.getFileInfo(ClientNamenodeProtocolTranslatorPB.java:875)</span><br><span class="line">        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">        at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">        at org.apache.hadoop.io.retry.RetryInvocationHandler.invokeMethod(RetryInvocationHandler.java:422)</span><br><span class="line">        at org.apache.hadoop.io.retry.RetryInvocationHandler$Call.invokeMethod(RetryInvocationHandler.java:165)</span><br><span class="line">        at org.apache.hadoop.io.retry.RetryInvocationHandler$Call.invoke(RetryInvocationHandler.java:157)</span><br><span class="line">        at org.apache.hadoop.io.retry.RetryInvocationHandler$Call.invokeOnce(RetryInvocationHandler.java:95)</span><br><span class="line">        at org.apache.hadoop.io.retry.RetryInvocationHandler.invoke(RetryInvocationHandler.java:359)</span><br><span class="line">        at com.sun.proxy.$Proxy29.getFileInfo(Unknown Source)</span><br><span class="line">        at org.apache.hadoop.hdfs.DFSClient.getFileInfo(DFSClient.java:1630)</span><br><span class="line">        at org.apache.hadoop.hdfs.DistributedFileSystem$29.doCall(DistributedFileSystem.java:1496)</span><br><span class="line">        at org.apache.hadoop.hdfs.DistributedFileSystem$29.doCall(DistributedFileSystem.java:1493)</span><br><span class="line">        at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)</span><br><span class="line">        at org.apache.hadoop.hdfs.DistributedFileSystem.getFileStatus(DistributedFileSystem.java:1508)</span><br><span class="line">        at org.apache.hadoop.fs.FileSystem.exists(FileSystem.java:1617)</span><br><span class="line">        at org.apache.hadoop.hive.ql.session.SessionState.createRootHDFSDir(SessionState.java:712)</span><br><span class="line">        at org.apache.hadoop.hive.ql.session.SessionState.createSessionDirs(SessionState.java:650)</span><br><span class="line">        at org.apache.hadoop.hive.ql.session.SessionState.start(SessionState.java:580)</span><br><span class="line">        ... 9 more</span><br><span class="line">Caused by: java.io.IOException: org.apache.hadoop.security.AccessControlException: Client cannot authenticate via:[TOKEN, KERBEROS]</span><br><span class="line">        at org.apache.hadoop.ipc.Client$Connection$1.run(Client.java:756)</span><br></pre></td></tr></tbody></table></figure>
 
 <p><strong>1.生成 keytab</strong></p>
@@ -424,8 +425,6 @@
 <hr>
 <h2 id="五-问题与总结"><a href="#五-问题与总结" class="headerlink" title="五.问题与总结"></a>五.问题与总结</h2><p><strong>1.连接beelin遇到的错误</strong></p>
 <p>问题貌似出在：</p>
-<blockquote>
-</blockquote>
 <p>1.没有把用户加到机器<br>2.没有把用户添加到hdfs,hadoop用户组中</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">beeline&gt; !connect jdbc:hive2://h1:10000/;principal=hive/h1@CAT.COM</span><br><span class="line">Connecting to jdbc:hive2://h1:10000/;principal=hive/h1@CAT.COM</span><br><span class="line">19/12/30 17:36:50 [main]: WARN jdbc.HiveConnection: Failed to connect to h1:10000</span><br><span class="line">Could not open connection to the HS2 server. Please check the server URI and if the URI is correct, then ask the administrator to check the server status.</span><br><span class="line">Error: Could not open client transport with JDBC Uri: jdbc:hive2://h1:10000/;principal=hive/h1@CAT.COM: java.net.ConnectException: Connection refused (Connection refused) (state=08S01,code=0)</span><br><span class="line"></span><br><span class="line">beeline&gt; !connect jdbc:hive2://h1:10000/;principal=hive/h1@CAT.COM</span><br><span class="line">Connecting to jdbc:hive2://h1:10000/;principal=hive/h1@CAT.COM</span><br><span class="line">19/12/30 19:10:22 [main]: ERROR transport.TSaslTransport: SASL negotiation failure</span><br><span class="line">javax.security.sasl.SaslException: GSS initiate failed</span><br></pre></td></tr></tbody></table></figure>
 
@@ -437,8 +436,6 @@
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">[kdcdefaults]</span><br><span class="line"> kdc_ports = 88</span><br><span class="line"> kdc_tcp_ports = 88</span><br><span class="line"></span><br><span class="line">[realms]</span><br><span class="line"> CAT.COM = {</span><br><span class="line">  #master_key_type = aes256-cts</span><br><span class="line">  #ticket_lifetime = 10m</span><br><span class="line">  max_renewable_life= 7d 0h 0m 0s</span><br><span class="line">  acl_file = /var/kerberos/krb5kdc/kadm5.acl</span><br><span class="line">  dict_file = /usr/share/dict/words</span><br><span class="line">  admin_keytab = /var/kerberos/krb5kdc/kadm5.keytab</span><br><span class="line">  supported_enctypes = aes256-cts:normal aes128-cts:normal des3-hmac-sha1:normal arcfour-hmac:normal camellia256-cts:normal ca</span><br><span class="line">mellia128-cts:normal des-hmac-sha1:normal des-cbc-md5:normal des-cbc-crc:normal</span><br><span class="line"> }</span><br></pre></td></tr></tbody></table></figure>
 
 <p>另外一个可能引起的问题是maxnewlisf配置有问题。<br>大部分导致的原因是maxnewlife时间是0</p>
-<blockquote>
-</blockquote>
 <p>官方介绍<br><a target="_blank" rel="noopener" href="https://docs.cloudera.com/documentation/manager/5-1-x/Configuring-Hadoop-Security-with-Cloudera-Manager/cm5chs_enable_hue_sec_s10.html">https://docs.cloudera.com/documentation/manager/5-1-x/Configuring-Hadoop-Security-with-Cloudera-Manager/cm5chs_enable_hue_sec_s10.html</a></p>
 <p>命令查看maxnewlife的配置: <code>kadmin.local -q 'getprinc krbtgt/CAT.COM@CAT.COM'</code><br>看是否为0，如果是0需要修改。</p>
 <p><img src="/blog/img/setting.png"></p>
@@ -449,35 +446,29 @@
 <p><code>modprinc -maxrenewlife 90day allow_renewable hue/h1.cat.com@CAT.COM</code></p>
 <p><strong>3.hive metastore问题:</strong></p>
 <p>原因是hive的keytab生成有误，metastore无法正常启动<br>解决办法：按照上面的步骤重新生成新的keytab,然后发送到所有机器即可</p>
-<blockquote>
-</blockquote>
 <p>failure to login: for principal: <a href="mailto:hive/h1.cat.com@CAT.COM">hive/h1.cat.com@CAT.COM</a> from keytab hive.keytab javax.security.auth.logi<br>n.LoginException: Checksum failed</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">2019-12-30 18:22:08,407 ERROR org.apache.hadoop.hive.metastore.HiveMetaStore: [main]: org.apache.thrift.transport.TTransportException: org.apache</span><br><span class="line">.hadoop.security.KerberosAuthException: failure to login: for principal: hive/h1.cat.com@CAT.COM from keytab hive.keytab javax.security.auth.logi</span><br><span class="line">n.LoginException: Checksum failed</span><br><span class="line">        at org.apache.hadoop.hive.thrift.HadoopThriftAuthBridge$Server.&lt;init&gt;(HadoopThriftAuthBridge.java:327)</span><br><span class="line">        at org.apache.hadoop.hive.thrift.HadoopThriftAuthBridge.createServer(HadoopThriftAuthBridge.java:101)</span><br><span class="line">        at org.apache.hadoop.hive.metastore.HiveMetaStore.startMetaStore(HiveMetaStore.java:7291)</span><br><span class="line">        at org.apache.hadoop.hive.metastore.HiveMetaStore.main(HiveMetaStore.java:7210)</span><br><span class="line">        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">        at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">        at org.apache.hadoop.util.RunJar.run(RunJar.java:313)</span><br><span class="line">        at org.apache.hadoop.util.RunJar.main(RunJar.java:227)</span><br><span class="line">Caused by: org.apache.hadoop.security.KerberosAuthException: failure to login: for principal: hive/h1.cat.com@CAT.COM from keytab hive.keytab jav</span><br><span class="line">ax.security.auth.login.LoginException: Checksum failed</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">```</span><br><span class="line">2019-12-30 18:22:08,407 ERROR org.apache.hadoop.hive.metastore.HiveMetaStore: [main]: org.apache.thrift.transport.TTransportException: org.apache</span><br><span class="line">.hadoop.security.KerberosAuthException: failure to login: for principal: hive/h1.cat.com@CAT.COM from keytab hive.keytab javax.security.auth.logi</span><br><span class="line">n.LoginException: Checksum failed</span><br><span class="line">        at org.apache.hadoop.hive.thrift.HadoopThriftAuthBridge$Server.&lt;init&gt;(HadoopThriftAuthBridge.java:327)</span><br><span class="line">        at org.apache.hadoop.hive.thrift.HadoopThriftAuthBridge.createServer(HadoopThriftAuthBridge.java:101)</span><br><span class="line">        at org.apache.hadoop.hive.metastore.HiveMetaStore.startMetaStore(HiveMetaStore.java:7291)</span><br><span class="line">        at org.apache.hadoop.hive.metastore.HiveMetaStore.main(HiveMetaStore.java:7210)</span><br><span class="line">        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">        at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">        at org.apache.hadoop.util.RunJar.run(RunJar.java:313)</span><br><span class="line">        at org.apache.hadoop.util.RunJar.main(RunJar.java:227)</span><br><span class="line">Caused by: org.apache.hadoop.security.KerberosAuthException: failure to login: for principal: hive/h1.cat.com@CAT.COM from keytab hive.keytab jav</span><br><span class="line">ax.security.auth.login.LoginException: Checksum failed</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"></span><br><span class="line">================================================================</span><br><span class="line"></span><br><span class="line">### 其他总结</span><br><span class="line"></span><br><span class="line">**给新建用户分配权限步骤**</span><br><span class="line"></span><br><span class="line">- 1.创建kerberos用户和密码</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>[root@bogon ~]# kadmin.local -q “addprinc user1”<br>Authenticating as principal root/<a href="mailto:admin@CAT.COM">admin@CAT.COM</a> with password.<br>WARNING: no policy specified for <a href="mailto:user1@CAT.COM">user1@CAT.COM</a>; defaulting to no policy<br>Enter password for principal “<a href="mailto:user1@CAT.COM">user1@CAT.COM</a>“:<br>Re-enter password for principal “<a href="mailto:user1@CAT.COM">user1@CAT.COM</a>“:<br>Principal “<a href="mailto:user1@CAT.COM">user1@CAT.COM</a>“ created.</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"></span><br><span class="line">**2. 在所有机器节点添加 user1 用户**</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">useradd user1        # 每台节点都执行</span><br></pre></td></tr></tbody></table></figure>
 
-<blockquote>
-</blockquote>
-<p>================================================================</p>
-<h3 id="其他总结"><a href="#其他总结" class="headerlink" title="其他总结"></a>其他总结</h3><p><strong>给新建用户分配权限步骤</strong></p>
-<ul>
-<li>1.创建kerberos用户和密码</li>
+<p><strong>3. 登陆验证</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">su - user1</span><br><span class="line">kinit user1          <span class="comment"># 输入上面设置的密码</span></span><br><span class="line">klist                <span class="comment"># 查看有效期</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="其他记录"><a href="#其他记录" class="headerlink" title="其他记录"></a>其他记录</h3><ul>
+<li><code>kdestroy</code>：清理当前凭证 / 退出当前 kerberos 用户</li>
+<li><code>kinit -R</code>：续订票据</li>
+<li>不同用户/机器的 ticket 时间可能不同，取决于 <code>/etc/krb5.conf</code></li>
+<li>必须在 ticket 有效期内续约才有效</li>
+<li>一台机器同一时间只能运行一个 kerberos 用户：a 登录 user1 后，b 登录 user2 时 user1 的角色自动切换为 user2</li>
+<li>查看配置：<code>kadmin.local -q 'getprinc krbtgt/CAT.COM@CAT.COM'</code></li>
+<li>hue 的 principal：<code>hue/h1.cat.com@CAT.COM</code></li>
+<li>配置文件目录：<code>/etc/krb5.conf</code>、<code>/var/kerberos/krb5kdc/kdc.conf</code></li>
 </ul>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">[root@bogon ~]# kadmin.local -q "addprinc user1"</span><br><span class="line">Authenticating as principal root/admin@CAT.COM with password.</span><br><span class="line">WARNING: no policy specified for user1@CAT.COM; defaulting to no policy</span><br><span class="line">Enter password for principal "user1@CAT.COM":</span><br><span class="line">Re-enter password for principal "user1@CAT.COM":</span><br><span class="line">Principal "user1@CAT.COM" created.</span><br></pre></td></tr></tbody></table></figure>
+<p>启动服务命令：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">systemctl start krb5kdc</span><br><span class="line">systemctl start kadmin</span><br></pre></td></tr></tbody></table></figure>
 
-<ul>
-<li></li>
-</ul>
-<p>2.在所有机器节点添加。User1用户<br>useradd user1</p>
-<ul>
-<li></li>
-</ul>
-<p>3.登陆验证</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">Su - user1</span><br><span class="line">Kinit user1</span><br><span class="line">输入上面设置的密码</span><br><span class="line">klist查看有效期</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="other"><a href="#other" class="headerlink" title="other:"></a>other:</h3><blockquote>
-</blockquote>
-<p>kdestroy 清理当前的凭证。或者是退出当前的kerberos用户<br>Kinit -R 续订<br>不同的用户在不同的机器的ticket的时间不同，因为取决于配置文件/etc/krb5.conf<br>必须在ticket有效期内续约才可以<br>一个机器，只能同时运行一个kerber用户，如果a用户登陆了user1 b用户登陆了user2那么user1的角色自动切换为user2<br>kadmin.local -q ‘getprinc <a href="mailto:krbtgt/CAT.COM@CAT.COM">krbtgt/CAT.COM@CAT.COM</a>’ 查看配置情况<br><a href="mailto:hue/h1.cat.com@CAT.COM">hue/h1.cat.com@CAT.COM</a><br>配置文件目录  /etc/krb5.conf，/var/kerberos/krb5kdc/kdc.conf</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">启动命令：</span><br><span class="line">systemctl start krb5kdc</span><br><span class="line">systemctl start kadmin</span><br><span class="line">查看kerberos用户列表</span><br><span class="line">`kadmin.local -q "listprincs"`</span><br></pre></td></tr></tbody></table></figure>
-
+<p>查看 kerberos 用户列表：<code>kadmin.local -q "listprincs"</code></p>
 <p><strong>kerberos的记录就完成了。下一篇研究sentry</strong></p>
 
     </div>
@@ -488,7 +479,10 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blog/tags/cdh-hadoop-kerberos-sentry/" rel="tag"># cdh,hadoop,kerberos,sentry</a>
+              <a href="/blog/tags/cdh/" rel="tag"># cdh</a>
+              <a href="/blog/tags/hadoop/" rel="tag"># hadoop</a>
+              <a href="/blog/tags/kerberos/" rel="tag"># kerberos</a>
+              <a href="/blog/tags/sentry/" rel="tag"># sentry</a>
           </div>
 
         
@@ -541,6 +535,24 @@
     </span>
     <span title="Reading time total">1:04</span>
   </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>

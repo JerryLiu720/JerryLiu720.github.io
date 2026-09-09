@@ -1414,7 +1414,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #e5650b;
+    background: #f9e278;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -1819,6 +1819,12 @@ pre code {
   color: #f00;
   display: inline-block;
   margin: 0 5px;
+}
+.busuanzi-count #busuanzi_container_site_uv {
+  display: none;
+}
+.busuanzi-count #busuanzi_container_site_pv {
+  display: none;
 }
 @keyframes icon-animate {
   0%, 100% {
@@ -2928,4 +2934,8 @@ header.header {
   --table-row-odd-bg-color: #1d2634;
   --table-row-hover-bg-color: #243041;
   --border-color: #283242;
+}
+/* 隐藏页脚全站字数/时长合计（已改用不蒜子 PV/UV） */
+.footer .wordcount {
+  display: none;
 }
