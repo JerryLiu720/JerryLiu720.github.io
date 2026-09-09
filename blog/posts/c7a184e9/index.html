@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Superset性能优化 | Jerryliublog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="从以下几个点出发 1. 修改缓存方式为redis安装Redis pip install redis 修改配置文件incubator-superset&#x2F;superset&#x2F;config.py中CACHE_CONFIG为以下内容,设置24小时过期 CACHE_CONFIG &#x3D; {    &#39;CACHE_TYPE&#39;: &#39;redis&#39;,    &#39;CACHE_DEFAULT_TIMEOUT&#39;: 60 * 60">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Superset性能优化">
+<meta property="og:url" content="https://jerryliu.site/blog/posts/c7a184e9/index.html">
+<meta property="og:site_name" content="Jerryliublog">
+<meta property="og:description" content="从以下几个点出发 1. 修改缓存方式为redis安装Redis pip install redis 修改配置文件incubator-superset&#x2F;superset&#x2F;config.py中CACHE_CONFIG为以下内容,设置24小时过期 CACHE_CONFIG &#x3D; {    &#39;CACHE_TYPE&#39;: &#39;redis&#39;,    &#39;CACHE_DEFAULT_TIMEOUT&#39;: 60 * 60">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jerryliu.site/blog/img/superset13.png">
+<meta property="article:published_time" content="2020-06-30T04:00:00.000Z">
+<meta property="article:modified_time" content="2026-09-09T12:26:25.781Z">
+<meta property="article:author" content="Jerryliu">
+<meta property="article:tag" content="superset">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jerryliu.site/blog/img/superset13.png">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="Jerryliublog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/blog/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">Jerryliublog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">11</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/blog/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://jerryliu.site/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Superset性能优化" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/blog/posts/c7a184e9/" class="article-date">
+  <time class="dt-published" datetime="2020-06-30T04:00:00.000Z" itemprop="datePublished">2020-06-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Superset性能优化
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="/blog/img/superset13.png"></p>
+<p>从以下几个点出发</p>
+<h3 id="1-修改缓存方式为redis"><a href="#1-修改缓存方式为redis" class="headerlink" title="1. 修改缓存方式为redis"></a>1. 修改缓存方式为redis</h3><p>安装Redis <code>pip install redis</code></p>
+<p>修改配置文件<code>incubator-superset/superset/config.py</code>中CACHE_CONFIG为以下内容,设置24小时过期</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">CACHE_CONFIG = {</span><br><span class="line">    'CACHE_TYPE': 'redis',</span><br><span class="line">    'CACHE_DEFAULT_TIMEOUT': 60 * 60 * 24, # 1 day default (in secs)</span><br><span class="line">    'CACHE_KEY_PREFIX': 'superset_results',</span><br><span class="line">    'CACHE_REDIS_URL': 'redis://localhost:6379/0',</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="2-修改celery-BROKER数据库sqlite为redis"><a href="#2-修改celery-BROKER数据库sqlite为redis" class="headerlink" title="2. 修改celery BROKER数据库sqlite为redis"></a>2. 修改celery BROKER数据库sqlite为redis</h3><p>配置文件：/root/incubator-superset/superset/config.py<br>修改以下内容：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">BROKER_URL = 'redis://localhost:6379/0'</span><br><span class="line">CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'</span><br><span class="line">CELERY_ACKS_LATE = True</span><br><span class="line">#关闭utc时区，添加上海时区</span><br><span class="line">CELERY_ENABLE_UTC = False</span><br><span class="line">CELERY_TIMEZONE = 'Asia/Shanghai'</span><br></pre></td></tr></tbody></table></figure>
+
+<p>完整内容：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">class CeleryConfig(object):</span><br><span class="line">    BROKER_URL = 'redis://localhost:6379/0'</span><br><span class="line">    CELERY_IMPORTS = (</span><br><span class="line">        'superset.sql_lab',</span><br><span class="line">        'superset.tasks',</span><br><span class="line">    )</span><br><span class="line">    CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'</span><br><span class="line">    CELERYD_LOG_LEVEL = 'DEBUG'</span><br><span class="line">    CELERYD_PREFETCH_MULTIPLIER = 10</span><br><span class="line">    CELERY_ACKS_LATE = True</span><br><span class="line">    CELERY_ENABLE_UTC = False</span><br><span class="line">    CELERY_TIMEZONE = 'Asia/Shanghai'</span><br><span class="line">    CELERY_ANNOTATIONS = {</span><br><span class="line">        'sql_lab.get_sql_results': {</span><br><span class="line">            'rate_limit': '100/s',</span><br><span class="line">        },</span><br><span class="line">        'email_reports.send': {</span><br><span class="line">            'rate_limit': '1/s',</span><br><span class="line">            'time_limit': 120,</span><br><span class="line">            'soft_time_limit': 150,</span><br><span class="line">            'ignore_result': True,</span><br><span class="line">        },</span><br><span class="line">    }</span><br><span class="line">    CELERYBEAT_SCHEDULE = {</span><br><span class="line">        'cache-warmup-hourly': {</span><br><span class="line">            'task': 'cache-warmup',</span><br><span class="line">            'schedule': crontab(minute=0,hour='*/2'),  # hourly</span><br><span class="line">            'kwargs': {</span><br><span class="line">                'strategy_name': 'top_n_dashboards',</span><br><span class="line">                'top_n': 10,</span><br><span class="line">                'since': '7 days ago',</span><br><span class="line">            },</span><br><span class="line">        },</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">CELERY_CONFIG = CeleryConfig</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="3-使用warmup指定预热数据策略。提前对画板进行数据缓存"><a href="#3-使用warmup指定预热数据策略。提前对画板进行数据缓存" class="headerlink" title="3. 使用warmup指定预热数据策略。提前对画板进行数据缓存."></a>3. 使用warmup指定预热数据策略。提前对画板进行数据缓存.</h3><p>1.修改配置文件：/root/incubator-superset/superset/config.py</p>
+<p>替换CELERYBEAT_SCHEDULE为以下内容,以下策略为,每小时更新最近七天top5的dashboard的缓存数据</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">CELERYBEAT_SCHEDULE = {</span><br><span class="line">    'cache-warmup-hourly': {</span><br><span class="line">        'task': 'cache-warmup',</span><br><span class="line">        'schedule': crontab(minute=0, hour='*'),  # hourly</span><br><span class="line">        'kwargs': {</span><br><span class="line">            'strategy_name': 'top_n_dashboards',</span><br><span class="line">            'top_n': 5,</span><br><span class="line">            'since': '7 days ago',</span><br><span class="line">        },</span><br><span class="line">    },</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>2.修改配置文件中默认访问地址和端口，后台会通过地址，进行缓存数据，修改为和命令行启动端口一致。</p>
+<p>配置文件：<code>/root/incubator-superset/superset/config.py</code></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">SUPERSET_WEBSERVER_ADDRESS = '0.0.0.0'</span><br><span class="line">SUPERSET_WEBSERVER_PORT = 7668</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这里需要注意，0.35 ADDRESS 为0.0.0.0时会报错。需要添加前缀 <a target="_blank" rel="noopener" href="http://0.0.0.0/">http://0.0.0.0</a></p>
+<p>官方bug：<a target="_blank" rel="noopener" href="https://github.com/apache/incubator-superset/issues/8461">https://github.com/apache/incubator-superset/issues/8461</a></p>
+<p>然后命令启动celery：启动work，-c 并发的work数</p>
+<p><code>celery worker --app=superset.tasks.celery_app:app  --broker=redis://localhost:6379/0  --pool=prefork -O fair -c 4</code></p>
+<p>启动定时调度：</p>
+<p><code>celery beat --app=superset.tasks.celery_app:app</code></p>
+<p>任务监控celery,ui(可选择安装)</p>
+<p>安装：<code>pip install flower</code></p>
+<p>启动：<code>celery flower --port=7788 --broker=redis://localhost:6379/0</code></p>
+<h3 id="4-缓存的配置行数，将数据调大。"><a href="#4-缓存的配置行数，将数据调大。" class="headerlink" title="4. 缓存的配置行数，将数据调大。"></a>4. 缓存的配置行数，将数据调大。</h3><p>需改配置文件：</p>
+<p><code>env_superset/lib/python3.7/site-packages/flask_caching/__init__.py</code></p>
+<p>修改行：</p>
+<p><code>config.setdefault("CACHE_THRESHOLD", 50000)</code></p>
+<h3 id="5-不同链接方式查询时间或许有差异。"><a href="#5-不同链接方式查询时间或许有差异。" class="headerlink" title="5. 不同链接方式查询时间或许有差异。"></a>5. 不同链接方式查询时间或许有差异。</h3><p>经过测试superset 连接AWS Athena  athena+rest比jdbc会稍慢。</p>
+<p>且查询大部分时间是消耗在了数据返回到前台展示的时间，理解是解析耗时。</p>
+<p>查看官方支持的连接方式，<a target="_blank" rel="noopener" href="http://superset.apache.org/installation.html#database-dependencies">http://superset.apache.org/installation.html#database-dependencies</a>，对比查询用时。</p>
+<h3 id="6-Gunicorn协程启动，"><a href="#6-Gunicorn协程启动，" class="headerlink" title="6. Gunicorn协程启动，"></a>6. Gunicorn协程启动，</h3><p>生产环境不要使用superset run的启动方式，Gunicorn协程启动，参考官网 <a target="_blank" rel="noopener" href="http://superset.apache.org/installation.html#a-proper-wsgi-http-server">a-proper-wsgi-http-server</a></p>
+<p>安装gunicorn和gevent</p>
+<p><code>pip install gunicorn</code></p>
+<p><code>pip install gevent</code></p>
+<ul>
+<li>这里需要注意版本问题，superset0.30需要 gunicorn&lt;19.9.0,但gunicorn由于向后不兼容的更改，Gunicorn在Python 3.7上中断，19.9.0才修复了该问题。</li>
+</ul>
+<p>如果启动superset报错<code>from gunicorn.workers.async import AsyncWorker</code>，升级gunicorn和superset：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">[Traceback (most recent call last):</span><br><span class="line">  File "/usr/local/lib/python3.7/site-packages/gunicorn/util.py", line 135, in load_class</span><br><span class="line">    mod = import_module('.'.join(components))</span><br><span class="line">  File "/usr/local/lib/python3.7/importlib/__init__.py", line 127, in import_module</span><br><span class="line">    return _bootstrap._gcd_import(name[level:], package, level)</span><br><span class="line">  File "&lt;frozen importlib._bootstrap&gt;", line 1006, in _gcd_import</span><br><span class="line">  File "&lt;frozen importlib._bootstrap&gt;", line 983, in _find_and_load</span><br><span class="line">  File "&lt;frozen importlib._bootstrap&gt;", line 967, in _find_and_load_unlocked</span><br><span class="line">   File "&lt;frozen importlib._bootstrap&gt;", line 677, in _load_unlocked</span><br><span class="line">  File "&lt;frozen importlib._bootstrap_external&gt;", line 724, in exec_module</span><br><span class="line">  File "&lt;frozen importlib._bootstrap_external&gt;", line 860, in get_code</span><br><span class="line">  File "&lt;frozen importlib._bootstrap_external&gt;", line 791, in source_to_code</span><br><span class="line">  File "&lt;frozen importlib._bootstrap&gt;", line 219, in _call_with_frames_removed</span><br><span class="line">  File "/usr/local/lib/python3.7/site-packages/gunicorn/workers/geventlet.py", line 27</span><br><span class="line">    from gunicorn.workers.async import AsyncWorker</span><br><span class="line">                              ^</span><br><span class="line">SyntaxError: invalid syntax</span><br><span class="line">]</span><br></pre></td></tr></tbody></table></figure>
+
+<p>错误参考：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/apache/incubator-superset/issues/8349">https://github.com/apache/incubator-superset/issues/8349</a><br><a target="_blank" rel="noopener" href="https://github.com/benoitc/gunicorn/issues/1822">https://github.com/benoitc/gunicorn/issues/1822</a></p>
+<p>启动命令：</p>
+<ul>
+<li>注意：在不加-D执行下才会输出superset程序日志。</li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">#-D 后台执行</span><br><span class="line">#-w 启动进程数</span><br><span class="line">#--log-level debug 日志级别</span><br><span class="line">#--access-logfile /tmp/superset_access.log 指定access请求日志路径</span><br><span class="line">#--error-logfile /tmp/superset_error.log 指定请求错误日志路径</span><br><span class="line"></span><br><span class="line">前台启动：</span><br><span class="line">gunicorn  -w 10 -k gevent --timeout 120 -b 0.0.0.0:7668 --limit-request-line 0 --limit-request-field_size 0 "superset.app:create_app()"</span><br><span class="line"></span><br><span class="line">后台执行：</span><br><span class="line">superset 0.35.0</span><br><span class="line">gunicorn \</span><br><span class="line">    -w 10 \</span><br><span class="line">    --timeout 120 \</span><br><span class="line">    -b 0.0.0.0:7668 \</span><br><span class="line">    --limit-request-line 0 \</span><br><span class="line">    --limit-request-field_size 0 \</span><br><span class="line">    --forwarded-allow-ips=*</span><br><span class="line">    --log-level debug</span><br><span class="line">    --access-logfile /tmp/superset_access.log</span><br><span class="line">    --error-logfile /tmp/superset_error.log</span><br><span class="line">    superset:app -D</span><br><span class="line"></span><br><span class="line">superset 0.36.0</span><br><span class="line">gunicorn \</span><br><span class="line">    -w 10 \</span><br><span class="line">    --timeout 120 \</span><br><span class="line">    -b 0.0.0.0:7668 \</span><br><span class="line">    --limit-request-line 0 \</span><br><span class="line">    --limit-request-field_size 0 \</span><br><span class="line">    --forwarded-allow-ips=*</span><br><span class="line">    --log-level debug</span><br><span class="line">    --access-logfile /tmp/superset_access.log</span><br><span class="line">    --error-logfile /tmp/superset_error.log</span><br><span class="line">    "superset.app:create_app()" -D</span><br></pre></td></tr></tbody></table></figure>
+
+<p>停止命令：kill <code>ps aux | grep  "gunicorn" | grep -v 'grep' |  awk '{print $2}'</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jerryliu.site/blog/posts/c7a184e9/" data-id="cmtu2pvid000jsc8og0a365q3" data-title="Superset性能优化" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/superset/" rel="tag">superset</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/posts/83ee6eb4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Superset二次开发-接入SSO
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/posts/11efd417/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Github commit不统计Contribution</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/123456/" rel="tag">123456</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cdh-hadoop-kerberos-sentry/" rel="tag">cdh,hadoop,kerberos,sentry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cdh-hadoop-sentry-flume-kafka/" rel="tag">cdh,hadoop,sentry,flume,kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cdh-sentry-flume-hugo/" rel="tag">cdh,sentry,flume,hugo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/druid-kafka/" rel="tag">druid,kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/druid-superset/" rel="tag">druid,superset</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/flume/" rel="tag">flume</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/flume-flink-kafka/" rel="tag">flume,flink,kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/kafka-conda/" rel="tag">kafka,conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/superset/" rel="tag">superset</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vnc/" rel="tag">vnc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%9F%E8%83%BD%E6%9B%B4%E6%96%B0/" rel="tag">功能更新</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/123456/" style="font-size: 10px;">123456</a> <a href="/blog/tags/cdh-hadoop-kerberos-sentry/" style="font-size: 20px;">cdh,hadoop,kerberos,sentry</a> <a href="/blog/tags/cdh-hadoop-sentry-flume-kafka/" style="font-size: 10px;">cdh,hadoop,sentry,flume,kafka</a> <a href="/blog/tags/cdh-sentry-flume-hugo/" style="font-size: 10px;">cdh,sentry,flume,hugo</a> <a href="/blog/tags/druid-kafka/" style="font-size: 10px;">druid,kafka</a> <a href="/blog/tags/druid-superset/" style="font-size: 10px;">druid,superset</a> <a href="/blog/tags/flume/" style="font-size: 10px;">flume</a> <a href="/blog/tags/flume-flink-kafka/" style="font-size: 10px;">flume,flink,kafka</a> <a href="/blog/tags/kafka-conda/" style="font-size: 10px;">kafka,conda</a> <a href="/blog/tags/superset/" style="font-size: 20px;">superset</a> <a href="/blog/tags/vnc/" style="font-size: 10px;">vnc</a> <a href="/blog/tags/%E5%8A%9F%E8%83%BD%E6%9B%B4%E6%96%B0/" style="font-size: 10px;">功能更新</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/posts/30a6384b/">xiaomi cyberdog 配置 VNC 远程桌面</a>
+          </li>
+        
+          <li>
+            <a href="/blog/posts/83ee6eb4/">Superset二次开发-接入SSO</a>
+          </li>
+        
+          <li>
+            <a href="/blog/posts/c7a184e9/">Superset性能优化</a>
+          </li>
+        
+          <li>
+            <a href="/blog/posts/11efd417/">Github commit不统计Contribution</a>
+          </li>
+        
+          <li>
+            <a href="/blog/posts/19869521/">Druid添加扩展S3数据源</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 Jerryliu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/blog/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/blog/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

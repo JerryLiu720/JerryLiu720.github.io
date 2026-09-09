@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Superset二次开发-接入SSO | Jerryliublog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="为了统一和安全考虑，将superset接入公司账号系统，使用员工现有邮箱和密码作为登录方式env:superset 0.36.0  Superset使用FAB（Flask-Appbuilder）实现了用户权限功能，登录认证框架。 FAB支持以下几种认证方式：  这里使用的是REMOTE_USER方式，通过调用remote server api,从remote web server获取用户的认证">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Superset二次开发-接入SSO">
+<meta property="og:url" content="https://jerryliu.site/blog/posts/83ee6eb4/index.html">
+<meta property="og:site_name" content="Jerryliublog">
+<meta property="og:description" content="为了统一和安全考虑，将superset接入公司账号系统，使用员工现有邮箱和密码作为登录方式env:superset 0.36.0  Superset使用FAB（Flask-Appbuilder）实现了用户权限功能，登录认证框架。 FAB支持以下几种认证方式：  这里使用的是REMOTE_USER方式，通过调用remote server api,从remote web server获取用户的认证">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jerryliu.site/blog/img/superset13.png">
+<meta property="og:image" content="https://jerryliu.site/blog/img/superset_sso1.png">
+<meta property="article:published_time" content="2020-07-12T04:00:00.000Z">
+<meta property="article:modified_time" content="2026-09-09T12:26:25.784Z">
+<meta property="article:author" content="Jerryliu">
+<meta property="article:tag" content="superset">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jerryliu.site/blog/img/superset13.png">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="Jerryliublog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/blog/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">Jerryliublog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">11</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/blog/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://jerryliu.site/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Superset二次开发-接入SSO" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/blog/posts/83ee6eb4/" class="article-date">
+  <time class="dt-published" datetime="2020-07-12T04:00:00.000Z" itemprop="datePublished">2020-07-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Superset二次开发-接入SSO
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+</blockquote>
+<p>为了统一和安全考虑，将superset接入公司账号系统，使用员工现有邮箱和密码作为登录方式<br>env:superset 0.36.0</p>
+<p><img src="/blog/img/superset13.png"></p>
+<p>Superset使用FAB（Flask-Appbuilder）实现了用户权限功能，登录认证框架。</p>
+<p>FAB支持以下几种认证方式：</p>
+<p><img src="/blog/img/superset_sso1.png"></p>
+<p>这里使用的是REMOTE_USER方式，通过调用remote server api,从remote web server获取用户的认证信息，也就是公司的登录系统，认证通过则将用户信息保存到db中，只要验证用户的session没有过期，就可以直接访问网站。授权验证通过后，通过appbuilder.sm.add_user，将用户添加到superset用户库中，后面进行该用户的应用内权限管理。</p>
+<h3 id="1-首先是配置"><a href="#1-首先是配置" class="headerlink" title="1.首先是配置"></a>1.首先是配置</h3><p>通过阅读superset/config.py中的代码, 如果需要自行修改配置, 创建superset_config.py文件。</p>
+<p>在superset 创建自定义配置文件 superset_config.py</p>
+<p>添加以下内容，替换默认CUSTOM_SECURITY_MANAGER中使用的SecurityManager. 然后写一个CustomSecurityManager类去继承SecurityManager,</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">from superset.custom_security import CustomSecurityManager</span><br><span class="line">CUSTOM_SECURITY_MANAGER = CustomSecurityManager</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="2-修改登录页"><a href="#2-修改登录页" class="headerlink" title="2.修改登录页"></a>2.修改登录页</h3><p>/root/incubator-superset/superset/templates/appbuilder/navbar_right.html</p>
+<p>主要是为了修改登录和登出按钮的连接跳转。</p>
+<p>修改为以下内容：<br>将110行注释，替换<br>将125行注释替换，添加124行</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">109             &lt;li&gt;&lt;a href="{{appbuilder.get_url_for_userinfo}}"&gt;&lt;span class="fa fa-fw fa-user"&gt;&lt;/span&gt;{{_("Profile")}}&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">110             &lt;li&gt;&lt;a href="/sso/logout"&gt;&lt;span class="fa fa-fw fa-sign-out"&gt;&lt;/span&gt;{{_("Logout")}}&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">111             &lt;!--&lt;li&gt;&lt;a href="{{appbuilder.get_url_for_logout}}"&gt;&lt;span class="fa fa-fw fa-sign-out"&gt;&lt;/span&gt;{{_("Logout")}}&lt;/a&gt;&lt;/li&gt;--&gt;</span><br><span class="line">123 {% else %}</span><br><span class="line">124     &lt;li&gt;&lt;a href="/sso/login"&gt;</span><br><span class="line">125     &lt;!--&lt;li&gt;&lt;a href="{{appbuilder.get_url_for_login}}"&gt;--&gt;</span><br><span class="line">126     &lt;i class="fa fa-fw fa-sign-in"&gt;&lt;/i&gt;SSO_{{_("Login")}}&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">127 {% endif %}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="3-自定义方法继承SecurityManager"><a href="#3-自定义方法继承SecurityManager" class="headerlink" title="3.自定义方法继承SecurityManager"></a>3.自定义方法继承SecurityManager</h3><p>写一个custom_security.py类去继承SecurityManager, 重写一些view自定义登录效果。</p>
+<p>在superset目录新建custom_security.py脚本。</p>
+<ul>
+<li>每次将请求中的ticket，向remote server进行验证，如果有效，直接登录成功，否则重新登录sso进行授权。成功授权后判断用户是否已经出现在superset用户库中，如果没有添加该用户，指定账户名为用户名，密码默认为用户名。</li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">from flask import redirect, g, flash, request</span><br><span class="line">from flask_appbuilder.security.views import UserDBModelView,AuthDBView</span><br><span class="line">from superset.security import SupersetSecurityManager</span><br><span class="line">from flask_appbuilder.security.views import expose</span><br><span class="line">from flask_appbuilder.security.manager import BaseSecurityManager</span><br><span class="line">from flask_login import login_user, logout_user</span><br><span class="line">import requests</span><br><span class="line">import superset_config</span><br><span class="line">class CustomAuthDBView(AuthDBView):</span><br><span class="line">    @expose('/sso/login/', methods=['GET'])</span><br><span class="line">    def sso_login(self):</span><br><span class="line">        print("------------ login", request.args)</span><br><span class="line">        if request.args.get('ticket') is not None:</span><br><span class="line">            r = requests.get(**login_url**, verify=False)</span><br><span class="line">            print("------------ validate", r.json()['username'])</span><br><span class="line">            username = r.json()['username']</span><br><span class="line">            user = self.appbuilder.sm.find_user(username=username)</span><br><span class="line">            if user is not None:</span><br><span class="line">                print("------------ find user", user)</span><br><span class="line">                login_user(user, remember=False)</span><br><span class="line">                return redirect(self.appbuilder.get_url_for_index)</span><br><span class="line">            else:</span><br><span class="line">                user = self.appbuilder.sm.add_user(</span><br><span class="line">                    username=username,</span><br><span class="line">                    first_name=username.split('.')[0],</span><br><span class="line">                    last_name=username.split('.')[1],</span><br><span class="line">                    password = username,</span><br><span class="line">                    email=username,</span><br><span class="line">                    role=self.appbuilder.sm.find_role(self.appbuilder.sm.auth_user_registration_role))</span><br><span class="line">                print("------------ new user", user)</span><br><span class="line">                login_user(user, remember=False)</span><br><span class="line">                return redirect(self.appbuilder.get_url_for_index)</span><br><span class="line">        else:</span><br><span class="line">            return redirect(***login_url***)</span><br><span class="line">    @expose('/sso/logout/', methods=['GET'])</span><br><span class="line">    def sso_logout(self):</span><br><span class="line">        print("------------ logout", logout_url)</span><br><span class="line">        return redirect(**logout_url**)</span><br><span class="line">class CustomSecurityManager(SupersetSecurityManager):</span><br><span class="line">    authdbview = CustomAuthDBView</span><br><span class="line">    def __init__(self, appbuilder):</span><br><span class="line">        super(CustomSecurityManager, self).__init__(appbuilder)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>刷新superset,查看登录页面右上角登录按钮。</p>
+<p>参考 ：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://juejin.im/post/5adff757518825673446b2e1">https://juejin.im/post/5adff757518825673446b2e1</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jerryliu.site/blog/posts/83ee6eb4/" data-id="cmtu2pvid000gsc8o1c1l82ul" data-title="Superset二次开发-接入SSO" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/superset/" rel="tag">superset</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/posts/30a6384b/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          xiaomi cyberdog 配置 VNC 远程桌面
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/posts/c7a184e9/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Superset性能优化</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/123456/" rel="tag">123456</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cdh-hadoop-kerberos-sentry/" rel="tag">cdh,hadoop,kerberos,sentry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cdh-hadoop-sentry-flume-kafka/" rel="tag">cdh,hadoop,sentry,flume,kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cdh-sentry-flume-hugo/" rel="tag">cdh,sentry,flume,hugo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/druid-kafka/" rel="tag">druid,kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/druid-superset/" rel="tag">druid,superset</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/flume/" rel="tag">flume</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/flume-flink-kafka/" rel="tag">flume,flink,kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/kafka-conda/" rel="tag">kafka,conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/superset/" rel="tag">superset</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vnc/" rel="tag">vnc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%9F%E8%83%BD%E6%9B%B4%E6%96%B0/" rel="tag">功能更新</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/123456/" style="font-size: 10px;">123456</a> <a href="/blog/tags/cdh-hadoop-kerberos-sentry/" style="font-size: 20px;">cdh,hadoop,kerberos,sentry</a> <a href="/blog/tags/cdh-hadoop-sentry-flume-kafka/" style="font-size: 10px;">cdh,hadoop,sentry,flume,kafka</a> <a href="/blog/tags/cdh-sentry-flume-hugo/" style="font-size: 10px;">cdh,sentry,flume,hugo</a> <a href="/blog/tags/druid-kafka/" style="font-size: 10px;">druid,kafka</a> <a href="/blog/tags/druid-superset/" style="font-size: 10px;">druid,superset</a> <a href="/blog/tags/flume/" style="font-size: 10px;">flume</a> <a href="/blog/tags/flume-flink-kafka/" style="font-size: 10px;">flume,flink,kafka</a> <a href="/blog/tags/kafka-conda/" style="font-size: 10px;">kafka,conda</a> <a href="/blog/tags/superset/" style="font-size: 20px;">superset</a> <a href="/blog/tags/vnc/" style="font-size: 10px;">vnc</a> <a href="/blog/tags/%E5%8A%9F%E8%83%BD%E6%9B%B4%E6%96%B0/" style="font-size: 10px;">功能更新</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/posts/30a6384b/">xiaomi cyberdog 配置 VNC 远程桌面</a>
+          </li>
+        
+          <li>
+            <a href="/blog/posts/83ee6eb4/">Superset二次开发-接入SSO</a>
+          </li>
+        
+          <li>
+            <a href="/blog/posts/c7a184e9/">Superset性能优化</a>
+          </li>
+        
+          <li>
+            <a href="/blog/posts/11efd417/">Github commit不统计Contribution</a>
+          </li>
+        
+          <li>
+            <a href="/blog/posts/19869521/">Druid添加扩展S3数据源</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 Jerryliu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/blog/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/blog/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

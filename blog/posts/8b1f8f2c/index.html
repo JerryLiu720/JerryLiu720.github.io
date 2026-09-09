@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>superset 源码安装/pip安装+superset二次开发环境搭建 | Jerryliublog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="环境：   mac 10.15 Catalina + Anaconda 3 + Python3.7 + superset 0.30   Superset 是一款由 Airbnb 开源的“现代化的企业级 BI（商业智能） Web 应用程序”，其通过创建和分享 dashboard，为数据分析提供了轻量级的数据查询和可视化方案。 Superset 的前端主要用到了 React 和 NVD3&#x2F;D3，而后端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="superset 源码安装&#x2F;pip安装+superset二次开发环境搭建">
+<meta property="og:url" content="https://jerryliu.site/blog/posts/8b1f8f2c/index.html">
+<meta property="og:site_name" content="Jerryliublog">
+<meta property="og:description" content="环境：   mac 10.15 Catalina + Anaconda 3 + Python3.7 + superset 0.30   Superset 是一款由 Airbnb 开源的“现代化的企业级 BI（商业智能） Web 应用程序”，其通过创建和分享 dashboard，为数据分析提供了轻量级的数据查询和可视化方案。 Superset 的前端主要用到了 React 和 NVD3&#x2F;D3，而后端">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jerryliu.site/blog/img/superset13.png">
+<meta property="og:image" content="https://jerryliu.site/blog/img/superset6.png">
+<meta property="og:image" content="https://jerryliu.site/blog/img/superset7.png">
+<meta property="og:image" content="https://jerryliu.site/blog/img/superset4.png">
+<meta property="og:image" content="https://jerryliu.site/blog/img/superset5.png">
+<meta property="og:image" content="https://jerryliu.site/blog/img/superset8.png">
+<meta property="og:image" content="https://jerryliu.site/blog/img/superset1.png">
+<meta property="og:image" content="https://jerryliu.site/blog/img/superset2.png">
+<meta property="og:image" content="https://jerryliu.site/blog/img/superset12.png">
+<meta property="og:image" content="https://jerryliu.site/blog/img/superset10.png">
+<meta property="article:published_time" content="2020-02-23T04:00:00.000Z">
+<meta property="article:modified_time" content="2026-09-09T12:26:25.783Z">
+<meta property="article:author" content="Jerryliu">
+<meta property="article:tag" content="druid,superset">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jerryliu.site/blog/img/superset13.png">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="Jerryliublog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/blog/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">Jerryliublog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">11</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/blog/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://jerryliu.site/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-superset 源码安装-pip安装+superset二次开发环境搭建" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/blog/posts/8b1f8f2c/" class="article-date">
+  <time class="dt-published" datetime="2020-02-23T04:00:00.000Z" itemprop="datePublished">2020-02-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      superset 源码安装/pip安装+superset二次开发环境搭建
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>环境：</p>
+<blockquote>
+</blockquote>
+<p>mac 10.15 Catalina + Anaconda 3 + Python3.7 + superset 0.30</p>
+<p><img src="/blog/img/superset13.png"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"> Superset 是一款由 Airbnb 开源的“现代化的企业级 BI（商业智能） Web 应用程序”，其通过创建和分享 dashboard，为数据分析提供了轻量级的数据查询和可视化方案。</span><br><span class="line"> Superset 的前端主要用到了 React 和 NVD3/D3，而后端则基于 Python 的 Flask 框架和 Pandas、SQLAlchemy 等依赖库，主要提供了这几方面的功能：</span><br><span class="line">集成数据查询功能，支持多种数据库，包括 MySQL、PostgresSQL、Oracle、SQL Server、SQLite、SparkSQL 等，并深度支持 Druid。</span><br><span class="line">通过 NVD3/D3 预定义了多种可视化图表，满足大部分的数据展示功能。如果还有其他需求，也可以自开发更多的图表类型，或者嵌入其他的 JavaScript 图表库（如 HighCharts、ECharts）。</span><br><span class="line">提供细粒度安全模型，可以在功能层面和数据层面进行访问控制。支持多种鉴权方式（如数据库、OpenID、LDAP、OAuth、REMOTE_USER 等）。</span><br></pre></td></tr></tbody></table></figure>
+
+<p>17年装过一次，简单使用了一下，现在又开始使用supeset了。这次记录下问题，和安装步骤<br>因为之前安装过，导致残留。不能导入示例数据，不能创建用户等一些问题。</p>
+<p>下面两种方式都是在Anaconda虚拟python环境中进行。</p>
+<h2 id="一-源码安装superset"><a href="#一-源码安装superset" class="headerlink" title="一.源码安装superset"></a>一.源码安装superset</h2><p>首先，Anaconda 创建python环境</p>
+<p><code>conda create -n superset python=3.7</code></p>
+<ul>
+<li>激活环境</li>
+</ul>
+<p><code>conda activate superset</code></p>
+<h3 id="1-github-下载源码包"><a href="#1-github-下载源码包" class="headerlink" title="1.github 下载源码包"></a>1.github 下载源码包</h3><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">git clone https://github.com/apache/incubator-superset.git</span><br><span class="line"></span><br><span class="line">git tag　列出所有版本号</span><br><span class="line"></span><br><span class="line">#切换到自己想要的版本</span><br><span class="line">git checkout　+某版本号</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="2-安装扩展依赖，及开发依赖-这里指定豆瓣源"><a href="#2-安装扩展依赖，及开发依赖-这里指定豆瓣源" class="headerlink" title="2.安装扩展依赖，及开发依赖(这里指定豆瓣源)"></a>2.安装扩展依赖，及开发依赖(这里指定豆瓣源)</h3><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">#进入到目录</span><br><span class="line">cd incubator-superset</span><br><span class="line">pip install -r requirements.txt -i https://pypi.douban.com/simple/</span><br><span class="line"></span><br><span class="line">安装开发依赖</span><br><span class="line">pip install -r requirements-dev.txt -i https://pypi.douban.com/simple/</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="3-安装superset"><a href="#3-安装superset" class="headerlink" title="3.安装superset"></a>3.安装superset</h3><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">#incubator-superset 目录执行</span><br><span class="line">pip install -e .</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src="/blog/img/superset6.png"></p>
+<h3 id="4-开始配置superset"><a href="#4-开始配置superset" class="headerlink" title="4.开始配置superset"></a>4.开始配置superset</h3><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">创建管理员账户和密码</span><br><span class="line">这个命令已经不推荐使用了。</span><br><span class="line">fabmanager create-admin --app superset</span><br><span class="line">推荐使用</span><br><span class="line">$export FLASK_APP=superset</span><br><span class="line">flask fab create-admin</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src="/blog/img/superset7.png"></p>
+<ul>
+<li>以下操作要进入superset/bin目录下</li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">#初始化数据库</span><br><span class="line">python superset db upgrade</span><br><span class="line"></span><br><span class="line">#初始化角色和权限</span><br><span class="line">python superset init</span><br><span class="line"></span><br><span class="line">#加载示例数据</span><br><span class="line">python superset load_examples</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="5-安装编译前端文件，并进入前端开发者模式"><a href="#5-安装编译前端文件，并进入前端开发者模式" class="headerlink" title="5.安装编译前端文件，并进入前端开发者模式"></a>5.安装编译前端文件，并进入前端开发者模式</h3><ul>
+<li>安装nodejs,<a target="_blank" rel="noopener" href="https://nodejs.org/en/">nodejs官网</a>下载编译好的包</li>
+</ul>
+<p><code>wget https://nodejs.org/dist/v12.18.2/node-v12.18.2-linux-x64.tar.xz</code></p>
+<p>解压 :</p>
+<p><code>tar -xvf node-v12.18.2-linux-x64.tar.xz</code></p>
+<p>建软链:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">ln -s /xxxx/nodejs/bin/node /usr/local/bin/</span><br><span class="line">ln -s /xxxxx/nodejs/bin/npm /usr/local/bin/&nbsp;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>然后node -v 查看版本，查看正常即可</p>
+<ul>
+<li>设置npm为淘宝镜像</li>
+</ul>
+<p><code>npm config set registry https://registry.npm.taobao.org</code></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">验证 `npm config get registry`</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>进入superset/assets目录下（新版目录incubator-superset/superset-frontend/）,安装编译所需模块</li>
+</ul>
+<p><code>npm install -d </code></p>
+<p><img src="/blog/img/superset4.png"></p>
+<ul>
+<li>编译前端文件，并进入前端开发者模式</li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">npm run build</span><br><span class="line">npm run dev</span><br></pre></td></tr></tbody></table></figure>
+
+<p>注：如果这两部编译失败，可能是因为nodejs版本过低。可尝试升级nodejs再试。</p>
+<p><img src="/blog/img/superset5.png"></p>
+<ul>
+<li>运行完npm run dev，命令窗口会停止，不要误以为是执行不下去，保持窗口开启状态即可，一有文件变动时，它会重新编译</li>
+</ul>
+<h3 id="6、把项目导入到pyCharm"><a href="#6、把项目导入到pyCharm" class="headerlink" title="6、把项目导入到pyCharm"></a>6、把项目导入到pyCharm</h3><p>File -&gt; New Project -&gt; Location选择incubator-superset所在目录 -&gt; 选择Existing interpreter -&gt; 选择conda-&gt; 选择你的环境</p>
+<h3 id="7、启动项目"><a href="#7、启动项目" class="headerlink" title="7、启动项目"></a>7、启动项目</h3><p>两种方式都可启动，任选其一。</p>
+<ul>
+<li></li>
+</ul>
+<p>命令启动superset <code>superset run -h 0.0.0.0 -p 8088</code></p>
+<ul>
+<li></li>
+</ul>
+<p>在 incubator-superset/superset 目录下新建 run.py，添加如下内容:</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">from superset import app</span><br><span class="line">app.run(debug=True, host='0.0.0.0', port=8088)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>等 pycharm 右下角 processes running 完成后就可以debug run.py了。访问：<a href="http://localhost:8088,输入管理员账号跟密码，登录。">http://localhost:8088,输入管理员账号跟密码，登录。</a></p>
+<p><img src="/blog/img/superset8.png"></p>
+<h2 id="二-pip安装superset"><a href="#二-pip安装superset" class="headerlink" title="二.pip安装superset"></a>二.pip安装superset</h2><h3 id="1-Anaconda-创建python环境"><a href="#1-Anaconda-创建python环境" class="headerlink" title="1.Anaconda 创建python环境"></a>1.Anaconda 创建python环境</h3><p><code>conda create -n superset python=3.7</code></p>
+<ul>
+<li>激活环境</li>
+</ul>
+<p><code>conda activate superset</code></p>
+<h3 id="2-安装依赖包。"><a href="#2-安装依赖包。" class="headerlink" title="2.安装依赖包。"></a>2.安装依赖包。</h3><ul>
+<li></li>
+</ul>
+<p>具体的依赖包配置要去github找对应版本的根目录下的requirements.txt</p>
+<ul>
+<li></li>
+</ul>
+<p>raw的地址被污染不能用了。这里需要手动复制requirements.txt的内容创建一个文件</p>
+<ul>
+<li></li>
+</ul>
+<p>以下是0.34.0对应的依赖的list，请注意选择自己版本的依赖。</p>
+<p><code>vim requirements.txt</code></p>
+<p>复制以下内容</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">#</span><br><span class="line"># This file is autogenerated by pip-compile</span><br><span class="line"># To update, run:</span><br><span class="line">#</span><br><span class="line">#    pip-compile --output-file=requirements.txt setup.py</span><br><span class="line">#</span><br><span class="line">alembic==1.0.11           # via flask-migrate</span><br><span class="line">amqp==2.5.0               # via kombu</span><br><span class="line">apispec[yaml]==1.3.3      # via flask-appbuilder</span><br><span class="line">asn1crypto==0.24.0        # via cryptography</span><br><span class="line">attrs==19.1.0             # via jsonschema</span><br><span class="line">babel==2.7.0              # via flask-babel</span><br><span class="line">billiard==3.6.0.0         # via celery</span><br><span class="line">bleach==3.1.0</span><br><span class="line">celery==4.3.0</span><br><span class="line">cffi==1.12.3              # via cryptography</span><br><span class="line">click==6.7</span><br><span class="line">colorama==0.4.1</span><br><span class="line">contextlib2==0.5.5</span><br><span class="line">croniter==0.3.30</span><br><span class="line">cryptography==2.7</span><br><span class="line">decorator==4.4.0          # via retry</span><br><span class="line">defusedxml==0.6.0         # via python3-openid</span><br><span class="line">flask-appbuilder==2.1.13</span><br><span class="line">flask-babel==0.12.2       # via flask-appbuilder</span><br><span class="line">flask-caching==1.7.2</span><br><span class="line">flask-compress==1.4.0</span><br><span class="line">flask-jwt-extended==3.20.0  # via flask-appbuilder</span><br><span class="line">flask-login==0.4.1        # via flask-appbuilder</span><br><span class="line">flask-migrate==2.5.2</span><br><span class="line">flask-openid==1.2.5       # via flask-appbuilder</span><br><span class="line">flask-sqlalchemy==2.4.0   # via flask-appbuilder, flask-migrate</span><br><span class="line">flask-talisman==0.7.0</span><br><span class="line">flask-wtf==0.14.2</span><br><span class="line">flask==1.1.1</span><br><span class="line">future==0.17.1            # via parsedatetime</span><br><span class="line">geographiclib==1.49       # via geopy</span><br><span class="line">geopy==1.20.0</span><br><span class="line">gunicorn==19.8.1</span><br><span class="line">humanize==0.5.1</span><br><span class="line">idna==2.8</span><br><span class="line">isodate==0.6.0</span><br><span class="line">itsdangerous==1.1.0       # via flask</span><br><span class="line">jinja2==2.10.1            # via flask, flask-babel</span><br><span class="line">jsonschema==3.0.1         # via flask-appbuilder</span><br><span class="line">kombu==4.6.3              # via celery</span><br><span class="line">mako==1.0.14              # via alembic</span><br><span class="line">markdown==3.1.1</span><br><span class="line">markupsafe==1.1.1         # via jinja2, mako</span><br><span class="line">marshmallow-enum==1.4.1   # via flask-appbuilder</span><br><span class="line">marshmallow-sqlalchemy==0.17.0  # via flask-appbuilder</span><br><span class="line">marshmallow==2.19.5       # via flask-appbuilder, marshmallow-enum, marshmallow-sqlalchemy</span><br><span class="line">numpy==1.17.0             # via pandas</span><br><span class="line">pandas==0.24.2</span><br><span class="line">parsedatetime==2.4</span><br><span class="line">pathlib2==2.3.4</span><br><span class="line">polyline==1.4.0</span><br><span class="line">prison==0.1.2             # via flask-appbuilder</span><br><span class="line">py==1.8.0                 # via retry</span><br><span class="line">pycparser==2.19           # via cffi</span><br><span class="line">pyjwt==1.7.1              # via flask-appbuilder, flask-jwt-extended</span><br><span class="line">pyrsistent==0.15.4        # via jsonschema</span><br><span class="line">python-dateutil==2.8.0</span><br><span class="line">python-dotenv==0.10.3</span><br><span class="line">python-editor==1.0.4      # via alembic</span><br><span class="line">python-geohash==0.8.5</span><br><span class="line">python3-openid==3.1.0     # via flask-openid</span><br><span class="line">pytz==2019.2              # via babel, celery, pandas</span><br><span class="line">pyyaml==5.1.2</span><br><span class="line">retry==0.9.2</span><br><span class="line">selenium==3.141.0</span><br><span class="line">simplejson==3.16.0</span><br><span class="line">six==1.12.0               # via bleach, cryptography, flask-jwt-extended, flask-talisman, isodate, jsonschema, pathlib2, polyline, prison, pyrsistent, python-dateutil, sqlalchemy-utils, wtforms-json</span><br><span class="line">sqlalchemy-utils==0.34.1</span><br><span class="line">sqlalchemy==1.3.6</span><br><span class="line">sqlparse==0.3.0</span><br><span class="line">urllib3==1.25.3           # via selenium</span><br><span class="line">vine==1.3.0               # via amqp, celery</span><br><span class="line">webencodings==0.5.1       # via bleach</span><br><span class="line">werkzeug==0.15.5          # via flask, flask-jwt-extended</span><br><span class="line">wtforms-json==0.3.3</span><br><span class="line">wtforms==2.2.1            # via flask-wtf, wtforms-json</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>安装依赖，指定国内pip速度飞起。</li>
+</ul>
+<p><code> pip install -r requirements.txt -i https://pypi.douban.com/simple/</code></p>
+<h3 id="3-安装superset-1"><a href="#3-安装superset-1" class="headerlink" title="3.安装superset"></a>3.安装superset</h3><ul>
+<li>指定版本0.30.0,pip源目前为止最高版本为0.30.0</li>
+</ul>
+<p><code>pip install superset==0.30.0  -i https://pypi.douban.com/simple/</code></p>
+<h3 id="4-开始配置初始化superset"><a href="#4-开始配置初始化superset" class="headerlink" title="4.开始配置初始化superset"></a>4.开始配置初始化superset</h3><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">#创建管理用户及密码</span><br><span class="line">$ export FLASK_APP=superset</span><br><span class="line">flask fab create-admin</span><br><span class="line">或者</span><br><span class="line">fabmanager create-admin --app superset</span><br><span class="line"></span><br><span class="line">#初始化数据库</span><br><span class="line">superset db upgrade</span><br><span class="line"></span><br><span class="line">#初始化角色和权限</span><br><span class="line">superset init</span><br><span class="line"></span><br><span class="line">#加载示例数据</span><br><span class="line">superset load_examples</span><br><span class="line">superset load_examples</span><br><span class="line"></span><br><span class="line">#debug模式启动，并指定8088端口</span><br><span class="line">superset run -p 8088 --with-threads --reload --debugger</span><br></pre></td></tr></tbody></table></figure>
+
+<p>然后启动成功。浏览器访问</p>
+<p><img src="/blog/img/superset1.png"></p>
+<p>登陆上面创建的管理用户和密码即可</p>
+<p><img src="/blog/img/superset2.png"></p>
+<p><img src="/blog/img/superset12.png"></p>
+<h2 id="三-问题与总结"><a href="#三-问题与总结" class="headerlink" title="三.问题与总结"></a>三.问题与总结</h2><p>记录：conda pip安装的路径<br>/opt/anaconda3/envs/superset/lib/python3.7/site-packages/superset</p>
+<p>1.无法创建管理账户,需要保证email的唯一性，说明这个邮件已经被创建过，换一个邮件创建即可。<br>导致这个问题的原因是：之前安装过superset，没有删除遗留的supeset.db文件。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">2020-02-21 18:16:07,701:INFO:root:Configured event logger of type &lt;class 'superset.utils.log.DBEventLogger'&gt;</span><br><span class="line">Recognized Database Authentications.</span><br><span class="line">2020-02-21 18:16:08,948:ERROR:flask_appbuilder.security.sqla.manager:Error adding new user to database. (sqlite3.IntegrityError) UNIQUE constraint failed: ab_user.email</span><br><span class="line">[SQL: INSERT INTO ab_user (first_name, last_name, username, password, active, email, last_login, login_count, fail_login_count, created_on, changed_on, created_by_fk, changed_by_fk) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]</span><br><span class="line">[parameters: ('admin', 'user', 'admin', 'pbkdf2:sha256:150000$lXoRkj1U$96d4f6c545b94200fabf2e0cee44e66ba928982109d926c75633c10db0a78d7a', 1, 'admin@superset.com', None, None, None, '2020-02-21 18:16:08.946516', '2020-02-21 18:16:08.946527', None, None)]</span><br><span class="line">(Background on this error at: http://sqlalche.me/e/gkpj)</span><br><span class="line">No user created an error occured</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li></li>
+</ul>
+<p><code>superset load_examples times out with TimeoutError </code> superset load_examples,无法导入数据,显示拒绝连接</p>
+<p>前天安装还好好的，今天不管是pip,还是源码安装都不行，我以为是我的安装问题<br>日志也没有详情，找错了方向，还以为是sqlite无法连接。<br>这个问题当误好大功夫。找了好久。。。。</p>
+<p>后来找到了github 提交的issue,找到了问题的所在:</p>
+<p>raw.githubusercontent.com域名解析污染了,的确ping raw.githubusercontent.com都是失败的</p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/apache/incubator-superset/issues/8520">https://github.com/apache/incubator-superset/issues/8520</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/apache/incubator-superset/issues/8491">https://github.com/apache/incubator-superset/issues/8491</a></p>
+<p>解决：</p>
+<p>issues里说可以通过下载数据zip包，手动导入，但是没有给数据包url.下面用一个简单的方法，这里通过修改<code>raw.githubusercontent.com</code>的解析地址解决</p>
+<p>首先通过<a target="_blank" rel="noopener" href="https://www.ipaddress.com/">ipaddress</a>,找出raw.githubusercontent.com的ip地址。</p>
+<p><img src="/blog/img/superset10.png"></p>
+<p>然后<code>vim /etc/hosts</code>添加</p>
+<p><code>199.232.28.133 raw.githubusercontent.com</code></p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://www.ioiox.com/archives/62.html">https://www.ioiox.com/archives/62.html</a></p>
+<p>这个方法修改后是可以ping 通的。但是下载速度，就几kb，只能等，没办法了。</p>
+<p><strong>补充下后期安装0.36.0 npm run build遇到了一些问题</strong></p>
+<ul>
+<li>loose不一致错误：</li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">The "loose" option must be the same for @babel/plugin-proposal-class-properties, @babel/plugin-proposal-private-methods and @babel/plugin-proposal-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding</span><br></pre></td></tr></tbody></table></figure>
+
+<p>修改文件：<code>/data/deploy_tools/deploy_superset/incubator-superset-0.36.0/supeset-frontend/babel.config.js</code></p>
+<p>注释45行，添加49，50,将loose设置为true</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">42   plugins: [</span><br><span class="line">43     'lodash',</span><br><span class="line">44     '@babel/plugin-syntax-dynamic-import',</span><br><span class="line">45     //'@babel/plugin-proposal-class-properties',</span><br><span class="line">46     '@babel/plugin-proposal-optional-chaining',</span><br><span class="line">47     ['@babel/plugin-transform-runtime', { corejs: 3 }],</span><br><span class="line">48     'react-hot-loader/babel',</span><br><span class="line">49      ['@babel/plugin-proposal-private-methods', { 'loose': true }],</span><br><span class="line">50      ['@babel/plugin-proposal-class-properties', { 'loose': true }]</span><br><span class="line">51   ],</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>“Property ‘hidden’ does not exist on type ‘HeaderGroup&lt;{}&gt;’”</li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">ERROR in /data/deploy_tools/deploy_superset/incubator-superset-0.36.0/superset-frontend/src/components/ListView/TableCollection.tsx</span><br><span class="line">ERROR in /data/deploy_tools/deploy_superset/incubator-superset-0.36.0/superset-frontend/src/components/ListView/TableCollection.tsx(45,22):</span><br><span class="line">TS2339: Property 'hidden' does not exist on type 'HeaderGroup&lt;{}&gt;'.</span><br><span class="line"></span><br><span class="line">ERROR in /data/deploy_tools/deploy_superset/incubator-superset-0.36.0/superset-frontend/src/components/ListView/TableCollection.tsx</span><br><span class="line">ERROR in /data/deploy_tools/deploy_superset/incubator-superset-0.36.0/superset-frontend/src/components/ListView/TableCollection.tsx(48,28):</span><br><span class="line">TS2339: Property 'sortable' does not exist on type 'HeaderGroup&lt;{}&gt;'.</span><br><span class="line"></span><br><span class="line">ERROR in /data/deploy_tools/deploy_superset/incubator-superset-0.36.0/superset-frontend/src/components/ListView/TableCollection.tsx</span><br><span class="line">ERROR in /data/deploy_tools/deploy_superset/incubator-superset-0.36.0/superset-frontend/src/components/ListView/TableCollection.tsx(54,27):</span><br><span class="line">TS2339: Property 'sortable' does not exist on type 'HeaderGroup&lt;{}&gt;'.</span><br></pre></td></tr></tbody></table></figure>
+
+<p>解决方法：</p>
+<p>修改 <code>/data/deploy_tools/deploy_superset/incubator-superset-0.36.0/superset-frontend/src/components/ListView/TableCollection.tsx</code>文件。</p>
+<p>修改44行，修改前</p>
+<p><code>{headerGroup.headers.map(column =&gt;</code></p>
+<p>修改后</p>
+<p><code>{headerGroup.headers.map((column:any) =&gt;</code></p>
+<p>修改82行，修改前</p>
+<p><code>{row.cells.map(cell:any =&gt; {</code></p>
+<p>修改后</p>
+<p><code>{row.cells.map((cell:any) =&gt; {</code></p>
+<ul>
+<li>‘Error: ENOSPC: System limit for number of file watchers reached, watch’</li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">Error from chokidar (/data/deploy_tools/deploy_superset/incubator-superset-0.36.0/superset-frontend/node_modules/fbjs/lib): Error: ENOSPC: System limit for number of file watchers reached, watch '/data/deploy_tools/deploy_superset/incubator-superset-0.36.0/superset-frontend/node_modules/fbjs/lib/camelizeStyleName.js'</span><br><span class="line">Error from chokidar (/data/deploy_tools/deploy_superset/incubator-superset-0.36.0/superset-frontend/node_modules/fbjs/lib): Error: ENOSPC: System limit for number of file watchers reached, watch '/data/deploy_tools/deploy_superset/incubator-superset-0.36.0/superset-frontend/node_modules/fbjs/lib/camelizeStyleName.js.flow'</span><br><span class="line">Error from chokidar (/data/deploy_tools/deploy_superset/incubator-superset-0.36.0/superset-frontend/node_modules/fbjs/lib): Error: ENOSPC: System limit for number of file watchers reached, watch '/data/deploy_tools/deploy_superset/incubator-superset-0.36.0/superset-frontend/node_modules/fbjs/lib/compactArray.js'^C</span><br></pre></td></tr></tbody></table></figure>
+
+<p>解决方法：</p>
+<p>修改系统监视文件的数量：</p>
+<p><code>echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf &amp;&amp; sudo sysctl -p</code></p>
+<p><strong>superset搭建记录就完成了。下一篇集成echart</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jerryliu.site/blog/posts/8b1f8f2c/" data-id="cmtu2pvie000psc8oa8458f3g" data-title="superset 源码安装/pip安装+superset二次开发环境搭建" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/druid-superset/" rel="tag">druid,superset</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/posts/19869521/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Druid添加扩展S3数据源
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/posts/5ce0efd4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">迁移hexo博客到hugo</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/123456/" rel="tag">123456</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cdh-hadoop-kerberos-sentry/" rel="tag">cdh,hadoop,kerberos,sentry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cdh-hadoop-sentry-flume-kafka/" rel="tag">cdh,hadoop,sentry,flume,kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cdh-sentry-flume-hugo/" rel="tag">cdh,sentry,flume,hugo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/druid-kafka/" rel="tag">druid,kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/druid-superset/" rel="tag">druid,superset</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/flume/" rel="tag">flume</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/flume-flink-kafka/" rel="tag">flume,flink,kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/kafka-conda/" rel="tag">kafka,conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/superset/" rel="tag">superset</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vnc/" rel="tag">vnc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%9F%E8%83%BD%E6%9B%B4%E6%96%B0/" rel="tag">功能更新</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/123456/" style="font-size: 10px;">123456</a> <a href="/blog/tags/cdh-hadoop-kerberos-sentry/" style="font-size: 20px;">cdh,hadoop,kerberos,sentry</a> <a href="/blog/tags/cdh-hadoop-sentry-flume-kafka/" style="font-size: 10px;">cdh,hadoop,sentry,flume,kafka</a> <a href="/blog/tags/cdh-sentry-flume-hugo/" style="font-size: 10px;">cdh,sentry,flume,hugo</a> <a href="/blog/tags/druid-kafka/" style="font-size: 10px;">druid,kafka</a> <a href="/blog/tags/druid-superset/" style="font-size: 10px;">druid,superset</a> <a href="/blog/tags/flume/" style="font-size: 10px;">flume</a> <a href="/blog/tags/flume-flink-kafka/" style="font-size: 10px;">flume,flink,kafka</a> <a href="/blog/tags/kafka-conda/" style="font-size: 10px;">kafka,conda</a> <a href="/blog/tags/superset/" style="font-size: 20px;">superset</a> <a href="/blog/tags/vnc/" style="font-size: 10px;">vnc</a> <a href="/blog/tags/%E5%8A%9F%E8%83%BD%E6%9B%B4%E6%96%B0/" style="font-size: 10px;">功能更新</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/posts/30a6384b/">xiaomi cyberdog 配置 VNC 远程桌面</a>
+          </li>
+        
+          <li>
+            <a href="/blog/posts/83ee6eb4/">Superset二次开发-接入SSO</a>
+          </li>
+        
+          <li>
+            <a href="/blog/posts/c7a184e9/">Superset性能优化</a>
+          </li>
+        
+          <li>
+            <a href="/blog/posts/11efd417/">Github commit不统计Contribution</a>
+          </li>
+        
+          <li>
+            <a href="/blog/posts/19869521/">Druid添加扩展S3数据源</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 Jerryliu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/blog/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/blog/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

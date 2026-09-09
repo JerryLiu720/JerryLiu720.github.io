@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Centos7.5离线搭建CDH6.3 | Jerryliublog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="环境: centos 7.5,CDH 6.3 本文是在Centos7.5下完全离线部署CDH6 公司的CDH为5.X版本,CDH5和CDH6的差异还是有些的。之前搭建过CDH5，但每次多多少少会遇到一些问题，所以这次搭建记录一下。 官方文档地址：cloudera 参考资料：blog 1.搭建前的环境准备环境要求 操作系统    软件依赖• Python 2.7+，不支持Python 3（安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos7.5离线搭建CDH6.3">
+<meta property="og:url" content="https://jerryliu.site/blog/posts/2360fe26/index.html">
+<meta property="og:site_name" content="Jerryliublog">
+<meta property="og:description" content="环境: centos 7.5,CDH 6.3 本文是在Centos7.5下完全离线部署CDH6 公司的CDH为5.X版本,CDH5和CDH6的差异还是有些的。之前搭建过CDH5，但每次多多少少会遇到一些问题，所以这次搭建记录一下。 官方文档地址：cloudera 参考资料：blog 1.搭建前的环境准备环境要求 操作系统    软件依赖• Python 2.7+，不支持Python 3（安装">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jerryliu.site/blog/img/CDH.png">
+<meta property="article:published_time" content="2019-10-15T04:00:00.000Z">
+<meta property="article:modified_time" content="2026-09-09T12:26:25.784Z">
+<meta property="article:author" content="Jerryliu">
+<meta property="article:tag" content="cdh,hadoop,sentry,flume,kafka">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jerryliu.site/blog/img/CDH.png">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="Jerryliublog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/blog/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">Jerryliublog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">11</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/blog/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://jerryliu.site/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Centos7.5离线搭建CDH6.3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/blog/posts/2360fe26/" class="article-date">
+  <time class="dt-published" datetime="2019-10-15T04:00:00.000Z" itemprop="datePublished">2019-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Centos7.5离线搭建CDH6.3
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="/blog/img/CDH.png"></p>
+<blockquote>
+</blockquote>
+<p>环境: centos 7.5,CDH 6.3</p>
+<p>本文是在Centos7.5下完全离线部署CDH6</p>
+<p>公司的CDH为5.X版本,CDH5和CDH6的差异还是有些的。之前搭建过CDH5，但每次多多少少会遇到一些问题，所以这次搭建记录一下。</p>
+<p>官方文档地址：<a target="_blank" rel="noopener" href="https://docs.cloudera.com/documentation/enterprise/6/6.0/topics/install_cm_cdh.html#cmig_topic_6_6">cloudera</a></p>
+<p>参考资料：<a target="_blank" rel="noopener" href="https://www.staroon.dev/2018/12/01/CDH6Install/">blog</a></p>
+<h2 id="1-搭建前的环境准备"><a href="#1-搭建前的环境准备" class="headerlink" title="1.搭建前的环境准备"></a>1.搭建前的环境准备</h2><p>环境要求</p>
+<p>操作系统</p>
+<ul>
+<li></li>
+</ul>
+<p>软件依赖<br>• Python 2.7+，不支持Python 3（安装HUE需要）</p>
+<p>• perl</p>
+<p>• python-psycopg2 2.5.4+（安装HUE需要）</p>
+<p>• iproute package<br>○ RHEL7：iproute-3.10<br>○ RHEL6：iproute-2.6</p>
+<p>说明：通常这部分依赖环境操作系统已经自带，不需要手动安装。</p>
+<p>系统版本</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">• RHEL系列：6.10，6.9，6.8，7.2，7.3，7.4，7.5</span><br><span class="line"></span><br><span class="line">• SELS：12 SP3,12 SP2</span><br><span class="line"></span><br><span class="line">• Ubuntu系列：16.04 LTS</span><br></pre></td></tr></tbody></table></figure>
+
+<p>文件系统</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">• ext3</span><br><span class="line"></span><br><span class="line">• ext4</span><br><span class="line"></span><br><span class="line">• XFS</span><br><span class="line"></span><br><span class="line">• S3</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Kudu仅支持ext4和XFS文件系统，不支持NFS和NAS存储。</p>
+<p>文件访问记录</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">Cloudera建议禁用该项功能，可以提升磁盘性能。</span><br><span class="line">配置/etc/fstab文件：/dev/sdb1 /data1 ext4 defaults,noatime 0 0</span><br><span class="line">不重启即生效命令：mount -o remount /data1</span><br><span class="line">nproc配置：</span><br><span class="line">配置文件位置/etc/security/limits.conf，Cloudera Manager通常会自动配置该文件，但是该项配置可能会被/etc/security/limits.d/目录下的文件覆盖掉。确保nproc限制设置的足够高，比如65536或者262144。</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>数据库要求</strong></p>
+<p>Cloudera Manager和CDH内置嵌入式PostgreSQL数据库，用于非生产环境。生产环境不支持PostgreSQL数据库，必须为集群配置专用外部数据库。</p>
+<p>注意：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">• 数据库需要使用UTF8编码。对于MySQL和MariaDB，必须使用UTF8编码，而不是utf8mb4；</span><br><span class="line">• 对于MySQL5.7，必须要额外安装MySQL-shared-compat或者MySQL-shared包</span><br></pre></td></tr></tbody></table></figure>
+
+<p>版本要求：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">• MySQL：5.7</span><br><span class="line">• MariaDB：5.5，10.0</span><br><span class="line">• PostgreSQL：8.4，9.2，9.4</span><br><span class="line">• Oracle：12C</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>Java要求</strong></p>
+<p>仅支持Oracle 64位JDK8，不支持JDK7，JDK9。</p>
+<p>版本要求：最低要求1.8u31，推荐1.8u74，1.8u91，1.8u102，1.8u111，1.8u121，1.8u131，1.8u162</p>
+<p>网络以及安全要求</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">• CDH不支持IPv6，操作系统必须要禁用IPv6</span><br><span class="line">• 集群主机必须正确配置/etc/hosts文件</span><br><span class="line">    ○ 应该包含集群中所有主机的主机名和对应IP地址</span><br><span class="line">    ○ 不能含有大写主机名</span><br><span class="line">    ○ 不能有重复的IP地址</span><br><span class="line">• SELinux不得阻止Cloudera Manager或者CDH的操作</span><br><span class="line">• 防火墙必须被禁用或者放开CDH集群所使用的端口</span><br><span class="line">• 对于RHEL或者CENTOS，/etc/sysconfig/network文件中必须包含正确的主机名</span><br></pre></td></tr></tbody></table></figure>
+
+<p>浏览器要求</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">• Chrome：63+</span><br><span class="line">• Firefox：59+</span><br><span class="line">• Safari</span><br><span class="line">• IE：11+</span><br><span class="line">• Edge：41+</span><br></pre></td></tr></tbody></table></figure>
+
+<p>所使用的端口：</p>
+<p>官方文档介绍：<a target="_blank" rel="noopener" href="https://www.cloudera.com/documentation/enterprise/6/6.0/topics/cm_ig_ports.html">CDH集群端口占用列表</a></p>
+<p>组件版本</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">组件名称	组件版本</span><br><span class="line">Apache Avro	1.8.2</span><br><span class="line">Apache Flume	1.8.0</span><br><span class="line">Apache Hadoop	3.0.0</span><br><span class="line">Apache HBase	2.0.0</span><br><span class="line">HBase Indexer	1.5</span><br><span class="line">Apache Hive	2.1.1</span><br><span class="line">Hue	4.2.0</span><br><span class="line">Apache Impala	3.0.0</span><br><span class="line">Apache Kafka	1.0.1</span><br><span class="line">Kite SDK	1.0.0</span><br><span class="line">Apache Kudu	1.6.0</span><br><span class="line">Apache Solr	7.0.0</span><br><span class="line">Apache Oozie	5.0.0</span><br><span class="line">Apache Parquet	1.9.0</span><br><span class="line">Parquet-format	2.3.1</span><br><span class="line">Apache Pig	0.17.0</span><br><span class="line">Apache Sentry	2.0.0</span><br><span class="line">Apache Spark	2.2.0</span><br><span class="line">Apache Sqoop	1.4.7</span><br><span class="line">Apache ZooKeeper 3.4.5</span><br></pre></td></tr></tbody></table></figure>
+
+<p>安装之前</p>
+<p>网络相关配置</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">• 设置唯一主机名：hostnamectl set-hostname new-hostname</span><br><span class="line">• 配置/etc/hosts</span><br><span class="line">• 检测主机名与IP是否正确对应</span><br></pre></td></tr></tbody></table></figure>
+
+<p>禁用防火墙</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">• 停止防火墙：systemctl stop firewalld</span><br><span class="line">• 关闭防火墙开机自启动：systemctl disable firewalld</span><br></pre></td></tr></tbody></table></figure>
+
+<p>设置SELinux执行模式</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">1. 检查SELinux模式：getenforce，如果输出permissive或者disabled，你可以跳过该步骤，如果输出enforcing，则需要继续下面的操作步骤。</span><br><span class="line">2. 编辑/etc/selinux/config（在某些操作系统可能是/etc/sysconfig/selinux）文件，将SELINUX=enforcing修改为SELINUX=permissive，保存该文件。</span><br><span class="line">3. 重启操作系统生效或者执行：setenforce 0临时禁用SELinux。</span><br><span class="line">4. 当CDH安装部署完成之后，可以重新启用SELinux，修改SELinux配置文件，然后执行：setenforce 1命令。</span><br></pre></td></tr></tbody></table></figure>
+
+<p>配置局域网内yum源</p>
+<p>安装Cloudera Manager需要很多依赖包，强烈建议搭建一个局域网内yum源，在集群中某一个节点上部署即可。<br>可参考我之前的文章：CentOS7下使用FTP搭建局域网内Yum源<br>配置NTP服务</p>
+<p>集群中所有节点的时间必须要保持同步，可以选择集群中其中一个节点作为ntp服务端，其余节点作为客户端。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">• 安装ntp软件：yum -y install ntp</span><br><span class="line">• 配置ntp服务端/etc/ntp.conf</span><br><span class="line">• 配置ntp客户端/etc/ntp.conf</span><br><span class="line">• 启动ntp服务：systemctl start ntpd</span><br><span class="line">• 配置开机自启动：systemctl enable ntpd</span><br><span class="line">• 同步客户端时间与服务端时间相同：ntpdate -u &lt;ntp-server&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>具体配置说明可参考我之前的文章：环境准备-配置ntp时间同步<br>安装jdk8<br>集群所有节点都要安装。<br>可参考我之前的文章：环境准备-JDK1.8安装<br>安装mysql5.7<br>只需要在集群中某一个节点上安装即可。<br>可参考我之前的文章：CentOS7下使用RPM安装MySQL5.7<br>集群性能优化相关配置<br>集群所有节点都需要进行这些配置。<br>可参考我之前的文章：CDH6集群性能调优（操作系统层面）<br>环境准备部分完毕</p>
+<p>来自 <a target="_blank" rel="noopener" href="https://www.staroon.dev/2018/12/01/CDH6BeforeInstall/">https://www.staroon.dev/2018/12/01/CDH6BeforeInstall/</a></p>
+<ul>
+<li><p>CDH6需要java 1.8版本</p>
+</li>
+<li><p>需要安装Mysql</p>
+</li>
+<li></li>
+</ul>
+<p>1.添加host /etc/hosts<br>Eric1 192.168.2.10<br>2，禁用防火墙<br>Systemctl stop firewalld<br>关闭开机自启<br>Systemctl disalbe firewalld</p>
+<p>安装NTP<br>集群中所有节点的时间必须要保持同步，可以选择集群中其中一个节点作为ntp服务端，其余节点作为客户端。<br>• 安装ntp软件：yum -y install ntp<br>• 配置ntp服务端/etc/ntp.conf<br>• 配置ntp客户端/etc/ntp.conf<br>• 启动ntp服务：systemctl start ntpd<br>• 配置开机自启动：systemctl enable ntpd<br>• 同步客户端时间与服务端时间相同：ntpdate -u</p>
+<p>来自 <a target="_blank" rel="noopener" href="https://www.staroon.dev/2018/12/01/CDH6BeforeInstall/">https://www.staroon.dev/2018/12/01/CDH6BeforeInstall/</a></p>
+<p>安装java1.8<br>1.安装java环境<br>环境存放到 cd /opt/<br>下载 wget <a target="_blank" rel="noopener" href="https://repo.huaweicloud.com/java/jdk/8u202-b08/jdk-8u202-linux-x64.tar.gz">https://repo.huaweicloud.com/java/jdk/8u202-b08/jdk-8u202-linux-x64.tar.gz</a><br>(这里是用华为的镜像地址下载，oracle需要登陆账号)<br>解压到指定目录 tar -zxvf jdk-8u202-linux-x64.tar.gz<br>vim ~/.bashrc 添加环境变量如下<br>export JAVA_HOME=/opt/jdk1.8.0_202  ## 这里要注意目录要换成自己解压的jdk 目录<br>export JRE_HOME=${JAVA_HOME}/jre<br>export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib<br>export PATH=${JAVA_HOME}/bin:$PATH<br>立即生效<br>source ~/.bashr<br>验证 java -version</p>
+<p>安装数据库<br>yum install mariadb-server -y<br>systemctl start mariadb  #启动MariaDB<br>systemctl stop mariadb  #停止MariaDB<br>systemctl restart mariadb  #重启MariaDB<br>systemctl enable mariadb  #设置开机启动</p>
+<p>这里安装maridb</p>
+<p>数据库配置<br>CDH官方给的有一份推荐的MySQL的配置内容：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">datadir=/var/lib/mysql</span><br><span class="line">socket=/var/lib/mysql/mysql.sock</span><br><span class="line">transaction-isolation = READ-COMMITTED</span><br><span class="line"># Disabling symbolic-links is recommended to prevent assorted security risks;</span><br><span class="line"># to do so, uncomment this line:</span><br><span class="line">symbolic-links = 0</span><br><span class="line"># Settings user and group are ignored when systemd is used.</span><br><span class="line"># If you need to run mysqld under a different user or group,</span><br><span class="line"># customize your systemd unit file for mariadb according to the</span><br><span class="line"># instructions in http://fedoraproject.org/wiki/Systemd</span><br><span class="line">key_buffer = 16M</span><br><span class="line">key_buffer_size = 32M</span><br><span class="line">max_allowed_packet = 32M</span><br><span class="line">thread_stack = 256K</span><br><span class="line">thread_cache_size = 64</span><br><span class="line">query_cache_limit = 8M</span><br><span class="line">query_cache_size = 64M</span><br><span class="line">query_cache_type = 1</span><br><span class="line">max_connections = 550</span><br><span class="line">#expire_logs_days = 10</span><br><span class="line">#max_binlog_size = 100M</span><br><span class="line">#log_bin should be on a disk with enough free space.</span><br><span class="line">#Replace '/var/lib/mysql/mysql_binary_log' with an appropriate path for your</span><br><span class="line">#system and chown the specified folder to the mysql user.</span><br><span class="line">log_bin=/var/lib/mysql/mysql_binary_log</span><br><span class="line">#In later versions of MariaDB, if you enable the binary log and do not set</span><br><span class="line">#a server_id, MariaDB will not start. The server_id must be unique within</span><br><span class="line">#the replicating group.</span><br><span class="line">server_id=1</span><br><span class="line">binlog_format = mixed</span><br><span class="line">read_buffer_size = 2M</span><br><span class="line">read_rnd_buffer_size = 16M</span><br><span class="line">sort_buffer_size = 8M</span><br><span class="line">join_buffer_size = 8M</span><br><span class="line"># InnoDB settings</span><br><span class="line">innodb_file_per_table = 1</span><br><span class="line">innodb_flush_log_at_trx_commit  = 2</span><br><span class="line">innodb_log_buffer_size = 64M</span><br><span class="line">innodb_buffer_pool_size = 4G</span><br><span class="line">innodb_thread_concurrency = 8</span><br><span class="line">innodb_flush_method = O_DIRECT</span><br><span class="line">innodb_log_file_size = 512M</span><br><span class="line">[mysqld_safe]</span><br><span class="line">log-error=/var/log/mariadb/mariadb.log</span><br><span class="line">pid-file=/var/run/mariadb/mariadb.pid</span><br><span class="line">#</span><br><span class="line"># include all files from the config directory</span><br><span class="line">#</span><br><span class="line">!includedir /etc/my.cnf.d</span><br></pre></td></tr></tbody></table></figure>
+
+<p>来自 <a target="_blank" rel="noopener" href="https://docs.cloudera.com/documentation/enterprise/6/6.0/topics/install_cm_mariadb.html#install_cm_mariadb">https://docs.cloudera.com/documentation/enterprise/6/6.0/topics/install_cm_mariadb.html#install_cm_mariadb</a></p>
+<p>下载CM6 RPM包<br><a target="_blank" rel="noopener" href="https://archive.cloudera.com/cm6/6.3.1/redhat7/yum/RPMS/x86_64/">https://archive.cloudera.com/cm6/6.3.1/redhat7/yum/RPMS/x86_64/</a><br>下载以下四个包放在 自己新建的/opt/cloudera-repos</p>
+<p>cloudera-manager-agent-6.3.1-1466458.el7.x86_64.rpm	2019-10-11 08:42	9.00MB<br>cloudera-manager-daemons-6.3.1-1466458.el7.x86_64.rpm	2019-10-11 08:42	1.00GB<br>cloudera-manager-server-6.3.1-1466458.el7.x86_64.rpm	2019-10-11 08:42	11.00KB<br>cloudera-manager-server-db-2-6.3.1-1466458.el7.x86_64.rpm	2019-10-11 08:42	10.00KB<br>oracle-j2sdk1.8-1.8.0+update181-1.x86_64.rpm	2019-10-11 08:42	176.00MB</p>
+<p>配置Cloudera Manager yum库<br>注意：不要尝试使用FTP搭建CM的YUM库！<br>首先安装httpd和createrepo：<br>yum -y install httpd createrepo<br>启动httpd服务并设置开机自启动：<br>systemctl start httpd<br>systemctl enable httpd<br>然后进入到前面准备好的存放Cloudera Manager RPM包的目录cloudera-repos下：<br>cd /upload/cloudera-repos/<br>生成RPM元数据：<br>createrepo .</p>
+<p>[root@bogon cloudera-repos]# createrepo .<br>Spawning worker 0 with 1 pkgs<br>Spawning worker 1 with 1 pkgs<br>Spawning worker 2 with 1 pkgs<br>Spawning worker 3 with 1 pkgs<br>Workers Finished<br>Saving Primary metadata<br>Saving file lists metadata<br>Saving other metadata<br>Generating sqlite DBs<br>Sqlite DBs complete</p>
+<p>然后将cloudera-repos目录移动到httpd的html目录下：<br>mv cloudera-repos /var/www/html/<br>确保可以通过浏览器查看到这些RPM包</p>
+<p><a target="_blank" rel="noopener" href="http://192.168.2.106/cloudera-repos/">http://192.168.2.106/cloudera-repos/</a></p>
+<p>接着在Cloudera Manager Server主机上创建cm6的repo文件（要把哪个节点作为Cloudera Manager Server节点，就在这个节点上创建repo文件）：<br>cd /etc/yum.repos.d<br>vim cloudera-manager.repo<br>添加如下内容：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">1. [cloudera-manager]</span><br><span class="line">2. name=Cloudera Manager 6.0.1</span><br><span class="line">3. baseurl=http://cdh601/cloudera-repos/</span><br><span class="line">4. gpgcheck=0</span><br><span class="line">5. enabled=1</span><br></pre></td></tr></tbody></table></figure>
+
+<p>保存，退出,然后执行yum clean all &amp;&amp; yum makecache命令：<br>[root@bogon yum.repos.d]# yum clean all &amp;&amp; yum makecache<br>已加载插件：fastestmirror<br>正在清理软件源： base cloudera-manager extras updates<br>Cleaning up everything<br>Maybe you want: rm -rf /var/cache/yum, to also free up space taken by orphaned data from disabled or removed repos<br>Cleaning up list of fastest mirrors<br>已加载插件：fastestmirror<br>base                                                                                                                      | 3.6 kB  00:00:00</p>
+<p>cloudera-manager                                                                                                          | 2.9 kB  00:00:00</p>
+<p>extras                                                                                                                    | 2.9 kB  00:00:00</p>
+<p>updates                                                                                                                   | 2.9 kB  00:00:00</p>
+<p>(1/13): cloudera-manager/filelists_db                                                                                     | 102 kB  00:00:00</p>
+<p>(2/13): cloudera-manager/primary_db                                                                                       | 6.5 kB  00:00:00</p>
+<p>(3/13): cloudera-manager/other_db                                                                                         |  864 B  00:00:00</p>
+<p>(4/13): base/7/x86_64/group_gz                                                                                            | 165 kB  00:00:00</p>
+<p>(5/13): extras/7/x86_64/primary_db                                                                                        | 153 kB  00:00:01</p>
+<p>(6/13): extras/7/x86_64/other_db                                                                                          | 100 kB  00:00:00</p>
+<p>(7/13): base/7/x86_64/other_db                                                                                            | 2.6 MB  00:00:02</p>
+<p>(8/13): extras/7/x86_64/filelists_db                                                                                      | 207 kB  00:00:02</p>
+<p>(9/13): updates/7/x86_64/other_db                                                                                         | 368 kB  00:00:00</p>
+<p>(10/13): updates/7/x86_64/primary_db                                                                                      | 5.9 MB  00:00:07</p>
+<p>(11/13): updates/7/x86_64/filelists_db                                                                                    | 3.3 MB  00:00:07</p>
+<p>(12/13): base/7/x86_64/filelists_db                                                                                       | 7.3 MB  00:00:14</p>
+<p>(13/13): base/7/x86_64/primary_db                                                                                         | 6.0 MB  00:01:01</p>
+<p>Determining fastest mirrors</p>
+<ul>
+<li><p>base: mirror.lzu.edu.cn</p>
+</li>
+<li><p>extras: mirror.lzu.edu.cn</p>
+</li>
+<li><p>updates: mirror.bit.edu.cn<br>元数据缓存已建立</p>
+</li>
+</ul>
+<p>安装CM<br>yum install cloudera-manager-daemons cloudera-manager-agent cloudera-manager-server</p>
+<p>配置本地Parcel存储库<br>Cloudera Manager Server安装完成后，进入到本地Parcel存储库目录：<br>cd /opt/cloudera/parcel-repo<br>将第一部分下载的CDH Parcel文件（CDH-6.0.1-1.cdh6.0.1.p0.590678-el7.parcel和manifest.json）上传至该目录下，然后执行命令生成sha文件：<br>sha1sum CDH-6.0.1-1.cdh6.0.1.p0.590678-el7.parcel | awk ‘{ print $1 }’ &gt; CDH-6.0.1-1.cdh6.0.1.p0.590678-el7.parcel.sha<br>然后执行下面的命令修改文件所有者：<br>chown -R cloudera-scm:cloudera-scm /opt/cloudera/parcel-repo/*<br>最终/opt/cloudera/parcel-repo目录内容如下：</p>
+<p>mysql配置<br>/etc/my.cnf</p>
+<p>启动mysql<br>配置开机自启</p>
+<p>systemctl start mariadb  #启动MariaDB<br>systemctl enable mariadb</p>
+<p>查看端口<br>安装netstat<br>yum install net-tools</p>
+<p>配置mysql jdbc驱动<br>从前面下载好的mysql-connector-java-5.1.47.tar.gz包中解压出mysql-connector-java-5.1.47-bin.jar文件，将mysql-connector-java-5.1.47-bin.jar文件上传至CM Server节点上的/usr/share/java/目录下并重命名为mysql-connector-java.jar（如果/usr/share/java/目录不存在，需要手动创建）：<br>tar zxvf mysql-connector-java-5.1.47.tar.gz<br>mkdir -p /usr/share/java/<br>cp mysql-connector-java-5.1.47-bin.jar /usr/share/java/mysql-connector-java.jar</p>
+<p>来自 <a target="_blank" rel="noopener" href="https://www.staroon.dev/2018/12/01/CDH6Install/">https://www.staroon.dev/2018/12/01/CDH6Install/</a></p>
+<p>创建CDH所需要的数据库<br>根据所需要安装的服务参照下表创建对应的数据库以及数据库用户，数据库必须使用utf8编码，创建数据库时要记录好用户名及对应密码：</p>
+<p>我这里就先创建4个数据库及对应用户：<br>CREATE DATABASE scm DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;<br>CREATE DATABASE amon DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;<br>CREATE DATABASE rman DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;<br>CREATE DATABASE oozie DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;<br>CREATE DATABASE hue DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</p>
+<p>CREATE DATABASE metastore DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;<br>GRANT ALL ON scm.* TO ‘scm’@’%’ IDENTIFIED BY ‘scm’;<br>GRANT ALL ON amon.* TO ‘amon’@’%’ IDENTIFIED BY ‘amon’;<br>GRANT ALL ON rman.* TO ‘rman’@’%’ IDENTIFIED BY ‘rman’;<br>GRANT ALL ON metastore.* TO ‘hive’@’%’ IDENTIFIED BY ‘hive’;</p>
+<p>GRANT ALL ON oozie.* TO ‘oozie’@’%’ IDENTIFIED BY ‘oozie’;<br>GRANT ALL ON hue.* TO ‘hue’@’%’ IDENTIFIED BY ‘hue’;</p>
+<p>FLUSH PRIVILEGES;</p>
+<p>SHOW GRANTS FOR ‘scm’@’%’;<br>SHOW GRANTS FOR ‘amon’@’%’;<br>SHOW GRANTS FOR ‘rman’@’%’;<br>SHOW GRANTS FOR ‘hive’@’%’;</p>
+<p>来自 <a target="_blank" rel="noopener" href="https://www.staroon.dev/2018/12/01/CDH6Install/">https://www.staroon.dev/2018/12/01/CDH6Install/</a></p>
+<p>设置Cloudera Manager 数据库<br>Cloudera Manager Server包含一个配置数据库的脚本。<br>• mysql数据库与CM Server是同一台主机<br>执行命令：/opt/cloudera/cm/schema/scm_prepare_database.sh mysql scm scm</p>
+<p>mysql数据库与CM Server不在同一台主机上<br>执行命令：/opt/cloudera/cm/schema/scm_prepare_database.sh mysql -h  –scm-host  scm scm</p>
+<p>来自 <a target="_blank" rel="noopener" href="https://www.staroon.dev/2018/12/01/CDH6Install/">https://www.staroon.dev/2018/12/01/CDH6Install/</a></p>
+<p>[root@eric1 schema]# /opt/cloudera/cm/schema/scm_prepare_database.sh mysql scm scm<br>Enter SCM password:<br>JAVA_HOME=/opt/jdk1.8.0_202<br>Verifying that we can write to /etc/cloudera-scm-server<br>Creating SCM configuration file in /etc/cloudera-scm-server<br>Executing:  /opt/jdk1.8.0_202/bin/java -cp /usr/share/java/mysql-connector-java.jar:/usr/share/java/oracle-connector-java.jar:/usr/share/java/postgresql-connector-java.jar:/opt/cloudera/cm/schema/../lib/* com.cloudera.enterprise.dbutil.DbCommandExecutor /etc/cloudera-scm-server/db.properties com.cloudera.cmf.db.<br>[                          main] DbCommandExecutor              INFO  Unable to login using supplied username/password.<br>[                          main] DbCommandExecutor              ERROR Error when connecting to database.<br>java.sql.SQLException: Access denied for user ‘scm’@‘localhost’ (using password: YES)<br>at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:965)[mysql-connector-java.jar:5.1.47]</p>
+<p>安装CDH节点<br>启动Cloudera Manager Server服务<br>systemctl start cloudera-scm-server</p>
+<p>wget <a target="_blank" rel="noopener" href="http://192.168.1.171/cloudera-repos/oracle-j2sdk1.8-1.8.0+update181-1.x86_64.rpm">http://192.168.1.171/cloudera-repos/oracle-j2sdk1.8-1.8.0+update181-1.x86_64.rpm</a><br>rpm -ivh oracle-j2sdk1.8-1.8.0+update181-1.x86_64.rpm</p>
+<p>export JAVA_HOME=/usr/java/jdk1.8.0_181-cloudera  ## 这里要注意目录要换成自己解压的jdk 目录<br>export JRE_HOME=${JAVA_HOME}/jre<br>export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib<br>export PATH=${JAVA_HOME}/bin:$PATH</p>
+<p>然后等待Cloudera Manager Server启动，可能需要稍等一会儿，可以通过命令tail -f /var/log/cloudera-scm-server/cloudera-scm-server.log去监控服务启动状态。<br>当看到INFO WebServerImpl:com.cloudera.server.cmf.WebServerImpl: Started Jetty server.日志打印出来后，说明服务启动成功，可以通过浏览器访问Cloudera Manager WEB界面了。</p>
+<p>查看本地端口 netstat</p>
+<p>访问Cloudera Manager WEB界面<br>打开浏览器，访问地址：http://<server_host>:7180，默认账号和密码都为admin：</server_host></p>
+<p>来自 <a target="_blank" rel="noopener" href="https://www.staroon.dev/2018/12/01/CDH6Install/">https://www.staroon.dev/2018/12/01/CDH6Install/</a></p>
+<p>选择安装的机器。</p>
+<p>rm /usr/bin/host</p>
+<p>因为只有一台机器这里选择基础安装</p>
+<p>自定义角色分配，因为只有一台，这里按照默认来，将必须组件分到一台上面</p>
+<p>将之前讲好的mysql数据库信息填进去。</p>
+<p>等待设置成功</p>
+<p>由于只有一台机器。中间因为GC,导致步骤失败多次，多试几遍就好</p>
+<p>集群优化参考<br><a target="_blank" rel="noopener" href="https://www.staroon.dev/2018/11/30/CDH6Performance/">https://www.staroon.dev/2018/11/30/CDH6Performance/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jerryliu.site/blog/posts/2360fe26/" data-id="cmtu2pvib0008sc8o9yyp9g1p" data-title="Centos7.5离线搭建CDH6.3" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/cdh-hadoop-sentry-flume-kafka/" rel="tag">cdh,hadoop,sentry,flume,kafka</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/posts/824879e0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          CDH6.3.1开启kerberos认证
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/posts/f233e23a/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">通过Thrift source向Flume发送数据的Python实现</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/123456/" rel="tag">123456</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cdh-hadoop-kerberos-sentry/" rel="tag">cdh,hadoop,kerberos,sentry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cdh-hadoop-sentry-flume-kafka/" rel="tag">cdh,hadoop,sentry,flume,kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cdh-sentry-flume-hugo/" rel="tag">cdh,sentry,flume,hugo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/druid-kafka/" rel="tag">druid,kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/druid-superset/" rel="tag">druid,superset</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/flume/" rel="tag">flume</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/flume-flink-kafka/" rel="tag">flume,flink,kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/kafka-conda/" rel="tag">kafka,conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/superset/" rel="tag">superset</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vnc/" rel="tag">vnc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%9F%E8%83%BD%E6%9B%B4%E6%96%B0/" rel="tag">功能更新</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/123456/" style="font-size: 10px;">123456</a> <a href="/blog/tags/cdh-hadoop-kerberos-sentry/" style="font-size: 20px;">cdh,hadoop,kerberos,sentry</a> <a href="/blog/tags/cdh-hadoop-sentry-flume-kafka/" style="font-size: 10px;">cdh,hadoop,sentry,flume,kafka</a> <a href="/blog/tags/cdh-sentry-flume-hugo/" style="font-size: 10px;">cdh,sentry,flume,hugo</a> <a href="/blog/tags/druid-kafka/" style="font-size: 10px;">druid,kafka</a> <a href="/blog/tags/druid-superset/" style="font-size: 10px;">druid,superset</a> <a href="/blog/tags/flume/" style="font-size: 10px;">flume</a> <a href="/blog/tags/flume-flink-kafka/" style="font-size: 10px;">flume,flink,kafka</a> <a href="/blog/tags/kafka-conda/" style="font-size: 10px;">kafka,conda</a> <a href="/blog/tags/superset/" style="font-size: 20px;">superset</a> <a href="/blog/tags/vnc/" style="font-size: 10px;">vnc</a> <a href="/blog/tags/%E5%8A%9F%E8%83%BD%E6%9B%B4%E6%96%B0/" style="font-size: 10px;">功能更新</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/posts/30a6384b/">xiaomi cyberdog 配置 VNC 远程桌面</a>
+          </li>
+        
+          <li>
+            <a href="/blog/posts/83ee6eb4/">Superset二次开发-接入SSO</a>
+          </li>
+        
+          <li>
+            <a href="/blog/posts/c7a184e9/">Superset性能优化</a>
+          </li>
+        
+          <li>
+            <a href="/blog/posts/11efd417/">Github commit不统计Contribution</a>
+          </li>
+        
+          <li>
+            <a href="/blog/posts/19869521/">Druid添加扩展S3数据源</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 Jerryliu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/blog/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/blog/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
