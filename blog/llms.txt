@@ -1,0 +1,35 @@
+# JerryLiu 的博客（jerryliu.site）
+
+> 数据工程（Snowflake / Databricks / Flink / Kafka）与 AI Agent 实践笔记。
+> 文章面向人类与 AI 双读者：结构化小节、事实表、FAQ、术语表、机器可读 JSON。
+
+## 全部文章（按时间倒序）
+
+- [AI Agent 长期记忆与自我治理实践手册：本地事实库、定时抽取、技能库精简、AI 可读化（Hermes Agent v0.21.7 实测）](https://jerryliu.site/blog/posts/ai-agent-long-term-memory-and-curation-playbook/) — 一份可复现的 AI Agent 长期记忆与自我治理实践手册：两页预算制热记忆、holographic 本地事实库、每周/每月定时抽取（非思考模型省 4 倍）、中文召回实测 10/11、技能库 63→35 精简（索引 -47%）、提示词预算测量、AI 可读化改造（robots.txt/llms.txt/sitemap/JSON-LD），以及 14 类真实踩坑与修复。含机器可读摘要与可复制命令。
+- [xiaomi cyberdog 配置 VNC 远程桌面](https://jerryliu.site/blog/posts/30a6384b/)
+- [Superset二次开发-接入SSO](https://jerryliu.site/blog/posts/83ee6eb4/)
+- [Superset性能优化](https://jerryliu.site/blog/posts/c7a184e9/)
+- [Github commit不统计Contribution](https://jerryliu.site/blog/posts/11efd417/)
+- [Druid添加扩展S3数据源](https://jerryliu.site/blog/posts/19869521/)
+- [superset 源码安装/pip安装+superset二次开发环境搭建](https://jerryliu.site/blog/posts/8b1f8f2c/)
+- [迁移hexo博客到hugo](https://jerryliu.site/blog/posts/5ce0efd4/)
+- [CDH6.3.1使用sentry权限控制](https://jerryliu.site/blog/posts/b43bd655/)
+- [CDH6.3.1开启kerberos认证](https://jerryliu.site/blog/posts/824879e0/)
+- [Centos7.5离线搭建CDH6.3](https://jerryliu.site/blog/posts/2360fe26/)
+- [通过Thrift source向Flume发送数据的Python实现](https://jerryliu.site/blog/posts/f233e23a/)
+- [Flume+Kafka+Flink+Redis构建大数据实时处理系统（单机环境）--环境篇](https://jerryliu.site/blog/posts/611d6905/)
+- [ubantu 16.04 conda环境安装kafka](https://jerryliu.site/blog/posts/800c731c/)
+- [今日更新(2019-05-10)](https://jerryliu.site/blog/posts/88c6290b/)
+- [Hello,2019](https://jerryliu.site/blog/posts/a9c35d26/)
+- [立冬](https://jerryliu.site/blog/posts/9abcd761/)
+- [rain](https://jerryliu.site/blog/posts/b7528aad/)
+- [又是一日雨](https://jerryliu.site/blog/posts/8496cc94/)
+- [今日更新](https://jerryliu.site/blog/posts/71ff22e6/)
+- [2018-06-18](https://jerryliu.site/blog/posts/62cf21fb/)
+- [欢迎来到JerryLiu的博客](https://jerryliu.site/blog/posts/49726cd2/)
+
+## 关于
+
+- 作者：JerryLiu（数据工程师）
+- 邮箱：me@jerryliu.site
+- 站点地图：https://jerryliu.site/blog/sitemap.xml
