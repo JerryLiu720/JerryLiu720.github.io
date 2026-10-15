@@ -6,9 +6,9 @@
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16.png">
   <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/blog/css/main.css">
@@ -104,6 +104,25 @@
     pointer-events: none;
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "CDH6.3.1使用sentry权限控制",
+  "description": "\n\n环境：CDH6.3.1,Centos7.5\n\n上一篇记录的是kerberos。是用来管理用户身份*即用户身份认证\nSentry，用户身份和权限的映射关系管理 即授权。CDH的介绍是：Sentry 服务存储身份验证政策元数据并为客户端提供对该元数据的并发安全访问。",
+  "datePublished": "2020-01-02T04:00:00.000Z",
+  "dateModified": "2026-09-09T15:48:15.884Z",
+  "inLanguage": "zh-CN",
+  "author": { "@type": "Person", "name": "JerryLiu" },
+  "publisher": { "@type": "Organization", "name": "JerryLiu",
+                 "logo": { "@type": "ImageObject", "url": "https://jerryliu.site/blog/images/apple-touch-icon.png" } },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://jerryliu.site/blog//posts/b43bd655/" },
+  "url": "https://jerryliu.site/blog//posts/b43bd655/",
+  "image": "https://jerryliu.site/blog/images/apple-touch-icon.png",
+  "keywords": ", , , ",
+  "articleSection": ""
+}
+</script>
 
   <noscript>
     <link rel="stylesheet" href="/blog/css/noscript.css">
@@ -180,7 +199,7 @@
     <img class="site-author-image" itemprop="image" alt="JerryLiu"
       src="/blog/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">JerryLiu</p>
-  <div class="site-description" itemprop="description">JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记</div>
+  <div class="site-description" itemprop="description">JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记</div>
 </div>
 <div class="site-state-wrap animated">
   <nav class="site-state">
@@ -235,7 +254,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="JerryLiu">
-      <meta itemprop="description" content="JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记">
+      <meta itemprop="description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -285,7 +304,7 @@
     <div class="post-body" itemprop="articleBody"><blockquote>
 </blockquote>
 <p>环境：CDH6.3.1,Centos7.5</p>
-<p><img src="/blog/img/ext_sentry.png"></p>
+<p><img src="/blog/img/ext_sentry.png" loading="lazy"></p>
 <p>上一篇记录的是kerberos。是用来管理用户身份*即用户身份认证</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">Sentry，用户身份和权限的映射关系管理 即授权。</span><br><span class="line">CDH的介绍是：Sentry 服务存储身份验证政策元数据并为客户端提供对该元数据的并发安全访问。</span><br></pre></td></tr></tbody></table></figure>
 
@@ -293,22 +312,22 @@
 
 <p>我理解的kerberos+sentry = 用户验证+权限管理。搭配组合使用来做多租户的权限分配。<br>可以管理用户读那些hive表，和那些hdfs路径下的文件。</p>
 <h2 id="一-CM添加Sentry服务及配置"><a href="#一-CM添加Sentry服务及配置" class="headerlink" title="一.CM添加Sentry服务及配置"></a>一.CM添加Sentry服务及配置</h2><p><strong>1.在CM中添加服务。Sentry</strong></p>
-<p><img src="/blog/img/sentry1.png"></p>
+<p><img src="/blog/img/sentry1.png" loading="lazy"></p>
 <p>给服务器分配sentry角色</p>
-<p><img src="/blog/img/sentry2.png"></p>
+<p><img src="/blog/img/sentry2.png" loading="lazy"></p>
 <p>需要生成一个sentry的数据库,我这里sentry数据库和其他服务放在了一起都在h1上，数据库名字自定义，我这里数据库和用户都叫sentry</p>
-<p><img src="/blog/img/sentry3.png"></p>
+<p><img src="/blog/img/sentry3.png" loading="lazy"></p>
 <p>下面两步没有截图。略过了。</p>
 <p><strong>2.添加好sentry服务下面开始设置sentry：</strong></p>
 <p>Hive的设置，将图中两项勾选去掉</p>
-<p><img src="/blog/img/sentry4.png"></p>
+<p><img src="/blog/img/sentry4.png" loading="lazy"></p>
 <p>第二步 将Hive服务的Sentry勾上，默认是none</p>
-<p><img src="/blog/img/sentry5.png"></p>
+<p><img src="/blog/img/sentry5.png" loading="lazy"></p>
 <p>然后重启hive的过时配置即可。</p>
 <p><strong>3.设置hdfs的控制列表和sentry同步</strong></p>
 <p>紧接着，开启HDFS角色的acl（这里主要控制用户访问的HDFS目录，因为在生产环境中会指定一些目录是该用户可以访问的，而其他一些目录该用户访问不了）</p>
 <p>以下两项勾选。</p>
-<p><img src="/blog/img/sentry6.png"></p>
+<p><img src="/blog/img/sentry6.png" loading="lazy"></p>
 <p>然后重启hdfs的过期配置，并勾选重新部署客户端配置</p>
 <p><strong>4.接下来。生成hive.keytab</strong></p>
 <p>在KDC服务器上执行以下命令，将集群的所有机器的keytab汇总到一个文件中：</p>
@@ -356,20 +375,20 @@
 <p>hive没有权限做授权，看网上资料用的是beeline,然后成功。</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">create role user1_role;</span><br><span class="line">GRANT ALL ON DATABASE db1 TO ROLE user1_role;</span><br><span class="line">GRANT ROLE user1_role TO GROUP user1;</span><br><span class="line"></span><br><span class="line">create role user2_role;</span><br><span class="line">GRANT ALL ON DATABASE db2 TO ROLE user2_role;</span><br><span class="line">GRANT ROLE user2_role TO GROUP user2;</span><br></pre></td></tr></tbody></table></figure>
 
-<p><img src="/blog/img/sentry7.png"></p>
+<p><img src="/blog/img/sentry7.png" loading="lazy"></p>
 <p>验证User1只有db1和default的权限（default是默认的自带库）</p>
-<p><img src="/blog/img/sentry8.png"></p>
+<p><img src="/blog/img/sentry8.png" loading="lazy"></p>
 <p>User2只有db2和default的权限</p>
-<p><img src="/blog/img/sentry9.png"></p>
+<p><img src="/blog/img/sentry9.png" loading="lazy"></p>
 <p>然后验证hdfs 权限<br>User1只能查看db1.db表下面的数据文件</p>
-<p><img src="/blog/img/sentry10.png"></p>
+<p><img src="/blog/img/sentry10.png" loading="lazy"></p>
 <p>同理use2只能查看db2.db下面的数据。</p>
-<p><img src="/blog/img/sentry11.png"></p>
+<p><img src="/blog/img/sentry11.png" loading="lazy"></p>
 <h2 id="三-问题与总结："><a href="#三-问题与总结：" class="headerlink" title="三.问题与总结："></a>三.问题与总结：</h2><p>1.当使用hive cli的时候，会显示所有表，而beeline只会显示有权限的表,但hive显示没有权限的表当查询的时候也会报没有权限的错误。</p>
 <p>例如。User2用户使用user1的db1。会报以下错误。没有权限读取元数据的hdfs目录数据</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">FAILED: SemanticException Unable to determine if hdfs://h1.cat.com:8020/user/hive/warehouse/db1.db/table1</span><br><span class="line">is encrypted: org.apache.hadoop.security.AccessControlException: Permission denied: user=user2, access=READ,</span><br><span class="line">inode="/user/hive/warehouse/db1.db/table1":hive:hive:drwxrwx--</span><br></pre></td></tr></tbody></table></figure>
 
-<p><img src="/blog/img/sentry12.png"></p>
+<p><img src="/blog/img/sentry12.png" loading="lazy"></p>
 <p>2.这里用keytab登陆hive报错。</p>
 <figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">hive&gt; [root@h1 ckinit -kt hive.keytab hive/h1.cat.com</span><br><span class="line">kinit: Password incorrect while getting initial credentials</span><br></pre></td></tr></tbody></table></figure>
 

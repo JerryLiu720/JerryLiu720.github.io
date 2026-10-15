@@ -6,9 +6,9 @@
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16.png">
   <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/blog/css/main.css">
@@ -22,15 +22,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jerryliu.site","root":"/blog/","images":"/blog/images","scheme":"Gemini","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/blog/js/config.js" defer></script>
 
-    <meta name="description" content="JerryLiu 的个人博客：大数据 &#x2F; Hadoop &#x2F; CDH &#x2F; Flink &#x2F; Superset 技术笔记">
+    <meta name="description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
 <meta property="og:type" content="website">
 <meta property="og:title" content="JerryLiu">
 <meta property="og:url" content="https://jerryliu.site/blog/index.html">
 <meta property="og:site_name" content="JerryLiu">
-<meta property="og:description" content="JerryLiu 的个人博客：大数据 &#x2F; Hadoop &#x2F; CDH &#x2F; Flink &#x2F; Superset 技术笔记">
+<meta property="og:description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="JerryLiu">
-<meta property="article:tag" content="big data, hadoop, flink, superset, blog">
+<meta property="article:tag" content="data engineering, Snowflake, Databricks, Flink, Kafka, AI Agent, 长期记忆, 上下文工程, Hermes">
 <meta name="twitter:card" content="summary">
 
 
@@ -85,6 +85,28 @@
     pointer-events: none;
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "JerryLiu · Code & Input & Output",
+  "alternateName": "JerryLiu",
+  "url": "https://jerryliu.site/blog/",
+  "description": "JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记",
+  "inLanguage": "zh-CN",
+  "author": { "@type": "Person", "name": "JerryLiu" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "JerryLiu · Code & Input & Output",
+  "url": "https://jerryliu.site/blog/",
+  "description": "JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记",
+  "inLanguage": "zh-CN"
+}
+</script>
 
   <noscript>
     <link rel="stylesheet" href="/blog/css/noscript.css">
@@ -160,7 +182,7 @@
     <img class="site-author-image" itemprop="image" alt="JerryLiu"
       src="/blog/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">JerryLiu</p>
-  <div class="site-description" itemprop="description">JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记</div>
+  <div class="site-description" itemprop="description">JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记</div>
 </div>
 <div class="site-state-wrap animated">
   <nav class="site-state">
@@ -214,7 +236,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="JerryLiu">
-      <meta itemprop="description" content="JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记">
+      <meta itemprop="description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -305,7 +327,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="JerryLiu">
-      <meta itemprop="description" content="JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记">
+      <meta itemprop="description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -406,7 +428,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="JerryLiu">
-      <meta itemprop="description" content="JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记">
+      <meta itemprop="description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -457,7 +479,7 @@
           <blockquote>
 </blockquote>
 <p>为了统一和安全考虑，将superset接入公司账号系统，使用员工现有邮箱和密码作为登录方式<br>env:superset 0.36.0</p>
-<p><img src="/blog/img/superset13.png"></p>
+<p><img src="/blog/img/superset13.png" loading="lazy"></p>
 <p>Superset使用FAB（Flask-Appbuilder）实现了用户权限功能，登录认证框架。</p>
           <!--noindex-->
             <div class="post-button">
@@ -501,7 +523,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="JerryLiu">
-      <meta itemprop="description" content="JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记">
+      <meta itemprop="description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -549,7 +571,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><img src="/blog/img/superset13.png"></p>
+          <p><img src="/blog/img/superset13.png" loading="lazy"></p>
 <p>从以下几个点出发</p>
 <h3 id="1-修改缓存方式为redis"><a href="#1-修改缓存方式为redis" class="headerlink" title="1. 修改缓存方式为redis"></a>1. 修改缓存方式为redis</h3><p>安装Redis <code>pip install redis</code></p>
 <p>修改配置文件<code>incubator-superset/superset/config.py</code>中CACHE_CONFIG为以下内容,设置24小时过期</p>
@@ -595,7 +617,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="JerryLiu">
-      <meta itemprop="description" content="JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记">
+      <meta itemprop="description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -643,7 +665,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><img src="/blog/img/github2.jpeg"></p>
+          <p><img src="/blog/img/github2.jpeg" loading="lazy"></p>
 <blockquote>
 </blockquote>
 <p>Github注册有些年头了，自微软收购GitHub 后，官方宣布了一项重大更新，免费开放私有代码库。才逐渐用的多了起来，一直都是作为个人的代码仓库，来管理整合自己的代码。但也一直有个小问题困扰，就是在提交代码后有部分并不会统计贡献值，一直也没有深入去研究这个问题，以为是因为私有库不会被统计，最近看到了关于贡献值统计的规则,才发现</p>
@@ -689,7 +711,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="JerryLiu">
-      <meta itemprop="description" content="JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记">
+      <meta itemprop="description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -737,7 +759,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><img src="/blog/img/druid.png"></p>
+          <p><img src="/blog/img/druid.png" loading="lazy"></p>
 <blockquote>
 </blockquote>
 <p>最近接触aws比较多，然后研究了下实时数仓druid/kylin的部分，数据是存在s3桶中，driud连接s3的文章介绍不多，只有官方有一点点介绍，不详细，这里记录下。druid的扩展很多，有一部分是官方维护，一部分是社区维护，也可以自己定制自己的扩展<br>具体的列表见：<a target="_blank" rel="noopener" href="https://druid.apache.org/docs/latest/development/extensions.html">https://druid.apache.org/docs/latest/development/extensions.html</a></p>
@@ -783,7 +805,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="JerryLiu">
-      <meta itemprop="description" content="JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记">
+      <meta itemprop="description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -835,7 +857,7 @@
 <blockquote>
 </blockquote>
 <p>mac 10.15 Catalina + Anaconda 3 + Python3.7 + superset 0.30</p>
-<p><img src="/blog/img/superset13.png"></p>
+<p><img src="/blog/img/superset13.png" loading="lazy"></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"> Superset 是一款由 Airbnb 开源的“现代化的企业级 BI（商业智能） Web 应用程序”，其通过创建和分享 dashboard，为数据分析提供了轻量级的数据查询和可视化方案。</span><br><span class="line"> Superset 的前端主要用到了 React 和 NVD3/D3，而后端则基于 Python 的 Flask 框架和 Pandas、SQLAlchemy 等依赖库，主要提供了这几方面的功能：</span><br><span class="line">集成数据查询功能，支持多种数据库，包括 MySQL、PostgresSQL、Oracle、SQL Server、SQLite、SparkSQL 等，并深度支持 Druid。</span><br><span class="line">通过 NVD3/D3 预定义了多种可视化图表，满足大部分的数据展示功能。如果还有其他需求，也可以自开发更多的图表类型，或者嵌入其他的 JavaScript 图表库（如 HighCharts、ECharts）。</span><br><span class="line">提供细粒度安全模型，可以在功能层面和数据层面进行访问控制。支持多种鉴权方式（如数据库、OpenID、LDAP、OAuth、REMOTE_USER 等）。</span><br></pre></td></tr></tbody></table></figure>
           <!--noindex-->
             <div class="post-button">
@@ -879,7 +901,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="JerryLiu">
-      <meta itemprop="description" content="JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记">
+      <meta itemprop="description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -970,7 +992,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="JerryLiu">
-      <meta itemprop="description" content="JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记">
+      <meta itemprop="description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -1021,7 +1043,7 @@
           <blockquote>
 </blockquote>
 <p>环境：CDH6.3.1,Centos7.5</p>
-<p><img src="/blog/img/ext_sentry.png"></p>
+<p><img src="/blog/img/ext_sentry.png" loading="lazy"></p>
 <p>上一篇记录的是kerberos。是用来管理用户身份*即用户身份认证</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">Sentry，用户身份和权限的映射关系管理 即授权。</span><br><span class="line">CDH的介绍是：Sentry 服务存储身份验证政策元数据并为客户端提供对该元数据的并发安全访问。</span><br></pre></td></tr></tbody></table></figure>
           <!--noindex-->
@@ -1066,7 +1088,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="JerryLiu">
-      <meta itemprop="description" content="JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记">
+      <meta itemprop="description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -1115,8 +1137,8 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>环境： 基于centos 7.5,CDH 6.3.1</p>
-<p><img src="/blog/img/CDH.png"></p>
-<p><img src="/blog/img/ext_dog-ring.jpg"></p>
+<p><img src="/blog/img/CDH.png" loading="lazy"></p>
+<p><img src="/blog/img/ext_dog-ring.jpg" loading="lazy"></p>
 <h2 id="一-安装kerberos"><a href="#一-安装kerberos" class="headerlink" title="一.安装kerberos"></a>一.安装kerberos</h2><p><strong>kerberso是什么</strong></p>
 <p>之前没有接触过kerberos，最近项目需要基于CDH的多租户管理，所以简单了解了下。kerberos要做的工作就是验证进行权限申请的人是他声称的那个人的问题。</p>
           <!--noindex-->

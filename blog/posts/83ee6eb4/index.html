@@ -6,9 +6,9 @@
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16.png">
   <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/blog/css/main.css">
@@ -90,6 +90,25 @@
     pointer-events: none;
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Superset二次开发-接入SSO",
+  "description": "\n\n为了统一和安全考虑，将superset接入公司账号系统，使用员工现有邮箱和密码作为登录方式env:superset 0.36.0\n\nSuperset使用FAB（Flask-Appbuilder）实现了用户权限功能，登录认证框架。",
+  "datePublished": "2020-07-12T04:00:00.000Z",
+  "dateModified": "2026-09-09T15:33:29.174Z",
+  "inLanguage": "zh-CN",
+  "author": { "@type": "Person", "name": "JerryLiu" },
+  "publisher": { "@type": "Organization", "name": "JerryLiu",
+                 "logo": { "@type": "ImageObject", "url": "https://jerryliu.site/blog/images/apple-touch-icon.png" } },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://jerryliu.site/blog//posts/83ee6eb4/" },
+  "url": "https://jerryliu.site/blog//posts/83ee6eb4/",
+  "image": "https://jerryliu.site/blog/images/apple-touch-icon.png",
+  "keywords": "",
+  "articleSection": ""
+}
+</script>
 
   <noscript>
     <link rel="stylesheet" href="/blog/css/noscript.css">
@@ -166,7 +185,7 @@
     <img class="site-author-image" itemprop="image" alt="JerryLiu"
       src="/blog/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">JerryLiu</p>
-  <div class="site-description" itemprop="description">JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记</div>
+  <div class="site-description" itemprop="description">JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记</div>
 </div>
 <div class="site-state-wrap animated">
   <nav class="site-state">
@@ -221,7 +240,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="JerryLiu">
-      <meta itemprop="description" content="JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记">
+      <meta itemprop="description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -271,12 +290,12 @@
     <div class="post-body" itemprop="articleBody"><blockquote>
 </blockquote>
 <p>为了统一和安全考虑，将superset接入公司账号系统，使用员工现有邮箱和密码作为登录方式<br>env:superset 0.36.0</p>
-<p><img src="/blog/img/superset13.png"></p>
+<p><img src="/blog/img/superset13.png" loading="lazy"></p>
 <p>Superset使用FAB（Flask-Appbuilder）实现了用户权限功能，登录认证框架。</p>
 <span id="more"></span>
 
 <p>FAB支持以下几种认证方式：</p>
-<p><img src="/blog/img/superset_sso1.png"></p>
+<p><img src="/blog/img/superset_sso1.png" loading="lazy"></p>
 <p>这里使用的是REMOTE_USER方式，通过调用remote server api,从remote web server获取用户的认证信息，也就是公司的登录系统，认证通过则将用户信息保存到db中，只要验证用户的session没有过期，就可以直接访问网站。授权验证通过后，通过appbuilder.sm.add_user，将用户添加到superset用户库中，后面进行该用户的应用内权限管理。</p>
 <h3 id="1-首先是配置"><a href="#1-首先是配置" class="headerlink" title="1.首先是配置"></a>1.首先是配置</h3><p>通过阅读superset/config.py中的代码, 如果需要自行修改配置, 创建superset_config.py文件。</p>
 <p>在superset 创建自定义配置文件 superset_config.py</p>

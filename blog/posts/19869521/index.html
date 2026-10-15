@@ -6,9 +6,9 @@
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16.png">
   <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/blog/css/main.css">
@@ -92,6 +92,25 @@
     pointer-events: none;
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Druid添加扩展S3数据源",
+  "description": "\n\n\n最近接触aws比较多，然后研究了下实时数仓druid/kylin的部分，数据是存在s3桶中，driud连接s3的文章介绍不多，只有官方有一点点介绍，不详细，这里记录下。druid的扩展很多，有一部分是官方维护，一部分是社区维护，也可以自己定制自己的扩展具体的列表见：https://druid.apache.org...",
+  "datePublished": "2020-04-05T04:00:00.000Z",
+  "dateModified": "2026-09-09T15:39:33.886Z",
+  "inLanguage": "zh-CN",
+  "author": { "@type": "Person", "name": "JerryLiu" },
+  "publisher": { "@type": "Organization", "name": "JerryLiu",
+                 "logo": { "@type": "ImageObject", "url": "https://jerryliu.site/blog/images/apple-touch-icon.png" } },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://jerryliu.site/blog//posts/19869521/" },
+  "url": "https://jerryliu.site/blog//posts/19869521/",
+  "image": "https://jerryliu.site/blog/images/apple-touch-icon.png",
+  "keywords": ", ",
+  "articleSection": ""
+}
+</script>
 
   <noscript>
     <link rel="stylesheet" href="/blog/css/noscript.css">
@@ -168,7 +187,7 @@
     <img class="site-author-image" itemprop="image" alt="JerryLiu"
       src="/blog/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">JerryLiu</p>
-  <div class="site-description" itemprop="description">JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记</div>
+  <div class="site-description" itemprop="description">JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记</div>
 </div>
 <div class="site-state-wrap animated">
   <nav class="site-state">
@@ -223,7 +242,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="JerryLiu">
-      <meta itemprop="description" content="JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记">
+      <meta itemprop="description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -270,7 +289,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p><img src="/blog/img/druid.png"></p>
+    <div class="post-body" itemprop="articleBody"><p><img src="/blog/img/druid.png" loading="lazy"></p>
 <blockquote>
 </blockquote>
 <p>最近接触aws比较多，然后研究了下实时数仓druid/kylin的部分，数据是存在s3桶中，driud连接s3的文章介绍不多，只有官方有一点点介绍，不详细，这里记录下。druid的扩展很多，有一部分是官方维护，一部分是社区维护，也可以自己定制自己的扩展<br>具体的列表见：<a target="_blank" rel="noopener" href="https://druid.apache.org/docs/latest/development/extensions.html">https://druid.apache.org/docs/latest/development/extensions.html</a></p>
@@ -290,8 +309,8 @@
 <li></li>
 </ul>
 <p>重新启动，就可以看到原来灰色的s3,已经可用。</p>
-<p><img src="/blog/img/druid-s3.png"></p>
-<h2 id="2-设置AWS凭证"><a href="#2-设置AWS凭证" class="headerlink" title="2.设置AWS凭证"></a>2.设置AWS凭证</h2><p><img src="/blog/img/druid-s3-1.png"></p>
+<p><img src="/blog/img/druid-s3.png" loading="lazy"></p>
+<h2 id="2-设置AWS凭证"><a href="#2-设置AWS凭证" class="headerlink" title="2.设置AWS凭证"></a>2.设置AWS凭证</h2><p><img src="/blog/img/druid-s3-1.png" loading="lazy"></p>
 <p>AWS官方推荐使用设置凭证方式.第一种也很方便,直接在driud的<br><code>apache-druid-0.17.0/conf/druid/single-server/micro-quickstart/_common/common.runtime.properties</code> 配置文件中有相应的注释打开设置key即可。</p>
 <p>添加默认的aws配置文件到机器</p>
 <p>默认凭证配置文件–通常位于&nbsp;<code>~/.aws/credentials</code>（此位置可能因平台而异），此凭证文件由多个 AWS 开发工具包和 AWS CLI 共享。AWS SDK for Java使用&nbsp;ProfileCredentialsProvider&nbsp;加载这些凭证。</p>

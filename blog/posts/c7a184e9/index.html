@@ -6,9 +6,9 @@
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16.png">
   <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/blog/css/main.css">
@@ -89,6 +89,25 @@
     pointer-events: none;
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Superset性能优化",
+  "description": "\n从以下几个点出发\n1. 修改缓存方式为redis安装Redis pip install redis\n修改配置文件incubator-superset/superset/config.py中CACHE_CONFIG为以下内容,设置24小时过期",
+  "datePublished": "2020-06-30T04:00:00.000Z",
+  "dateModified": "2026-09-09T15:33:29.174Z",
+  "inLanguage": "zh-CN",
+  "author": { "@type": "Person", "name": "JerryLiu" },
+  "publisher": { "@type": "Organization", "name": "JerryLiu",
+                 "logo": { "@type": "ImageObject", "url": "https://jerryliu.site/blog/images/apple-touch-icon.png" } },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://jerryliu.site/blog//posts/c7a184e9/" },
+  "url": "https://jerryliu.site/blog//posts/c7a184e9/",
+  "image": "https://jerryliu.site/blog/images/apple-touch-icon.png",
+  "keywords": "",
+  "articleSection": ""
+}
+</script>
 
   <noscript>
     <link rel="stylesheet" href="/blog/css/noscript.css">
@@ -165,7 +184,7 @@
     <img class="site-author-image" itemprop="image" alt="JerryLiu"
       src="/blog/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">JerryLiu</p>
-  <div class="site-description" itemprop="description">JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记</div>
+  <div class="site-description" itemprop="description">JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记</div>
 </div>
 <div class="site-state-wrap animated">
   <nav class="site-state">
@@ -220,7 +239,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="JerryLiu">
-      <meta itemprop="description" content="JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记">
+      <meta itemprop="description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -267,7 +286,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p><img src="/blog/img/superset13.png"></p>
+    <div class="post-body" itemprop="articleBody"><p><img src="/blog/img/superset13.png" loading="lazy"></p>
 <p>从以下几个点出发</p>
 <h3 id="1-修改缓存方式为redis"><a href="#1-修改缓存方式为redis" class="headerlink" title="1. 修改缓存方式为redis"></a>1. 修改缓存方式为redis</h3><p>安装Redis <code>pip install redis</code></p>
 <p>修改配置文件<code>incubator-superset/superset/config.py</code>中CACHE_CONFIG为以下内容,设置24小时过期</p>

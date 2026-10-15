@@ -6,9 +6,9 @@
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16.png">
   <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/blog/css/main.css">
@@ -92,6 +92,25 @@
     pointer-events: none;
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "迁移hexo博客到hugo",
+  "description": "之前的博客生成是用的hexo，但是慢慢的随着博客增多速度 越来越慢,一些功能无法实现，比如图片预览的fancybox。偶然看到了文章介绍hugo，一个用golang编写的静态网站生成器 ，主题很多,号称世界上最快的框架，实际用起来也比hexo快的多，几十个页面生成速度毫秒级别，网站的访问速度从未有的顺畅，速度起码翻倍。",
+  "datePublished": "2020-01-05T04:00:00.000Z",
+  "dateModified": "2026-09-09T15:39:33.892Z",
+  "inLanguage": "zh-CN",
+  "author": { "@type": "Person", "name": "JerryLiu" },
+  "publisher": { "@type": "Organization", "name": "JerryLiu",
+                 "logo": { "@type": "ImageObject", "url": "https://jerryliu.site/blog/images/apple-touch-icon.png" } },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://jerryliu.site/blog//posts/5ce0efd4/" },
+  "url": "https://jerryliu.site/blog//posts/5ce0efd4/",
+  "image": "https://jerryliu.site/blog/images/apple-touch-icon.png",
+  "keywords": ", , , ",
+  "articleSection": ""
+}
+</script>
 
   <noscript>
     <link rel="stylesheet" href="/blog/css/noscript.css">
@@ -168,7 +187,7 @@
     <img class="site-author-image" itemprop="image" alt="JerryLiu"
       src="/blog/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">JerryLiu</p>
-  <div class="site-description" itemprop="description">JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记</div>
+  <div class="site-description" itemprop="description">JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记</div>
 </div>
 <div class="site-state-wrap animated">
   <nav class="site-state">
@@ -223,7 +242,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="JerryLiu">
-      <meta itemprop="description" content="JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记">
+      <meta itemprop="description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -275,7 +294,7 @@
 <span id="more"></span>
 
 <p><a target="_blank" rel="noopener" href="https://themes.gohugo.io/">主题地址</a></p>
-<p><img src="/blog/img/hugo2.png"></p>
+<p><img src="/blog/img/hugo2.png" loading="lazy"></p>
 <h2 id="一-Hugo-安装与配置"><a href="#一-Hugo-安装与配置" class="headerlink" title="一.Hugo 安装与配置"></a>一.Hugo 安装与配置</h2><p>Hugo 安装比较简单，但是配置过程中遇到了几个小问题😂</p>
 <p>1.首先安装 Hugo，在不同系统上安装都很简单，在 Mac 上，使用 Homebrew 安装 Hugo：<br><code>brew install hugo</code> 等待安装即可</p>
 <p>2.建立博客站点<br>安装以后，首先我们需要建立一个博客目录，下面存放的是博客的所有配置以及博文等资料，例如要建立一个名为&nbsp;Blog&nbsp;的站点，使用下面的命令：<code>hugo new site Blog</code></p>

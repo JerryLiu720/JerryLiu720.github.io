@@ -6,9 +6,9 @@
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16.png">
   <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/blog/css/main.css">
@@ -93,6 +93,25 @@
     pointer-events: none;
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Flume+Kafka+Flink+Redis构建大数据实时处理系统（单机环境）--环境篇",
+  "description": "大体流程：\n\npython readlog 读取本地日志文件发送到flume(本测试基于原有项目，原有项目是有scribe接收日志存到本地。正式项目flume直接读取本地文件 source改为直接监控日志文件 a1.sources.r1.type = exec, a1.sources.r1.command = tail...",
+  "datePublished": "2019-08-15T08:23:13.000Z",
+  "dateModified": "2026-09-09T15:48:15.885Z",
+  "inLanguage": "zh-CN",
+  "author": { "@type": "Person", "name": "JerryLiu" },
+  "publisher": { "@type": "Organization", "name": "JerryLiu",
+                 "logo": { "@type": "ImageObject", "url": "https://jerryliu.site/blog/images/apple-touch-icon.png" } },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://jerryliu.site/blog//posts/611d6905/" },
+  "url": "https://jerryliu.site/blog//posts/611d6905/",
+  "image": "https://jerryliu.site/blog/images/apple-touch-icon.png",
+  "keywords": ", , ",
+  "articleSection": ""
+}
+</script>
 
   <noscript>
     <link rel="stylesheet" href="/blog/css/noscript.css">
@@ -169,7 +188,7 @@
     <img class="site-author-image" itemprop="image" alt="JerryLiu"
       src="/blog/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">JerryLiu</p>
-  <div class="site-description" itemprop="description">JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记</div>
+  <div class="site-description" itemprop="description">JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记</div>
 </div>
 <div class="site-state-wrap animated">
   <nav class="site-state">
@@ -224,7 +243,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="JerryLiu">
-      <meta itemprop="description" content="JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记">
+      <meta itemprop="description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -368,7 +387,7 @@
 <blockquote>
 <p>JMX enabled by default<br>Using config: /opt/zookeeper-3.4.5/bin/../conf/zoo.cfg<br>Mode: standalone</p>
 </blockquote>
-<h2 id="4-安装kafka"><a href="#4-安装kafka" class="headerlink" title="4.安装kafka"></a><a name="fenced-code-block">4.安装kafka</a></h2><p><img src="/blog/img/ext_kafka_diagram.png" alt="kafka"></p>
+<h2 id="4-安装kafka"><a href="#4-安装kafka" class="headerlink" title="4.安装kafka"></a><a name="fenced-code-block">4.安装kafka</a></h2><p><img src="/blog/img/ext_kafka_diagram.png" alt="kafka" loading="lazy"></p>
 <ul>
 <li><p>这里安装 2.3.0</p>
 </li>
@@ -431,7 +450,7 @@
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">#listeners=PLAINTEXT://:9092</span><br><span class="line">advertised.listeners=PLAINTEXT://外网ip:9092</span><br><span class="line">zookeeper.connect=localhost:2181</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="5-flume安装"><a href="#5-flume安装" class="headerlink" title="5.flume安装"></a><a name="fenced-code-block">5.flume安装</a></h2><ul>
-<li>Flume<br><img src="/blog/img/ext_DevGuide_image00.png" alt="photo"></li>
+<li>Flume<br><img src="/blog/img/ext_DevGuide_image00.png" alt="photo" loading="lazy"></li>
 </ul>
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">wget http://archive.apache.org/dist/flume/1.8.0/apache-flume-1.8.0-bin.tar.gz</span><br><span class="line">tar -zxvf apache-flume-1.8.0-bin.tar.gz</span><br><span class="line">重命名 mv apache-flume-1.8.0-bin flume-1.8.0</span><br></pre></td></tr></tbody></table></figure>
 <p>添加环境变量</p>
@@ -469,7 +488,7 @@
 </blockquote>
 <p>这三者之间的关系:</p>
 <p>batchsize &lt;=transactionCapacity&lt;=capacity</p>
-<h2 id="6-flink安装"><a href="#6-flink安装" class="headerlink" title=" 6.flink安装 "></a><a name="fenced-code-block"> 6.flink安装 </a></h2><p><img src="/blog/img/ext_flink-home-graphic.png" alt="flink"></p>
+<h2 id="6-flink安装"><a href="#6-flink安装" class="headerlink" title=" 6.flink安装 "></a><a name="fenced-code-block"> 6.flink安装 </a></h2><p><img src="/blog/img/ext_flink-home-graphic.png" alt="flink" loading="lazy"></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">wget https://archive.apache.org/dist/flink/flink-1.8.0/flink-1.8.0-bin-scala_2.11.tgz</span><br><span class="line"></span><br><span class="line">解压 tar -zxvf apache-flume-1.8.0-bin.tar.gz</span><br></pre></td></tr></tbody></table></figure>
 <p>启动flink <code>bin/start-cluster.sh</code></p>
 <p>查看web <a target="_blank" rel="noopener" href="http://localhost:8081/">http://localhost:8081</a></p>

@@ -6,9 +6,9 @@
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16.png">
   <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/blog/css/main.css">
@@ -99,6 +99,25 @@
     pointer-events: none;
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "superset 源码安装/pip安装+superset二次开发环境搭建",
+  "description": "环境：\n\n\nmac 10.15 Catalina + Anaconda 3 + Python3.7 + superset 0.30\n\n Superset 是一款由 Airbnb 开源的“现代化的企业级 BI（商业智能） Web 应用程序”，其通过创建和分享...",
+  "datePublished": "2020-02-23T04:00:00.000Z",
+  "dateModified": "2026-09-09T15:48:15.886Z",
+  "inLanguage": "zh-CN",
+  "author": { "@type": "Person", "name": "JerryLiu" },
+  "publisher": { "@type": "Organization", "name": "JerryLiu",
+                 "logo": { "@type": "ImageObject", "url": "https://jerryliu.site/blog/images/apple-touch-icon.png" } },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://jerryliu.site/blog//posts/8b1f8f2c/" },
+  "url": "https://jerryliu.site/blog//posts/8b1f8f2c/",
+  "image": "https://jerryliu.site/blog/images/apple-touch-icon.png",
+  "keywords": ", ",
+  "articleSection": ""
+}
+</script>
 
   <noscript>
     <link rel="stylesheet" href="/blog/css/noscript.css">
@@ -175,7 +194,7 @@
     <img class="site-author-image" itemprop="image" alt="JerryLiu"
       src="/blog/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">JerryLiu</p>
-  <div class="site-description" itemprop="description">JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记</div>
+  <div class="site-description" itemprop="description">JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记</div>
 </div>
 <div class="site-state-wrap animated">
   <nav class="site-state">
@@ -230,7 +249,7 @@
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="JerryLiu">
-      <meta itemprop="description" content="JerryLiu 的个人博客：大数据 / Hadoop / CDH / Flink / Superset 技术笔记">
+      <meta itemprop="description" content="JerryLiu 的博客：数据工程与 AI Agent 长期记忆实践笔记">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
@@ -281,7 +300,7 @@
 <blockquote>
 </blockquote>
 <p>mac 10.15 Catalina + Anaconda 3 + Python3.7 + superset 0.30</p>
-<p><img src="/blog/img/superset13.png"></p>
+<p><img src="/blog/img/superset13.png" loading="lazy"></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"> Superset 是一款由 Airbnb 开源的“现代化的企业级 BI（商业智能） Web 应用程序”，其通过创建和分享 dashboard，为数据分析提供了轻量级的数据查询和可视化方案。</span><br><span class="line"> Superset 的前端主要用到了 React 和 NVD3/D3，而后端则基于 Python 的 Flask 框架和 Pandas、SQLAlchemy 等依赖库，主要提供了这几方面的功能：</span><br><span class="line">集成数据查询功能，支持多种数据库，包括 MySQL、PostgresSQL、Oracle、SQL Server、SQLite、SparkSQL 等，并深度支持 Druid。</span><br><span class="line">通过 NVD3/D3 预定义了多种可视化图表，满足大部分的数据展示功能。如果还有其他需求，也可以自开发更多的图表类型，或者嵌入其他的 JavaScript 图表库（如 HighCharts、ECharts）。</span><br><span class="line">提供细粒度安全模型，可以在功能层面和数据层面进行访问控制。支持多种鉴权方式（如数据库、OpenID、LDAP、OAuth、REMOTE_USER 等）。</span><br></pre></td></tr></tbody></table></figure>
 
 <span id="more"></span>
@@ -300,10 +319,10 @@
 
 <h3 id="3-安装superset"><a href="#3-安装superset" class="headerlink" title="3.安装superset"></a>3.安装superset</h3><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">#incubator-superset 目录执行</span><br><span class="line">pip install -e .</span><br></pre></td></tr></tbody></table></figure>
 
-<p><img src="/blog/img/superset6.png"></p>
+<p><img src="/blog/img/superset6.png" loading="lazy"></p>
 <h3 id="4-开始配置superset"><a href="#4-开始配置superset" class="headerlink" title="4.开始配置superset"></a>4.开始配置superset</h3><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">创建管理员账户和密码</span><br><span class="line">这个命令已经不推荐使用了。</span><br><span class="line">fabmanager create-admin --app superset</span><br><span class="line">推荐使用</span><br><span class="line">$export FLASK_APP=superset</span><br><span class="line">flask fab create-admin</span><br></pre></td></tr></tbody></table></figure>
 
-<p><img src="/blog/img/superset7.png"></p>
+<p><img src="/blog/img/superset7.png" loading="lazy"></p>
 <ul>
 <li>以下操作要进入superset/bin目录下</li>
 </ul>
@@ -329,14 +348,14 @@
 <li>进入superset/assets目录下（新版目录incubator-superset/superset-frontend/）,安装编译所需模块</li>
 </ul>
 <p><code>npm install -d </code></p>
-<p><img src="/blog/img/superset4.png"></p>
+<p><img src="/blog/img/superset4.png" loading="lazy"></p>
 <ul>
 <li>编译前端文件，并进入前端开发者模式</li>
 </ul>
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">npm run build</span><br><span class="line">npm run dev</span><br></pre></td></tr></tbody></table></figure>
 
 <p>注：如果这两部编译失败，可能是因为nodejs版本过低。可尝试升级nodejs再试。</p>
-<p><img src="/blog/img/superset5.png"></p>
+<p><img src="/blog/img/superset5.png" loading="lazy"></p>
 <ul>
 <li>运行完npm run dev，命令窗口会停止，不要误以为是执行不下去，保持窗口开启状态即可，一有文件变动时，它会重新编译</li>
 </ul>
@@ -353,7 +372,7 @@
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">from superset import app</span><br><span class="line">app.run(debug=True, host='0.0.0.0', port=8088)</span><br></pre></td></tr></tbody></table></figure>
 
 <p>等 pycharm 右下角 processes running 完成后就可以debug run.py了。访问：<a href="http://localhost:8088,输入管理员账号跟密码，登录。">http://localhost:8088,输入管理员账号跟密码，登录。</a></p>
-<p><img src="/blog/img/superset8.png"></p>
+<p><img src="/blog/img/superset8.png" loading="lazy"></p>
 <h2 id="二-pip安装superset"><a href="#二-pip安装superset" class="headerlink" title="二.pip安装superset"></a>二.pip安装superset</h2><h3 id="1-Anaconda-创建python环境"><a href="#1-Anaconda-创建python环境" class="headerlink" title="1.Anaconda 创建python环境"></a>1.Anaconda 创建python环境</h3><p><code>conda create -n superset python=3.7</code></p>
 <ul>
 <li>激活环境</li>
@@ -386,10 +405,10 @@
 <h3 id="4-开始配置初始化superset"><a href="#4-开始配置初始化superset" class="headerlink" title="4.开始配置初始化superset"></a>4.开始配置初始化superset</h3><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">#创建管理用户及密码</span><br><span class="line">$ export FLASK_APP=superset</span><br><span class="line">flask fab create-admin</span><br><span class="line">或者</span><br><span class="line">fabmanager create-admin --app superset</span><br><span class="line"></span><br><span class="line">#初始化数据库</span><br><span class="line">superset db upgrade</span><br><span class="line"></span><br><span class="line">#初始化角色和权限</span><br><span class="line">superset init</span><br><span class="line"></span><br><span class="line">#加载示例数据</span><br><span class="line">superset load_examples</span><br><span class="line">superset load_examples</span><br><span class="line"></span><br><span class="line">#debug模式启动，并指定8088端口</span><br><span class="line">superset run -p 8088 --with-threads --reload --debugger</span><br></pre></td></tr></tbody></table></figure>
 
 <p>然后启动成功。浏览器访问</p>
-<p><img src="/blog/img/superset1.png"></p>
+<p><img src="/blog/img/superset1.png" loading="lazy"></p>
 <p>登陆上面创建的管理用户和密码即可</p>
-<p><img src="/blog/img/superset2.png"></p>
-<p><img src="/blog/img/superset12.png"></p>
+<p><img src="/blog/img/superset2.png" loading="lazy"></p>
+<p><img src="/blog/img/superset12.png" loading="lazy"></p>
 <h2 id="三-问题与总结"><a href="#三-问题与总结" class="headerlink" title="三.问题与总结"></a>三.问题与总结</h2><p>记录：conda pip 安装的路径</p>
 <figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">/opt/anaconda3/envs/superset/lib/python3.7/site-packages/superset</span><br></pre></td></tr></tbody></table></figure>
 
@@ -409,7 +428,7 @@
 <p>解决：</p>
 <p>issues里说可以通过下载数据zip包，手动导入，但是没有给数据包url.下面用一个简单的方法，这里通过修改<code>raw.githubusercontent.com</code>的解析地址解决</p>
 <p>首先通过<a target="_blank" rel="noopener" href="https://www.ipaddress.com/">ipaddress</a>,找出raw.githubusercontent.com的ip地址。</p>
-<p><img src="/blog/img/superset10.png"></p>
+<p><img src="/blog/img/superset10.png" loading="lazy"></p>
 <p>然后<code>vim /etc/hosts</code>添加</p>
 <p><code>199.232.28.133 raw.githubusercontent.com</code></p>
 <p>参考：</p>
