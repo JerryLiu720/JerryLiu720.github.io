@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jerryliu.site/blog/about/index.html</loc>
+    
+    <lastmod>2026-10-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jerryliu.site/blog/posts/ai-agent-long-term-memory-and-curation-playbook/</loc>
     
     <lastmod>2026-10-13</lastmod>
@@ -200,15 +209,6 @@
   </url>
   
   <url>
-    <loc>https://jerryliu.site/blog/about/index.html</loc>
-    
-    <lastmod>2026-09-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://jerryliu.site/blog/categories/index.html</loc>
     
     <lastmod>2025-05-27</lastmod>
@@ -362,14 +362,14 @@
   </url>
   
   <url>
-    <loc>https://jerryliu.site/blog/tags/vnc/</loc>
+    <loc>https://jerryliu.site/blog/tags/%E5%8A%9F%E8%83%BD%E6%9B%B4%E6%96%B0/</loc>
     <lastmod>2026-10-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jerryliu.site/blog/tags/%E5%8A%9F%E8%83%BD%E6%9B%B4%E6%96%B0/</loc>
+    <loc>https://jerryliu.site/blog/tags/vnc/</loc>
     <lastmod>2026-10-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
