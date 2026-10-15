@@ -532,6 +532,17 @@
   (function () {
     var cv = document.getElementById('hermes-starfield');
     if (!cv) return;
+
+    /* ====== 效果开关：想调整只改这里 ====== */
+    var FX = {
+      stars:      true,   // 星星本体（漂浮 + 闪烁）
+      starLines:  false,  // 星与星之间的连线
+      mouseLines: false,  // 鼠标与星星之间的连线
+      repel:      true,   // 鼠标推开星星
+      burst:      true    // 点击爆发粒子
+    };
+    /* ===================================== */
+
     var ctx = cv.getContext('2d');
     var W, H, DPR = Math.min(window.devicePixelRatio || 1, 2);
     var stars = [], COUNT = 130;
@@ -561,7 +572,7 @@
       }
     }
 
-    // 交互：鼠标推开
+    // 交互：鼠标位置（供斥力/连线使用）
     window.addEventListener('mousemove', function (e) {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
@@ -570,63 +581,71 @@
       mouse.x = -9999; mouse.y = -9999;
     });
     // 点击：粒子爆发
-    window.addEventListener('click', function (e) {
-      for (var i = 0; i < 14; i++) {
-        var a = (Math.PI * 2 * i) / 14 + Math.random() * 0.4;
-        var sp = rand(1.2, 3.6);
-        bursts.push({
-          x: e.clientX, y: e.clientY,
-          vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
-          life: 1, decay: rand(0.012, 0.03),
-          r: rand(0.8, 2.0)
-        });
-      }
-    });
+    if (FX.burst) {
+      window.addEventListener('click', function (e) {
+        for (var i = 0; i < 14; i++) {
+          var a = (Math.PI * 2 * i) / 14 + Math.random() * 0.4;
+          var sp = rand(1.2, 3.6);
+          bursts.push({
+            x: e.clientX, y: e.clientY,
+            vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
+            life: 1, decay: rand(0.012, 0.03),
+            r: rand(0.8, 2.0)
+          });
+        }
+      });
+    }
 
     function tick() {
       ctx.clearRect(0, 0, W, H);
       var i, j, s;
 
-      // 星连线（近距）
-      ctx.lineWidth = 0.6;
-      for (i = 0; i < stars.length; i++) {
-        for (j = i + 1; j < stars.length; j++) {
-          var a = stars[i], b = stars[j];
-          var dx = a.x - b.x, dy = a.y - b.y;
-          var d2 = dx * dx + dy * dy;
-          if (d2 < 110 * 110) {
-            var al = (1 - Math.sqrt(d2) / 110) * 0.28;
-            ctx.strokeStyle = 'rgba(150,180,255,' + al.toFixed(3) + ')';
-            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      // 星连线（近距）—— 受 FX.starLines 控制
+      if (FX.starLines) {
+        ctx.lineWidth = 0.6;
+        for (i = 0; i < stars.length; i++) {
+          for (j = i + 1; j < stars.length; j++) {
+            var a = stars[i], b = stars[j];
+            var dx = a.x - b.x, dy = a.y - b.y;
+            var d2 = dx * dx + dy * dy;
+            if (d2 < 110 * 110) {
+              var al = (1 - Math.sqrt(d2) / 110) * 0.28;
+              ctx.strokeStyle = 'rgba(150,180,255,' + al.toFixed(3) + ')';
+              ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+            }
           }
         }
       }
 
-      // 星星 + 鼠标斥力
-      var MR = 150;
-      for (i = 0; i < stars.length; i++) {
-        s = stars[i];
-        var mdx = s.x - mouse.x, mdy = s.y - mouse.y;
-        var md = Math.sqrt(mdx * mdx + mdy * mdy);
-        if (md < MR && md > 0.01) {
-          var f = (1 - md / MR) * 1.4;       // 推开力度
-          s.x += (mdx / md) * f;
-          s.y += (mdy / md) * f;
+      // 星星（漂浮 + 闪烁 [+ 鼠标斥力]）
+      if (FX.stars) {
+        var MR = 150;
+        for (i = 0; i < stars.length; i++) {
+          s = stars[i];
+          if (FX.repel) {
+            var mdx = s.x - mouse.x, mdy = s.y - mouse.y;
+            var md = Math.sqrt(mdx * mdx + mdy * mdy);
+            if (md < MR && md > 0.01) {
+              var f = (1 - md / MR) * 1.4;       // 推开力度
+              s.x += (mdx / md) * f;
+              s.y += (mdy / md) * f;
+            }
+          }
+          s.x += s.vx; s.y -= s.v;
+          s.p += s.tw;
+          if (s.y < -4) { s.y = H + 4; s.x = Math.random() * W; }
+          if (s.x < -4) s.x = W + 4;
+          if (s.x > W + 4) s.x = -4;
+          var alpha = 0.4 + 0.55 * (0.5 + 0.5 * Math.sin(s.p));
+          ctx.beginPath();
+          ctx.fillStyle = 'rgba(210,226,255,' + alpha.toFixed(3) + ')';
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fill();
         }
-        s.x += s.vx; s.y -= s.v;
-        s.p += s.tw;
-        if (s.y < -4) { s.y = H + 4; s.x = Math.random() * W; }
-        if (s.x < -4) s.x = W + 4;
-        if (s.x > W + 4) s.x = -4;
-        var alpha = 0.4 + 0.55 * (0.5 + 0.5 * Math.sin(s.p));
-        ctx.beginPath();
-        ctx.fillStyle = 'rgba(210,226,255,' + alpha.toFixed(3) + ')';
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fill();
       }
 
-      // 鼠标与近星连线
-      if (mouse.x > -1000) {
+      // 鼠标与近星连线 —— 受 FX.mouseLines 控制
+      if (FX.mouseLines && mouse.x > -1000) {
         for (i = 0; i < stars.length; i++) {
           s = stars[i];
           var dxm = s.x - mouse.x, dym = s.y - mouse.y;
