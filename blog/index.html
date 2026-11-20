@@ -149,7 +149,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-blog"><a href="/blog/" rel="section"><i class="fa fa-book fa-fw"></i>Blog</a></li><li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-blog"><a href="/blog/" rel="section"><i class="fa fa-book fa-fw"></i>Blog</a></li><li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
   </ul>
 </nav>
 
@@ -193,8 +193,9 @@
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">22</span>
-        <span class="site-state-item-name">tags</span>
+          <a href="/blog/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
@@ -375,20 +376,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="lubuntu配置-VNC"><a href="#lubuntu配置-VNC" class="headerlink" title="lubuntu配置 VNC"></a>lubuntu配置 VNC</h2><blockquote>
-</blockquote>
-<p>环境：mac , lubuntu</p>
-<h1 id="1-安装vnc服务"><a href="#1-安装vnc服务" class="headerlink" title="1.安装vnc服务"></a>1.安装vnc服务</h1><ul>
-<li>cyberdog开机,进入其命令行</li>
-</ul>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">ssh 192.168.2.180 -l mi</span><br></pre></td></tr></tbody></table></figure>
-
-<ul>
-<li>安装tightvncserver</li>
-</ul>
+          <p>给小米 CyberDog 的 lubuntu 装 VNC，远程看桌面。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blog/posts/30a6384b/#more" rel="contents">
+              <a class="btn" href="/blog/posts/30a6384b/">
                 Read more &raquo;
               </a>
             </div>
@@ -476,14 +467,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <blockquote>
-</blockquote>
-<p>为了统一和安全考虑，将superset接入公司账号系统，使用员工现有邮箱和密码作为登录方式<br>env:superset 0.36.0</p>
-<p><img src="/blog/img/superset13.png" loading="lazy"></p>
-<p>Superset使用FAB（Flask-Appbuilder）实现了用户权限功能，登录认证框架。</p>
+          <p>Superset 0.36 通过 FAB 的 REMOTE_USER 方式接入公司统一登录。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blog/posts/83ee6eb4/#more" rel="contents">
+              <a class="btn" href="/blog/posts/83ee6eb4/">
                 Read more &raquo;
               </a>
             </div>
@@ -571,13 +558,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><img src="/blog/img/superset13.png" loading="lazy"></p>
-<p>从以下几个点出发</p>
-<h3 id="1-修改缓存方式为redis"><a href="#1-修改缓存方式为redis" class="headerlink" title="1. 修改缓存方式为redis"></a>1. 修改缓存方式为redis</h3><p>安装Redis <code>pip install redis</code></p>
-<p>修改配置文件<code>incubator-superset/superset/config.py</code>中CACHE_CONFIG为以下内容,设置24小时过期</p>
+          <p>Superset 换 Redis 缓存等几项性能优化实践。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blog/posts/c7a184e9/#more" rel="contents">
+              <a class="btn" href="/blog/posts/c7a184e9/">
                 Read more &raquo;
               </a>
             </div>
@@ -665,13 +649,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><img src="/blog/img/github2.jpeg" loading="lazy"></p>
-<blockquote>
-</blockquote>
-<p>Github注册有些年头了，自微软收购GitHub 后，官方宣布了一项重大更新，免费开放私有代码库。才逐渐用的多了起来，一直都是作为个人的代码仓库，来管理整合自己的代码。但也一直有个小问题困扰，就是在提交代码后有部分并不会统计贡献值，一直也没有深入去研究这个问题，以为是因为私有库不会被统计，最近看到了关于贡献值统计的规则,才发现</p>
+          <p>commit 不进贡献图的原因：本地 git 邮箱和 GitHub 账号邮箱不一致。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blog/posts/11efd417/#more" rel="contents">
+              <a class="btn" href="/blog/posts/11efd417/">
                 Read more &raquo;
               </a>
             </div>
@@ -759,13 +740,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><img src="/blog/img/druid.png" loading="lazy"></p>
-<blockquote>
-</blockquote>
-<p>最近接触aws比较多，然后研究了下实时数仓druid/kylin的部分，数据是存在s3桶中，driud连接s3的文章介绍不多，只有官方有一点点介绍，不详细，这里记录下。druid的扩展很多，有一部分是官方维护，一部分是社区维护，也可以自己定制自己的扩展<br>具体的列表见：<a target="_blank" rel="noopener" href="https://druid.apache.org/docs/latest/development/extensions.html">https://druid.apache.org/docs/latest/development/extensions.html</a></p>
+          <p>给 Druid 加 S3 扩展，直接查询对象存储里的数据。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blog/posts/19869521/#more" rel="contents">
+              <a class="btn" href="/blog/posts/19869521/">
                 Read more &raquo;
               </a>
             </div>
@@ -853,15 +831,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>环境：</p>
-<blockquote>
-</blockquote>
-<p>mac 10.15 Catalina + Anaconda 3 + Python3.7 + superset 0.30</p>
-<p><img src="/blog/img/superset13.png" loading="lazy"></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"> Superset 是一款由 Airbnb 开源的“现代化的企业级 BI（商业智能） Web 应用程序”，其通过创建和分享 dashboard，为数据分析提供了轻量级的数据查询和可视化方案。</span><br><span class="line"> Superset 的前端主要用到了 React 和 NVD3/D3，而后端则基于 Python 的 Flask 框架和 Pandas、SQLAlchemy 等依赖库，主要提供了这几方面的功能：</span><br><span class="line">集成数据查询功能，支持多种数据库，包括 MySQL、PostgresSQL、Oracle、SQL Server、SQLite、SparkSQL 等，并深度支持 Druid。</span><br><span class="line">通过 NVD3/D3 预定义了多种可视化图表，满足大部分的数据展示功能。如果还有其他需求，也可以自开发更多的图表类型，或者嵌入其他的 JavaScript 图表库（如 HighCharts、ECharts）。</span><br><span class="line">提供细粒度安全模型，可以在功能层面和数据层面进行访问控制。支持多种鉴权方式（如数据库、OpenID、LDAP、OAuth、REMOTE_USER 等）。</span><br></pre></td></tr></tbody></table></figure>
+          <p>macOS 下 Superset 源码/pip 安装与二次开发环境搭建。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blog/posts/8b1f8f2c/#more" rel="contents">
+              <a class="btn" href="/blog/posts/8b1f8f2c/">
                 Read more &raquo;
               </a>
             </div>
@@ -949,10 +922,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">之前的博客生成是用的hexo，但是慢慢的随着博客增多速度 越来越慢,一些功能无法实现，比如图片预览的fancybox。</span><br><span class="line">偶然看到了文章介绍hugo，一个用golang编写的静态网站生成器 ，主题很多,号称世界上最快的框架，</span><br><span class="line">实际用起来也比hexo快的多，几十个页面生成速度毫秒级别，网站的访问速度从未有的顺畅，速度起码翻倍。</span><br></pre></td></tr></tbody></table></figure>
+          <p>从 Hexo 迁到 Hugo：生成速度与图片预览的取舍。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blog/posts/5ce0efd4/#more" rel="contents">
+              <a class="btn" href="/blog/posts/5ce0efd4/">
                 Read more &raquo;
               </a>
             </div>
@@ -1040,15 +1013,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <blockquote>
-</blockquote>
-<p>环境：CDH6.3.1,Centos7.5</p>
-<p><img src="/blog/img/ext_sentry.png" loading="lazy"></p>
-<p>上一篇记录的是kerberos。是用来管理用户身份*即用户身份认证</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">Sentry，用户身份和权限的映射关系管理 即授权。</span><br><span class="line">CDH的介绍是：Sentry 服务存储身份验证政策元数据并为客户端提供对该元数据的并发安全访问。</span><br></pre></td></tr></tbody></table></figure>
+          <p>CDH 6.3.1 下用 Sentry 做库/表级授权，与 Kerberos 配合实现多租户权限管理。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blog/posts/b43bd655/#more" rel="contents">
+              <a class="btn" href="/blog/posts/b43bd655/">
                 Read more &raquo;
               </a>
             </div>
@@ -1136,14 +1104,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>环境： 基于centos 7.5,CDH 6.3.1</p>
-<p><img src="/blog/img/CDH.png" loading="lazy"></p>
-<p><img src="/blog/img/ext_dog-ring.jpg" loading="lazy"></p>
-<h2 id="一-安装kerberos"><a href="#一-安装kerberos" class="headerlink" title="一.安装kerberos"></a>一.安装kerberos</h2><p><strong>kerberso是什么</strong></p>
-<p>之前没有接触过kerberos，最近项目需要基于CDH的多租户管理，所以简单了解了下。kerberos要做的工作就是验证进行权限申请的人是他声称的那个人的问题。</p>
+          <p>CentOS 7.5 + CDH 6.3.1 开启 Kerberos 认证的完整步骤与常见报错。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blog/posts/824879e0/#more" rel="contents">
+              <a class="btn" href="/blog/posts/824879e0/">
                 Read more &raquo;
               </a>
             </div>
